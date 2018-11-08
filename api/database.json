@@ -1,9 +1,44 @@
 {
   "user": [
     {
-      "id": 1,
       "userName": "Brad Davis",
-      "password": "1234"
+      "password": "1234",
+      "id": 1
+    },
+    {
+      "userName": "Brad Johnson",
+      "password": "lkjdg",
+      "id": 2
+    },
+    {
+      "userName": "brad davis",
+      "password": "kl",
+      "id": 3
+    },
+    {
+      "userName": "John Kraw",
+      "password": "klsl",
+      "id": 4
+    },
+    {
+      "userName": "John Smith",
+      "password": "lklj",
+      "id": 5
+    },
+    {
+      "userName": "One More Shot",
+      "password": "Hellp",
+      "id": 6
+    },
+    {
+      "userName": "John Jingle",
+      "password": "kls",
+      "id": 7
+    },
+    {
+      "userName": "davisthedad@hotmail.com",
+      "password": "dsg",
+      "id": 8
     }
   ]
 }
