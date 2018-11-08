@@ -3,12 +3,9 @@
     {
       "userName": "Brad Davis",
       "password": "1234",
+      "group": "Davis Family",
+      "email": "brad@braddavistech.com",
       "id": 1
-    },
-    {
-      "userName": "Mark Truex",
-      "password": "NascarMan",
-      "id": 2
     }
   ]
 }

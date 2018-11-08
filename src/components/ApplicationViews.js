@@ -1,15 +1,14 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
 import Login from "./login/LoginMain";
+import ForgotPassword from "./forgotPassword/ForgotPassword";
+import CreateUser from "./create/NewUser";
 // import APIcalls from "../modules/APIcalls"
 
 
 
 export default class ApplicationViews extends Component {
 
-  state = {
-
-  }
 
   componentDidMount() {
     // const newState = {}
@@ -28,7 +27,13 @@ export default class ApplicationViews extends Component {
         <Route exact path="/" render={(props) => {
           return <Login  />
         }} />
-      </React.Fragment>
+      <Route exact path="/forgotPassword" render={(props) => {
+        return <ForgotPassword  />
+      }} />
+      <Route exact path="/create" render={(props) => {
+        return <CreateUser  />
+      }} />
+    </React.Fragment>
     )
   }
 

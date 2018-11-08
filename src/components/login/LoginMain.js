@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import logo from '../../groupGuruLogo.jpg';
 import APIcalls from '../../modules/APIcalls';
 import './LoginMain.css';
@@ -6,9 +7,11 @@ import './LoginMain.css';
 
 class LoginMain extends Component {
   state = {
-    userName: "",
-    password: "",
-    newUser: true,
+    checkUserName: "",
+    checkPassword: "",
+    user: {},
+    passwordCorrect: false,
+    currentUser: false,
     checkUserProcess: false
   }
 
@@ -18,30 +21,41 @@ class LoginMain extends Component {
     APIcalls.getData().then(thisData => {
       thisData.forEach(existingUser => {
         if (existingUser.userName === tempName.userName) {
-          this.setState({ newUser: false })
+          if (existingUser.password === tempName.password) {
+            this.setState({
+              user: existingUser,
+              currentUser: true,
+              passwordCorrect: true
+            })
+          } else {
+            alert(`${tempName.userName}, the password you entered is incorrect. Try again or click the link for forgot password.`)
+          }
           alreadyUser = true;
           return alreadyUser;
         }
       })
     }).then(() => {
-      if (alreadyUser) {
-        alert(`${this.state.userName} already exists. Did you forget your password?`)
+      if (!alreadyUser) {
+        alert(`${this.state.checkUserName} does not exist. Try a different user name or create an account.`)
+      } else if (alreadyUser && this.state.passwordCorrect) {
+        console.log(this.state)
       } else {
-        APIcalls.newUserData(tempName).then(() => {APIcalls.getData()})
+        console.log("something went wrong")
       }
-    }).then(() => this.setState({checkUserProcess: false}))
+    }).then(() => this.setState({ checkUserProcess: false }))
   }
 
   userLogin = (event) => {
     if (this.userName.value === "" || this.password.value === "") {
-      return alert("You must enter a username/email and a password.")
+      return alert("You must enter a username and a password.")
     } else {
       this.checkUserProcess = true;
       this.setState({
-        userName: this.userName.value,
-        password: this.password.value,
+        checkUserName: this.userName.value,
+        checkPassword: this.password.value,
         checkUserProcess: true,
-        newUser: true
+        passwordCorrect: false,
+        currentUser: false
       })
       let tempUser = {};
       tempUser.userName = this.userName.value;
@@ -53,34 +67,35 @@ class LoginMain extends Component {
 
 
   displayUserName = () => {
-    if (this.state.newUser === false || this.state.userName === "" || this.state.checkUserProcess === true) {
+    if (this.state.currentUser === false || this.state.userName === "" || this.state.checkUserProcess === true) {
       return null
     } else {
-      return <h3>Welcome, {this.state.userName}, let's see what's going on.</h3>
+      return <h3>Welcome, {this.state.user.userName}, let's see what's going on.</h3>
     }
   }
 
   loadLogin = () => {
-    return <section>
+    return <section id="completeLogin">
       <img src={logo} className="Main-Logo" alt="Group Guru" />
       <p className="Main-Greeting">Welcome To Group Guru</p>
       <div className="Login">
         <h1 className="Login-Header">Existing User Login </h1>
         <section className="Login-Individual-Sections">
           <label className="Login-Labels">Username</label>
-          <input type="text" id="userName" ref={input => this.userName = input} placeholder="Create your username" ></input>
+          <input type="text" id="userName" ref={input => this.userName = input} placeholder="Enter your username here" ></input>
         </section>
         <section className="Login-Individual-Sections">
           <label className="Login-Labels">Password</label>
-          <input type="text" id="password" ref={password => this.password = password} placeholder="Create your password"></input>
+          <input type="text" id="password" ref={password => this.password = password} placeholder="Enter your password"></input>
         </section>
-        <button className="submitButton" onClick={this.userLogin} id="loginSubmit">LOGIN</button>
+        <section className="Login-Individual-Sections">
+          <button className="submitButton" onClick={this.userLogin} id="loginSubmit">LOGIN</button>
+          <Link to="./forgotPassword" id="forgotPassword">Forgot Password</Link>
+          <Link to="./create" id="newUserLink">Don't have an accout? Create one.</Link>
+        </section>
       </div>
     </section>
   }
-
-
-
 
 
   render() {
