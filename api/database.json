@@ -1,9 +1,14 @@
 {
   "user": [
     {
-      "id": 1,
       "userName": "Brad Davis",
-      "password": "1234"
+      "password": "1234",
+      "id": 1
+    },
+    {
+      "userName": "Mark Truex",
+      "password": "NascarMan",
+      "id": 2
     }
   ]
 }

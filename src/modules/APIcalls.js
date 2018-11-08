@@ -5,7 +5,18 @@ export default Object.create(null, {
     value: function () {
       return fetch(dataURL)
         .then(user => user.json())
-    }
+        .then(data => {
+          let promises = []
+          data.forEach(user => {
+            promises.push(user)
+          })
+          return Promise.all(promises);
+        })
+        .then(data => {
+          console.log(data)
+          return data;
+        })
+      }
   },
   newUserData: {
     value: function (data) {

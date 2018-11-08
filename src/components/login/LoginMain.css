@@ -1,0 +1,59 @@
+.Main {
+  text-align: center;
+  margin-top: 43px;
+  padding-top: 55px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.Main-Logo {
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 40vmin;
+  border-radius: 10px;
+}
+.Main-Greeting {
+  margin-top: 5%;
+  font-size: calc(15px + 2vmin);
+  font-weight: bold;
+}
+.Login {
+  margin-bottom: 10vw;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+}
+.Login-Header {
+  font-size: calc(20px + 1vmin);
+  font-weight: bold;
+  margin-bottom: .25vw;
+}
+.Login-Labels {
+  margin-bottom: 0px;
+}
+.Login-Individual-Sections {
+  display: flex;
+  flex-direction: column;
+}
+.Login-Individual-Sections > input {
+  min-width: 35vh;
+  font-size: 16px;
+  text-align: center;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+::placeholder {
+  font-weight: bold;
+  vertical-align: middle;
+  color: #e65b11;
+}
+.submitButton {
+  width: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  border: 2px solid;
+}

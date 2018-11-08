@@ -1,0 +1,10 @@
+.navbar {
+  background-color: white;
+}
+.nav-item {
+  padding-bottom: .3vw;
+}
+a {
+  color: #e65b11 !important;
+  font-weight: bold;
+}
