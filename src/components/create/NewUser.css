@@ -1,0 +1,27 @@
+.Main {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 55px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+#createUserForm {
+  background-color: white;
+  color: black;
+  padding: 2vw;
+  border-radius: 10px;
+  border: 4px solid #e65b11;
+  font-weight: bold;
+}
+.submitButton {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  border: 4px solid #e65b11;
+}
