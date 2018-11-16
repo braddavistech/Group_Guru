@@ -1,14 +1,32 @@
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import React, { Component } from "react";
-import Login from "./login/LoginMain";
-import ForgotPassword from "./forgotPassword/ForgotPassword";
-import CreateUser from "./create/NewUser";
+import Login from "./login";
 // import APIcalls from "../modules/APIcalls"
 
 
 
 export default class ApplicationViews extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: false,
+      newUser: false,
+      landingPage: true,
+      formNow: "",
+      checkUserName: "",
+      checkPassword: "",
+      user: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+        password: "",
+        createUserStatus: 1
+      },
+      passwordCorrect: false,
+      checkUserProcess: false,
+    }
+  }
 
   componentDidMount() {
     // const newState = {}
@@ -22,17 +40,10 @@ export default class ApplicationViews extends Component {
   }
 
   render () {
+    console.log(this.props)
     return (
-      <React.Fragment>
-        <Route exact path="/" render={(props) => {
-          return <Login  />
-        }} />
-      <Route exact path="/forgotPassword" render={(props) => {
-        return <ForgotPassword  />
-      }} />
-      <Route exact path="/create" render={(props) => {
-        return <CreateUser  />
-      }} />
+    <React.Fragment>
+      <Login  currentUser={this.state}/>
     </React.Fragment>
     )
   }
