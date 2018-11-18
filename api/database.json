@@ -1,11 +1,34 @@
 {
-  "user": [
+  "users": [
     {
-      "userName": "Brad Davis",
-      "password": "1234",
-      "group": "Davis Family",
+      "firstName": "Brad",
+      "lastName": "Davis",
       "email": "brad@braddavistech.com",
+      "username": "braddavistech",
+      "password": "123456",
       "id": 1
+    },
+    {
+      "firstName": "Brad",
+      "lastName": "Davis",
+      "email": "davisthedad@hotmail.com",
+      "username": "davisthedad",
+      "password": "testingPassword",
+      "id": 2
+    }
+  ],
+  "groups": [
+    {
+      "groupName": "Davis Family",
+      "groupDescription": "This is just a test group creation.",
+      "groupType": "Family",
+      "id": 1
+    },
+    {
+      "groupName": "This is a tester.",
+      "groupDescription": "Testing this out.",
+      "groupType": "Work",
+      "id": 2
     }
   ]
 }
