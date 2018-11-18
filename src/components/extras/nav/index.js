@@ -15,7 +15,7 @@ class NavBar extends Component {
       <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
           <ul className="nav nav-pills">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Login</Link>
+              <Link className="nav-link" to="../login">Login</Link>
             </li>
           </ul>
       </nav>

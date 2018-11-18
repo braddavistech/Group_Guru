@@ -7,7 +7,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+:root{
+  --label--form-text: darkblue;
+  --input--form-background: #ff572299;
+  --input--form-textColor: black;
+  --input--form-fontSize: calc(12px + .5vw);
+  --input--form-height: calc(18px + 1vw);
+  --newUser--label-text: calc(12px + 1vw)
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
