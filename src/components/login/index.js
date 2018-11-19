@@ -1,58 +1,49 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import './LoginMain.css';
-import NewUserNav from "../newUserNav";
 
 
-class LoginMain extends Component {
+export default class LoginMain extends Component {
   state = {
-    landingPage: true,
     newUser: false,
-    currentUser: false,
+    existingUser: false
   }
 
-  radio() {
-    if (this.state.landingPage === true) {
-      return (
-        <div id="loginNavButtonContainer">
-          <button value="Log In" onClick={this.printConsole} className="loginNavButton">Log In</button>
-          <button value="Create Account" onClick={this.newUserForm} className="loginNavButton">Create New User</button>
-        </div>
-      )
-    } else if (this.state.newUser === true) {
-      return <NewUserNav backToLogin={this.reloadLogin}/>;
-    } else if (this.props.currentUser === true) {
-      console.log("Current User")
-    }
-  }
-
-  printConsole = () => {
-    console.log("Need login function.");
-  }
-
-  reloadLogin = () => {
+  existingUserForm = () => {
     this.setState({
-      landingPage: true,
-      newUser: false
+      existingUser: true
     })
   }
 
-  newUserForm = (event) => {
+
+
+  newUserForm = () => {
     this.setState({
-      landingPage: false,
       newUser: true
     })
   }
 
   render() {
-    let rdBtn = this.radio();
-
-    return (
-      <div className="Main">
-        {rdBtn}
-      </div>
-
-    );
+    if (this.state.newUser) {
+      return <Redirect to="/newUser" />
+    } else if (this.state.existingUser) {
+      return <Redirect to="/login" />
+    } else {
+      return (
+        <div id="newUserForm">
+          <section id="logoContainer">
+            <img src="../../groupGuruLogo.jpg" id="logoForLogin" alt="Group Guru Logo" />
+            <article id="welcomeLoginMessage">
+              <p id="welcome">Welcome</p>
+              <p id="to">Let's Get Started</p>
+            </article>
+          </section>
+          <article id="loginNavButtonContainer">
+            <button value="Log In" onClick={this.existingUserForm} className="loginNavButton">Log In</button>
+            <button value="Create Account" onClick={this.newUserForm} className="loginNavButton">Create New User</button>
+          </article>
+        </div>
+      )
+    }
   }
 }
-
-export default LoginMain;

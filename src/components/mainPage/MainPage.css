@@ -1,0 +1,35 @@
+.groupMain {
+  text-align: center;
+  margin-top: 41px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+#newUserForm {
+  position: fixed;
+  padding: 2%;
+  top: 125px;
+  width: 85%;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.mainTitle {
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: .5%;
+  color: var(--label--form-text);
+}
+
+.subTitle{
+  width: 100%;
+  margin-bottom: 0px;
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--newUser--label-text);
+  color: var(--label--form-text);
+}

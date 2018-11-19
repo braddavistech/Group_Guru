@@ -1,4 +1,4 @@
-#newUserForm {
+#existingUserForm {
   position: fixed;
   padding: 2%;
   top: 125px;
@@ -38,6 +38,7 @@
 }
 #loginNavButtonContainer{
   width: 100%;
+  margin-top:2%;
   justify-content: space-evenly;
   display: flex;
 }
@@ -47,4 +48,17 @@
   font-weight: bold;
   border-radius: 20px;
   text-align: center;
+}
+.hide {
+  display: none;
+}
+.alert {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 3%;
+  font-size: .65em;
+  font-style: italic;
+  position: relative;
+  color: red;
+  align-self: center;
 }
