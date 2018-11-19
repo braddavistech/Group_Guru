@@ -6,15 +6,15 @@
       "email": "brad@braddavistech.com",
       "username": "braddavistech",
       "password": "123456",
-      "id": 1
-    },
-    {
-      "firstName": "Brad",
-      "lastName": "Davis",
-      "email": "davisthedad@hotmail.com",
-      "username": "davisthedad",
-      "password": "testingPassword",
-      "id": 2
+      "securityQuestionId": 1,
+      "securityAnswer": "hello",
+      "id": 1,
+      "streetAdd": "1445 Bern Drive",
+      "city": "Spring Hill",
+      "stateId": "TN",
+      "zip": "37174",
+      "phone": "615-423-4972",
+      "preferredContact": "Email"
     }
   ],
   "groups": [
@@ -29,6 +29,24 @@
       "groupDescription": "Testing this out.",
       "groupType": "Work",
       "id": 2
+    }
+  ],
+  "securityQuestions": [
+    {
+      "id": 1,
+      "question": "What is your mother's maiden name?"
+    },
+    {
+      "id": 2,
+      "question": "What is the name of your favorite pet?"
+    },
+    {
+      "id": 3,
+      "question": "What is your favorite hobby?"
+    },
+    {
+      "id": 4,
+      "question": "What elementary school did you go to?"
     }
   ]
 }

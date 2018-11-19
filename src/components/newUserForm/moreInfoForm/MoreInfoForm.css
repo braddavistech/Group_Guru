@@ -1,7 +1,7 @@
-/* #newUserForm {
+#newUserForm {
   position: fixed;
   padding: 2%;
-  top: 8.5%;
+  top: 125px;
   width: 85%;
   display: inline-block;
   border-radius: 10px;
@@ -52,6 +52,7 @@
 #alertPreference {
   margin-bottom: 0px;
   font-weight: bold;
+  text-align: center;
   font-size: calc(12px + 1.25vw);
   color: var(--label--form-text);
 }
@@ -66,4 +67,4 @@
 .newUserDualButton {
   display: flex;
   justify-content: space-evenly;
-} */
+}
