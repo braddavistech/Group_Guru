@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import apiData from "../../../modules/APIcalls";
 import "./MoreInfoForm.css";
@@ -15,7 +15,19 @@ export default class MoreInfo extends Component {
     preferredContact: "Email"
   }
 
-  skipAddInfo = () => { this.setState({ skipMoreInfo: true }) }
+  skipAddInfo = () => {
+    let temp = {
+      streetAdd: "No Information Provided",
+      city: "No Information Provided",
+      stateId: "No Information Provided",
+      zip: "No Information Provided",
+      phone: "No Information Provided",
+      preferredContact: "No Information Provided"
+    }
+    apiData.updateItem("users", this.state.currentUserId, temp).then(() => {
+      this.setState({ skipMoreInfo: true })
+    })
+  }
 
   componentDidMount = () => {
     let id = sessionStorage.getItem("currentUserId");
@@ -29,6 +41,7 @@ export default class MoreInfo extends Component {
   }
 
   gatherInputValues = () => {
+    // Need checks for blank fields
     let temp = {
       streetAdd: this.streetAdd.value,
       city: this.city.value,
@@ -37,9 +50,9 @@ export default class MoreInfo extends Component {
       phone: this.phone.value,
       preferredContact: this.state.preferredContact
     }
-    apiData.updateItem("users", this.state.currentUserId, temp)
-    console.log("need to add function to patch user info", temp);
-    this.skipAddInfo();
+    apiData.updateItem("users", this.state.currentUserId, temp).then(() => {
+      this.setState({ skipMoreInfo: true })
+    })
   }
 
   render() {

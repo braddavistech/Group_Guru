@@ -2,13 +2,48 @@
   background-color: white;
 }
 .nav-item {
-  padding-bottom: .3vw;
+  margin-bottom: .5%;
+}
+.nav {
+  width: 75%;
 }
 a {
   color: #e65b11 !important;
   font-weight: bold;
+  border-radius: 9px;
+}
+a:hover {
+  background-color: rgb(184, 181, 181);
 }
 #loggedInButton {
   color: #e65b11 !important;
   font-weight: bold;
+  cursor: pointer;
+  border-radius: 9px;
+}
+#loggedInButton:hover {
+  background-color: rgb(184, 181, 181);
+}
+.hide {
+  display: none;
+}
+#logOutDropdown > p {
+  color: #e65b11 !important;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0px !important;
+  flex-direction: column;
+}
+#logOutDropdown {
+  position: fixed;
+  top: 0px;
+  width: 25%;
+  right: 0%;
+  background-color: white;
+  text-align: center;
+  border-radius: 9px;
+}
+#logOutDropdown > p:hover {
+  background-color: rgb(184, 181, 181);
 }

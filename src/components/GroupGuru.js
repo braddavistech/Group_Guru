@@ -24,9 +24,9 @@ class GroupGuru extends Component {
     this.checkUserState()
   }
 
-  // componentDidUpdate = () => {
-  //   this.checkUserState()
-  // }
+  logOut = () => {
+    this.setState({loggedIn: false})
+  }
 
   toggleLogin = () => {
     this.setState({ loggedIn: true })
@@ -36,7 +36,7 @@ class GroupGuru extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar loggedInStatus={this.state.loggedIn} />
+        <NavBar logOut={this.logOut} loggedInStatus={this.state.loggedIn} />
         <ApplicationViews loggedIn={this.toggleLogin} />
       </React.Fragment>
     )

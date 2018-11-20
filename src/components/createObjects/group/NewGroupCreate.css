@@ -1,20 +1,8 @@
-.Main {
-  text-align: center;
-  margin-top: 41px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 #newUserForm {
   position: fixed;
   padding: 2%;
-  top: 8.5%;
+  top: 125px;
   width: 85%;
-  margin-left: 7.5%;
   display: inline-block;
   border-radius: 10px;
   background-color: white;
@@ -24,23 +12,9 @@
   margin-left: 10%;
   margin-bottom: .5%;
 }
-.hide {
-  display: none;
-}
-.alert {
-  margin: 0px;
-  padding: 0px;
-  margin-left: 3%;
-  font-size: .65em;
-  font-style: italic;
-  position: relative;
-  color: red;
-  align-self: center;
-}
 .newUserLabel {
   width: 100%;
   margin-bottom: 0px;
-  display: inline-flex;
   text-align: left;
   font-weight: bold;
   font-size: var(--newUser--label-text);
@@ -57,15 +31,26 @@
   color: var(--input--form-text);
   background-color: var(--input--form-background);
 }
-#newUserGroupRadioSection {
-  width: 80%;
-  margin-left: 10%;
+#newGroupDescription {
+  width: 100%;
+  height: calc(48px + 10vw);
+  max-height: 200px;
+  text-align: center;
+  font-size: var(--input--form-fontSize);
+  font-weight: bold;
+  border-radius: 10px;
+  color: var(--input--form-text);
+  background-color: var(--input--form-background);
+}
+#newGroupTypeRadioSection {
+  width: 95%;
+  margin-left: 2.5%;
   margin-bottom: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-/* .newUserRadioLabel {
+.newUserRadioLabel {
   display: flex;
   flex-direction: column;
   font-weight: bold;
@@ -74,18 +59,12 @@
 }
 .newUserRadioBtn {
   margin: auto;
-} */
-/* #alertPreference {
+}
+#alertPreference {
   margin-bottom: 0px;
   font-weight: bold;
   font-size: calc(12px + 1.25vw);
   color: var(--label--form-text);
-} */
-#secQuestion {
-  margin-top: 1%;
-  margin-bottom: 2%;
-  width: 100%;
-  font-weight: bold;
 }
 #newUserBtn {
   width: 50%;
@@ -96,7 +75,6 @@
   margin-bottom: 2vw;
 }
 .newUserDualButton {
-  margin-top: 5%;
   display: flex;
   justify-content: space-evenly;
 }
