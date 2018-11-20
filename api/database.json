@@ -8,6 +8,8 @@
       "password": "123456",
       "securityQuestionId": 1,
       "securityAnswer": "hello",
+      "groupId": 1,
+      "inGroup": true,
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",

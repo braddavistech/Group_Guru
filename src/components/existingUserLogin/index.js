@@ -8,7 +8,7 @@ import apiData from "../../modules/APIcalls";
 
 export default class LoginMain extends Component {
   state = {
-    newUser: false
+    loggedIn: false
   }
 
   authenticateUser = () => {
@@ -28,6 +28,7 @@ export default class LoginMain extends Component {
         } else if (email[0].password === temp.password) {
           sessionStorage.setItem("currentUserId", email[0].id);
           this.props.loggedIn();
+          this.setState({loggedIn: true});
         } else { $("#wrongPasswordAlert").show(); }
       })
     } else {
@@ -37,6 +38,7 @@ export default class LoginMain extends Component {
         } else if (username[0].password === temp.password) {
           sessionStorage.setItem("currentUserId", username[0].id);
           this.props.loggedIn();
+          this.setState({loggedIn: true});
         } else {
           $("#worngPasswordAlert").show();
         }
@@ -52,8 +54,8 @@ export default class LoginMain extends Component {
   }
 
   render() {
-    if (this.state.newUser) {
-      return <Redirect to="/newUser" />
+    if (this.state.loggedIn) {
+      return <Redirect to="/GroupGuru" />
     } else {
       return (
         <div id="existingUserForm">

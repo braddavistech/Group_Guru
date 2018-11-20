@@ -23,7 +23,9 @@ export default class CreateNewUser extends Component {
         username: this.username.value,
         password: this.password.value,
         securityQuestionId: this.state.securityQuestionId,
-        securityAnswer: this.securityAnswer.value
+        securityAnswer: this.securityAnswer.value,
+        groupId: 0,
+        inGroup: false
       }
       this.checkAndSave(temp);
     } else { $("#passwordMatchAlert").show() }
@@ -41,7 +43,7 @@ export default class CreateNewUser extends Component {
       $("#emailValidAlert").show();
     } else if (temp.username === "") {
       $("#usernameMissingAlert").show();
-    } else if (temp.username.length < 6) {
+    } else if (temp.username.length < 6 || temp.username.length > 15) {
       $("#usernameLengthAlert").show();
     } else if (!testing.emailAndUsernameValidation(temp.username) === false) {
       $("#usernameValidAlert").show();
@@ -103,9 +105,9 @@ export default class CreateNewUser extends Component {
               userInput} className="newUserInput" placeholder="Enter Email Address"></input>
           </section>
           <section className="newUserInputSection">
-            <label htmlFor="username" className="newUserLabel">Username<p id="usernameMissingAlert" className="alert hide">You must enter a username.</p><p id="usernameLengthAlert" className="alert hide">Your username must be at least 6 characters. Please try again.</p><p id="usernameValidAlert" className="alert hide">The username you entered is not valid in a valid format. Please try again.</p><p id="usernameDupAlert" className="alert hide">This username is already registered. Please try again.</p></label>
+            <label htmlFor="username" className="newUserLabel">Username<p id="usernameMissingAlert" className="alert hide">You must enter a username.</p><p id="usernameLengthAlert" className="alert hide">Your username must be between 6 and 15 characters. Please try again.</p><p id="usernameValidAlert" className="alert hide">The username you entered is not valid in a valid format. Please try again.</p><p id="usernameDupAlert" className="alert hide">This username is already registered. Please try again.</p></label>
             <input name="username" ref={(userInput) => this.username =
-              userInput} className="newUserInput" placeholder="Enter Username (@ is not an allowed character)"></input>
+              userInput} className="newUserInput" placeholder="Enter Username (6 to 15 characters in length)"></input>
           </section>
           <section className="newUserInputSection">
             <label htmlFor="password" className="newUserLabel">Password<p id="passwordLengthAlert" className="alert hide">Your password must be at least 6 characters. Please try again.</p></label>

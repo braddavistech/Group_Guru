@@ -1,28 +1,61 @@
-.groupMain {
-  text-align: center;
-  margin-top: 41px;
-  min-height: 100vh;
+.topLeft {
+  position: fixed;
+  background-color: white;
+  height: 42%;
+  width: 46%;
+  margin-left: 3.3%;
+  margin-top: 55px;
+}
+.topRight {
+  position: fixed;
+  background-color: white;
+  height: 42%;
+  width: 46%;
+  right: 3.3%;
+  margin-top: 55px;
+
+}
+.middleRow {
+  position: absolute;
+  background-color: white;
+  height: 27%;
+  width: 93.4%;
+  right: 3.3%;
+  bottom: 21%;
+  overflow: scroll;
+}
+.alertBottom {
+  position: fixed;
+  background-color: white;
+  height: 19%;
+  z-index: 10000;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 1%;
+  width: 100%;
+  bottom: 0px;
 }
 
-#newUserForm {
-  position: fixed;
-  padding: 2%;
-  top: 125px;
-  width: 85%;
-  display: inline-block;
+#noGroupAlert {
+  position: relative;
+  padding: .5%;
+  border: 2px solid;
+  width: 100%;
+  text-align: center;
+  display: flex;
   border-radius: 10px;
   background-color: white;
 }
 
 .mainTitle {
-  width: 80%;
-  margin-left: 10%;
-  margin-bottom: .5%;
+  width: 50%;
+  font-size: 40px;
+  margin-top: 2%;
   color: var(--label--form-text);
+}
+
+#groupOptions {
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .subTitle{

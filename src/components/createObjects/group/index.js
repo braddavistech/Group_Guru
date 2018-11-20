@@ -1,49 +1,55 @@
 import React, { Component } from 'react';
 import "./NewGroupCreate.css";
 import apiData from "../../../modules/APIcalls";
+import $ from "jquery";
 
 export default class CreateNewGroup extends Component {
   state = {
+    userId: 0,
     groupType: "Other",
-    uniqueGroupName: false
+    uniqueGroupName: false,
+    backToMain: false
+  }
+
+  componentDidMount = () => {
+    let userId = sessionStorage.getItem("currentUserId")
+    this.setState({ userId: userId })
   }
 
   gatherGroupInputValues = () => {
+    $(".alert").hide();
     let temp = {
       groupName: this.groupName.value,
       groupDescription: this.groupDescription.value,
       groupType: this.state.groupType
     }
-    this.checkAndSave(temp);
-  }
-
-  groupExists = () => {
-    let groupName = this.groupName.value;
-    if (groupName.length >= 4) {
-      apiData.getSingleType('groups', `groupName=${groupName}`).then(sameGroup => {
-        if (sameGroup.length === 0) {
-          this.setState({ uniqueGroupName: true })
-        } else { this.setState({ uniqueGroupName: false }) };
-      })
-    }
-  }
-
-  checkAndSave = (temp) => {
-    if (temp.groupName === "") {
-      alert("You must enter a group name.");
-    } else if (temp.groupName.length < 4 ) {
-      alert("Group Names must be at least 4 characters.")
+    if (temp.groupName.length < 4 || temp.groupName.length > 20) {
+      $("#nameLengthAlert").show();
     } else if (temp.groupDescription === "") {
-      alert("You must enter a description for your group.");
-    } else if (this.state.uniqueGroupName === false) {
-      alert("There is already a group with that name. Please try again.");
+      $("#descriptionAlert").show();
     } else {
-      apiData.newDataPost(temp, "groups").then(currentGroup => {
-        console.log("just retrieved: ", currentGroup)
+      apiData.getSingleType('groups', `groupName=${temp.groupName}`).then(sameGroup => {
+        if (sameGroup.length === 0) {
+          this.saveGroup(temp);
+          this.setState({ uniqueGroupName: true })
+        } else {
+          $("#nameTakenAlert").show();
+        }
       })
+
     }
   }
 
+  saveGroup = (temp) => {
+    apiData.newDataPost(temp, "groups").then(currentGroup => {
+      let data = { groupId: currentGroup.id, inGroup: true }
+      sessionStorage.setItem("groupId", currentGroup.id);
+      sessionStorage.setItem("inGroup", true)
+      apiData.updateItem("users", this.state.userId, data).then(() => {
+        this.props.mainPage();
+      })
+    })
+  }
 
   handleOptionChange = (changeEvent) => {
     this.setState({
@@ -55,12 +61,12 @@ export default class CreateNewGroup extends Component {
     return (
       <article id="newUserForm">
         <section className="newUserInputSection">
-          <label htmlFor="groupName" className="newUserLabel">Group Name</label>
+          <label htmlFor="groupName" className="newUserLabel">Group Name<p id="nameLengthAlert" className="alert hide">Your group name must be between 4 and 20 characters. Please try again.</p><p id="nameTakenAlert" className="alert hide">That group name is already taken. Please try again.</p></label>
           <input name="groupName" ref={(userInput) => this.groupName =
-            userInput} className="newUserInput" onKeyUp={this.groupExists} placeholder="Enter The Name For Your Group"></input>
+            userInput} className="newUserInput" placeholder="Enter The Name For Your Group"></input>
         </section>
         <section className="newUserInputSection">
-          <label htmlFor="groupDescription" className="newUserLabel">Brief Description</label>
+          <label htmlFor="groupDescription" className="newUserLabel">Brief Description<p id="descriptionAlert" className="alert hide">You must enter a description for your group.</p></label>
           <textarea name="groupDescription" ref={(userInput) => this.groupDescription =
             userInput} id="newGroupDescription" placeholder="Enter A Brief Description To Display In A Search"></textarea>
         </section>
@@ -84,6 +90,7 @@ export default class CreateNewGroup extends Component {
         </section>
       </article>
     )
+    // }
   }
 }
 

@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import Login from "./login";
 import About from "./about";
 import MainPage from "./mainPage";
-import CreateNewUser from "./newUserForm/userAccountCreate";
-import MoreInfoForm from "./newUserForm/moreInfoForm";
+import CreateNewUser from "./createObjects/userAccountCreate";
+import MoreInfoForm from "./createObjects/moreInfoForm";
 import ExistingUserLogin from "./existingUserLogin";
+import CreateNewGroup from "./createObjects/group"
 
 
 export default class ApplicationViews extends Component {
@@ -28,6 +29,9 @@ export default class ApplicationViews extends Component {
           }} />
           <Route exact path="/login" render={(props) => {
             return <ExistingUserLogin loggedIn={this.props.loggedIn} />
+          }} />
+          <Route exact path="/createGroup" render={(props) => {
+            return <CreateNewGroup loggedIn={this.props.loggedIn} />
           }} />
           <Route exact path="/newUser" render={(props) => {
             return <CreateNewUser loggedIn={this.props.loggedIn} />
