@@ -36,27 +36,46 @@ export default class CreateNewUser extends Component {
 
   // validates all entries and then either toggles alerts or saves new user to json and redirects
   checkAndSave = (temp) => {
+    let errorFound= false;
     if (temp.firstName === "") {
       $("#firstNameMissingAlert").show();
-    } else if (temp.lastName === "") {
+      errorFound = true;
+    }
+    if (temp.lastName === "") {
       $("#lastNameMissingAlert").show();
-    } else if (temp.email === "") {
+      errorFound = true;
+    }
+    if (temp.email === "") {
       $("#emailMissingAlert").show();
+      errorFound = true;
     } else if (testing.emailAndUsernameValidation(temp.email) === false) {
       $("#emailValidAlert").show();
-    } else if (temp.username === "") {
+      errorFound = true;
+    }
+    if (temp.username === "") {
       $("#usernameMissingAlert").show();
+      errorFound = true;
     } else if (temp.username.length < 6 || temp.username.length > 15) {
       $("#usernameLengthAlert").show();
+      errorFound = true;
     } else if (!testing.emailAndUsernameValidation(temp.username) === false) {
       $("#usernameValidAlert").show();
-    } else if (temp.password.length < 6) {
+      errorFound = true;
+    }
+    if (temp.password.length < 6) {
       $("#passwordLengthAlert").show();
-    } else if (temp.securityQuestionId === 0) {
+      errorFound = true;
+    }
+    if (temp.securityQuestionId === 0) {
       $("#chooseQuestionAlert").show();
+      errorFound = true;
     } else if (temp.securityAnswer === "") {
       $("#answerQuestionAlert").show();
-    } else if (testing.emailAndUsernameValidation(temp.email) && !testing.emailAndUsernameValidation(temp.username)) {
+      errorFound = true;
+    }
+    if (!errorFound) {
+      console.log(errorFound)
+    // else if (testing.emailAndUsernameValidation(temp.email) && !testing.emailAndUsernameValidation(temp.username)) {
       apiData.getSingleType('users', `email=${temp.email}`).then(email => {
         if (email.length === 0) {
           apiData.getSingleType('users', `username=${temp.username}`).then(username => {
