@@ -61,12 +61,17 @@ export default class CreateNewGroup extends Component {
     return (
       <article id="newUserForm">
         <section className="newUserInputSection">
-          <label htmlFor="groupName" className="newUserLabel">Group Name<p id="nameLengthAlert" className="alert hide">Your group name must be between 4 and 20 characters. Please try again.</p><p id="nameTakenAlert" className="alert hide">That group name is already taken. Please try again.</p></label>
+          <label htmlFor="groupName" className="newUserLabel">Group Name
+            <p id="nameLengthAlert" className="alert hide">Your group name must be between 4 and 20 characters. Please try again.</p>
+            <p id="nameTakenAlert" className="alert hide">That group name is already taken. Please try again.</p>
+          </label>
           <input name="groupName" ref={(userInput) => this.groupName =
             userInput} className="newUserInput" placeholder="Enter The Name For Your Group"></input>
         </section>
         <section className="newUserInputSection">
-          <label htmlFor="groupDescription" className="newUserLabel">Brief Description<p id="descriptionAlert" className="alert hide">You must enter a description for your group.</p></label>
+          <label htmlFor="groupDescription" className="newUserLabel">Brief Description
+            <p id="descriptionAlert" className="alert hide">You must enter a description for your group.</p>
+          </label>
           <textarea name="groupDescription" ref={(userInput) => this.groupDescription =
             userInput} id="newGroupDescription" placeholder="Enter A Brief Description To Display In A Search"></textarea>
         </section>

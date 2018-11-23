@@ -13,12 +13,19 @@ class NavBar extends Component {
   }
 
   logOut = () => {
+    let newLoginDate = {
+      lastLogin: new Date()
+    }
+    let userId = sessionStorage.getItem("currentUserId");
+    apiData.updateItem("users", userId, newLoginDate).then(() => {
     this.props.logOut();
     sessionStorage.removeItem("currentUserId");
+    sessionStorage.removeItem("lastLogin");
     sessionStorage.removeItem("groupId");
     sessionStorage.removeItem("inGroup");
     this.setState({ currentUser: {}, profileLoaded: false})
     return <Redirect to="/"/>;
+    })
   }
 
 
@@ -37,16 +44,16 @@ class NavBar extends Component {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="nav-link" to="/GroupGuru">Home</Link>
+                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">About</Link>
+                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/GroupGuru">*Groups*</Link>
+                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Groups*</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/GroupGuru">*Logout*</Link>
+                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>
               </li>
             </ul>
             <section id="logOutDropdown">
