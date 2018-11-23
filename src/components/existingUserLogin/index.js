@@ -27,8 +27,14 @@ export default class LoginMain extends Component {
           $("#noEmailFoundAlert").show();
         } else if (email[0].password === temp.password) {
           sessionStorage.setItem("currentUserId", email[0].id);
-          this.props.loggedIn();
-          this.setState({loggedIn: true});
+          sessionStorage.setItem("lastLogin", email[0].lastLogin);
+          let newLoginDate = {
+            lastLogin: new Date()
+          }
+          apiData.updateItem("users", email[0].id, newLoginDate).then(() => {
+            this.props.loggedIn();
+            this.setState({ loggedIn: true });
+          })
         } else { $("#wrongPasswordAlert").show(); }
       })
     } else {
@@ -37,8 +43,14 @@ export default class LoginMain extends Component {
           $("#noUsernameFoundAlert").show();
         } else if (username[0].password === temp.password) {
           sessionStorage.setItem("currentUserId", username[0].id);
+          sessionStorage.setItem("lastLogin", username[0].lastLogin);
+          let newLoginDate = {
+            lastLogin: new Date()
+          }
+          apiData.updateItem("users", username[0].id, newLoginDate).then(() => {
           this.props.loggedIn();
-          this.setState({loggedIn: true});
+          this.setState({ loggedIn: true });
+          })
         } else {
           $("#worngPasswordAlert").show();
         }

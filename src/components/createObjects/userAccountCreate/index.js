@@ -15,6 +15,7 @@ export default class CreateNewUser extends Component {
   // grabs input values and submits for validation
   gatherInputValues = () => {
     $(".alert").hide()
+    let date = new Date ();
     if (this.password.value === this.confirmPassword.value) {
       let temp = {
         firstName: this.firstName.value,
@@ -25,7 +26,9 @@ export default class CreateNewUser extends Component {
         securityQuestionId: this.state.securityQuestionId,
         securityAnswer: this.securityAnswer.value,
         groupId: 0,
-        inGroup: false
+        inGroup: false,
+        accountCreationDate: date,
+        lastLogin: date
       }
       this.checkAndSave(temp);
     } else { $("#passwordMatchAlert").show() }
