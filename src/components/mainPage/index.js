@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import apiData from "../../modules/APIcalls";
 import "./MainPage.css";
 import CreateNewGroup from "../createObjects/group";
+import CreateMessage from "../createObjects/createMessage";
+import OldMessages from "./oldMessages";
 
 
 
@@ -11,16 +13,31 @@ export default class MainPage extends Component {
     closeGroup: false,
     sendToGroup: false,
     inGroup: false,
-    groupId: 0
+    groupId: 0,
+    groupMessages: []
   }
 
   componentDidMount = () => {
     let userId = sessionStorage.getItem("currentUserId");
     apiData.getSingleType("users", `id=${userId}`).then(user => {
       let newUser = user[0];
-      this.setState({ currentUser: newUser, profileLoaded: true, inGroup: newUser.inGroup })
+      return newUser;
+    })
+    .then(newUser => {
+      apiData.getSingleType("messages", `groupId=${newUser.groupId}`).then(messages => {
+        // console.log("group messages: ", messages)
+        this.setState({groupMessages: messages, currentUser: newUser, groupId: newUser.groupId, profileLoaded: true, inGroup: newUser.inGroup})
+      })
     })
   }
+
+  grabData = () => {
+    apiData.getSingleType("messages", `groupId=${this.state.currentUser.groupId}`).then(messages => {
+      // console.log("group messages: ", messages)
+      this.setState({groupMessages: messages})
+    })
+  }
+
 
   stayAtMain = () => {
     let newGroup = sessionStorage.getItem("groupId");
@@ -43,7 +60,10 @@ export default class MainPage extends Component {
       if (!this.state.inGroup) {
         return (
           <React.Fragment>
-            <div className="topLeft">Test Area</div>
+            <div className="topLeft">
+              {/* <OldMessages messages={this.state.groupMessages} /> */}
+              <CreateMessage currentUser={this.state.currentUser}/>
+            </div>
             <div className="topRight">Test</div>
             <div className="middleRow">
             </div>
@@ -67,7 +87,11 @@ export default class MainPage extends Component {
       } else {
         return (
           <React.Fragment>
-            <div className="topLeft">Test Area</div>
+            <div className="topLeft">
+              <p id="messageWindow">MESSAGES</p>
+              <OldMessages messages={this.state.groupMessages} />
+              <CreateMessage currentUser={this.state.currentUser} refresh={this.grabData}/>
+            </div>
             <div className="topRight">Test</div>
             <div className="middleRow"></div>
             <div className="alertBottom">

@@ -1,0 +1,23 @@
+#oldMessages {
+  height: 67%;
+  overflow: scroll;
+  padding-bottom: 10%;
+}
+.indivMessage {
+  border-bottom: 0.25px solid;
+  padding: 1.5%;
+
+}
+.oldMsgTitle {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 1;
+  margin: 0px;
+}
+.oldMsgBody {
+  margin: 0px;
+  line-height: 1;
+  margin-top: 3px;
+  font-size: 15px;
+
+}
