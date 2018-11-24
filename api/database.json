@@ -11,7 +11,7 @@
       "groupId": 1,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-11-23T13:39:53.660Z",
+      "lastLogin": "2018-11-24T15:06:33.313Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -31,7 +31,7 @@
       "groupId": 0,
       "inGroup": false,
       "accountCreationDate": "2018-11-21T04:02:37.606Z",
-      "lastLogin": "2018-11-23T14:00:59.148Z",
+      "lastLogin": "2018-11-23T14:04:33.526Z",
       "id": 2,
       "streetAdd": "1234 main",
       "city": "franklin",
@@ -74,7 +74,32 @@
     }
   ],
   "photos": [],
-  "messages": [],
+  "messages": [
+    {
+      "messageDate": "2018-11-24T11:12:09.245Z",
+      "messageTitle": "Got New Message Functionality",
+      "messageBody": "This is the first message created using the create new message functionality.",
+      "author": 1,
+      "groupId": 1,
+      "id": 1
+    },
+    {
+      "messageDate": "2018-11-24T11:13:31.159Z",
+      "messageTitle": "Great Thanksgiving",
+      "messageBody": "Always great to spend time with family.",
+      "author": 1,
+      "groupId": 2,
+      "id": 2
+    },
+    {
+      "messageDate": "2018-11-24T12:26:24.304Z",
+      "messageTitle": "Crazy Day",
+      "messageBody": "We went to Murfreesboro to eat lunch and had to deal with all the Black Friday shopping traffic.",
+      "author": 1,
+      "groupId": 1,
+      "id": 3
+    }
+  ],
   "events": [],
   "loginActivities": []
 }
