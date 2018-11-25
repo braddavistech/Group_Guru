@@ -11,7 +11,7 @@
       "groupId": 1,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-11-24T15:06:33.313Z",
+      "lastLogin": "2018-11-25T10:55:00.905Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -38,6 +38,26 @@
       "stateId": "tn",
       "zip": "37174",
       "phone": "6154765238",
+      "preferredContact": "Email"
+    },
+    {
+      "firstName": "Brad",
+      "lastName": "Davis",
+      "email": "test@test.com",
+      "username": "test2ndGroup",
+      "password": "123456",
+      "securityQuestionId": 1,
+      "securityAnswer": "hello",
+      "groupId": 1,
+      "inGroup": true,
+      "accountCreationDate": "2018-11-23T07:02:37.606Z",
+      "lastLogin": "2018-11-24T21:55:23.409Z",
+      "id": 3,
+      "streetAdd": "1445 Bern Drive",
+      "city": "Spring Hill",
+      "stateId": "TN",
+      "zip": "37174",
+      "phone": "615-423-4972",
       "preferredContact": "Email"
     }
   ],
@@ -79,7 +99,7 @@
       "messageDate": "2018-11-24T11:12:09.245Z",
       "messageTitle": "Got New Message Functionality",
       "messageBody": "This is the first message created using the create new message functionality.",
-      "author": 1,
+      "userId": 1,
       "groupId": 1,
       "id": 1
     },
@@ -87,17 +107,49 @@
       "messageDate": "2018-11-24T11:13:31.159Z",
       "messageTitle": "Great Thanksgiving",
       "messageBody": "Always great to spend time with family.",
-      "author": 1,
+      "userId": 1,
       "groupId": 2,
       "id": 2
+    },
+    {
+      "messageDate": "2018-11-24T11:45:15.806Z",
+      "messageTitle": "Testing other user",
+      "messageBody": "This is a message from another group member to ensure it shows on landing page.",
+      "userId": 3,
+      "groupId": 1,
+      "id": 3
     },
     {
       "messageDate": "2018-11-24T12:26:24.304Z",
       "messageTitle": "Crazy Day",
       "messageBody": "We went to Murfreesboro to eat lunch and had to deal with all the Black Friday shopping traffic.",
-      "author": 1,
+      "userId": 1,
       "groupId": 1,
-      "id": 3
+      "id": 4
+    },
+    {
+      "messageDate": "2018-11-24T15:10:15.806Z",
+      "messageTitle": "This is the 3rd message",
+      "messageBody": "This is the 3rd message for group 1. Just checking that the functionality is working correctly.",
+      "userId": 1,
+      "groupId": 1,
+      "id": 5
+    },
+    {
+      "messageDate": "2018-11-25T10:52:00.706Z",
+      "messageTitle": "Test to top of list",
+      "messageBody": "This should now be the top message.\n",
+      "userId": 1,
+      "groupId": 1,
+      "id": 6
+    },
+    {
+      "messageDate": "2018-11-25T10:53:38.608Z",
+      "messageTitle": "Top of list test 2",
+      "messageBody": "This is 2nd test to top of list after modifying object author name.",
+      "userId": 1,
+      "groupId": 1,
+      "id": 7
     }
   ],
   "events": [],
