@@ -23,18 +23,18 @@ export default class MainPage extends Component {
       let newUser = user[0];
       return newUser;
     })
-    .then(newUser => {
-      apiData.getSingleType("messages", `groupId=${newUser.groupId}`).then(messages => {
-        // console.log("group messages: ", messages)
-        this.setState({groupMessages: messages, currentUser: newUser, groupId: newUser.groupId, profileLoaded: true, inGroup: newUser.inGroup})
+      .then(newUser => {
+        apiData.getSingleType("messages", `_expand=user&groupId=${newUser.groupId}`).then(messages => {
+          // console.log("group messages: ", messages)
+          this.setState({ groupMessages: messages, currentUser: newUser, groupId: newUser.groupId, profileLoaded: true, inGroup: newUser.inGroup })
+        })
       })
-    })
   }
 
   grabData = () => {
-    apiData.getSingleType("messages", `groupId=${this.state.currentUser.groupId}`).then(messages => {
+    apiData.getSingleType("messages", `_expand=user&groupId=${this.state.currentUser.groupId}`).then(messages => {
       // console.log("group messages: ", messages)
-      this.setState({groupMessages: messages})
+      this.setState({ groupMessages: messages })
     })
   }
 
@@ -61,11 +61,15 @@ export default class MainPage extends Component {
         return (
           <React.Fragment>
             <div className="topLeft">
+              <p id="messageWindow">MESSAGES</p>
               {/* <OldMessages messages={this.state.groupMessages} /> */}
-              <CreateMessage currentUser={this.state.currentUser}/>
+              <CreateMessage currentUser={this.state.currentUser} />
             </div>
-            <div className="topRight">Test</div>
+            <div className="topRight">
+              <p id="messageWindow">CALENDAR</p>
+            </div>
             <div className="middleRow">
+              <p id="messageWindow">PICTURES</p>
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -90,10 +94,14 @@ export default class MainPage extends Component {
             <div className="topLeft">
               <p id="messageWindow">MESSAGES</p>
               <OldMessages messages={this.state.groupMessages} />
-              <CreateMessage currentUser={this.state.currentUser} refresh={this.grabData}/>
+              <CreateMessage currentUser={this.state.currentUser} refresh={this.grabData} />
             </div>
-            <div className="topRight">Test</div>
-            <div className="middleRow"></div>
+            <div className="topRight">
+              <p id="messageWindow">CALENDAR</p>
+            </div>
+            <div className="middleRow">
+              <p id="messageWindow">PICTURES</p>
+            </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
                 <h1>This is where info on events for this group since last login will appear.</h1>

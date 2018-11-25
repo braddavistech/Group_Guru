@@ -7,16 +7,6 @@ import "./CreateMessage.css";
 
 
 export default class CreateMessage extends Component {
-  // state = {
-  //   userId: 0,
-  //   groupId: 0
-  // }
-
-  // componentDidMount = () => {
-  //   let currentUserId = sessionStorage.getItem("currentUserId");
-  //   let newGroup = sessionStorage.getItem("groupId");
-  //   this.setState({userId: currentUserId, groupId: newGroup })
-  // }
 
   gatherInputValues = () => {
     $(".alert").hide()
@@ -25,7 +15,7 @@ export default class CreateMessage extends Component {
       messageDate: new Date(),
       messageTitle: this.title.value,
       messageBody: this.messageBody.value,
-      author: this.props.currentUser.id,
+      userId: this.props.currentUser.id,
       groupId: this.props.currentUser.groupId
     }
     if (message.messageTitle === "") {
@@ -43,14 +33,6 @@ export default class CreateMessage extends Component {
       this.messageBody.value = "";
     }
   }
-
-  // closeGroupMessage = () => {
-  //   this.setState({ closeGroup: true })
-  // }
-
-  // createJoinGroup = () => {
-  //   this.setState({ sendToGroup: true, closeGroup: false })
-  // }
 
   render() {
 
