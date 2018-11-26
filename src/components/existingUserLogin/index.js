@@ -8,7 +8,8 @@ import apiData from "../../modules/APIcalls";
 
 export default class LoginMain extends Component {
   state = {
-    loggedIn: false
+    loggedIn: false,
+    newUser: false
   }
 
   authenticateUser = () => {
@@ -31,10 +32,16 @@ export default class LoginMain extends Component {
           let newLoginDate = {
             lastLogin: new Date()
           }
-          apiData.updateItem("users", email[0].id, newLoginDate).then(() => {
-            this.props.loggedIn();
-            this.setState({ loggedIn: true });
-          })
+          let loginDate = new Date();
+          let date = { date: loginDate, userId: email[0].id }
+          apiData.newDataPost(date, "loginActivities")
+            .then(() => {
+              apiData.updateItem("users", email[0].id, newLoginDate).then(() => {
+                this.props.refresh();
+                this.props.loggedIn();
+                this.setState({ loggedIn: true });
+              })
+            })
         } else { $("#wrongPasswordAlert").show(); }
       })
     } else {
@@ -47,12 +54,18 @@ export default class LoginMain extends Component {
           let newLoginDate = {
             lastLogin: new Date()
           }
-          apiData.updateItem("users", username[0].id, newLoginDate).then(() => {
-          this.props.loggedIn();
-          this.setState({ loggedIn: true });
-          })
+          let loginDate = new Date();
+          let date = { date: loginDate, userId: username[0].id }
+          apiData.newDataPost(date, "loginActivities")
+            .then(() => {
+              apiData.updateItem("users", username[0].id, newLoginDate).then(() => {
+                this.props.refresh();
+                this.props.loggedIn();
+                this.setState({ loggedIn: true });
+              })
+            })
         } else {
-          $("#worngPasswordAlert").show();
+          $("#wrongPasswordAlert").show();
         }
       })
     }
@@ -68,6 +81,8 @@ export default class LoginMain extends Component {
   render() {
     if (this.state.loggedIn) {
       return <Redirect to="/GroupGuru" />
+    } else if (this.state.newUser) {
+      return <Redirect to="/newUser" />
     } else {
       return (
         <div id="existingUserForm">
@@ -79,17 +94,26 @@ export default class LoginMain extends Component {
             </article>
           </section>
           <section className="userLoginSection">
-            <label htmlFor="usernameOrEmail" className="newUserLabel">Enter Username or Email<p id="noEmailFoundAlert" className="alert hide">The email you entered is not registered.</p><p id="noUsernameFoundAlert" className="alert hide">The username you entered is not registered.</p><p id="invalidEmailAlert" className="alert hide">Please enter a valid email address.</p><p id="invalidUsernameAlert" className="alert hide">Please enter a valid username.</p></label>
+            <label htmlFor="usernameOrEmail" className="newUserLabel">Enter Username or Email
+            <p id="noEmailFoundAlert" className="alert hide">The email you entered is not registered.</p>
+              <p id="noUsernameFoundAlert" className="alert hide">The username you entered is not registered.</p>
+              <p id="invalidEmailAlert" className="alert hide">Please enter a valid email address.</p>
+              <p id="invalidUsernameAlert" className="alert hide">Please enter a valid username.</p>
+            </label>
             <input name="usernameOrEmail" ref={(userInput) => this.usernameOrEmail =
               userInput} className="newUserInput" placeholder="Enter Username/Email"></input>
           </section>
           <section className="userLoginSection">
-            <label htmlFor="password" className="newUserLabel">Enter Your Password<p id="wrongPasswordAlert" className="alert hide">The password entered is incorrect.</p><p id="passwordLengthAlert" className="alert hide">The password entered is too short. Please try again.</p></label>
+            <label htmlFor="password" className="newUserLabel">Enter Your Password
+            <p id="wrongPasswordAlert" className="alert hide">The password entered is incorrect.</p>
+              <p id="passwordLengthAlert" className="alert hide">The password entered is too short. Please try again.</p>
+            </label>
             <input name="password" ref={(userInput) => this.password =
               userInput} className="newUserInput" placeholder="Enter Password"></input>
           </section>
           <article id="loginNavButtonContainer">
             <button value="Log In" onClick={this.authenticateUser} className="loginNavButton">Log In</button>
+            <button value="New User" onClick={this.newUserForm} className="loginNavButton">Create New Account</button>
           </article>
         </div>
       )

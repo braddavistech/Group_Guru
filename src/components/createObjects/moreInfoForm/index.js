@@ -25,6 +25,7 @@ export default class MoreInfo extends Component {
       preferredContact: "No Information Provided"
     }
     apiData.updateItem("users", this.state.currentUserId, temp).then(() => {
+      this.props.refresh();
       this.setState({ skipMoreInfo: true })
     })
   }
@@ -51,6 +52,7 @@ export default class MoreInfo extends Component {
       preferredContact: this.state.preferredContact
     }
     apiData.updateItem("users", this.state.currentUserId, temp).then(() => {
+      this.props.refresh();
       this.setState({ skipMoreInfo: true })
     })
   }

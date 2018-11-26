@@ -14,7 +14,6 @@ export default Object.create(null, {
           return Promise.all(promises);
         })
         .then(data => {
-          console.log(data)
           return data;
         })
     }
@@ -25,7 +24,6 @@ export default Object.create(null, {
       return fetch(`${dataURL}${category}/?${search}`)
         .then(user => user.json())
         .then(data => {
-          console.log(data)
           return data;
         })
     }
@@ -34,9 +32,9 @@ export default Object.create(null, {
   newDataPost: {
     value: function (data, category) {
       return fetch(`${dataURL}${category}/`, {
-        method: "POST", // *GET, POST, PUT, DELETE
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(data), 
       })
         .then(response => response.json());
     }

@@ -15,8 +15,6 @@ export default class LoginMain extends Component {
     })
   }
 
-
-
   newUserForm = () => {
     this.setState({
       newUser: true

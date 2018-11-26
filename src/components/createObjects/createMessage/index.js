@@ -15,8 +15,8 @@ export default class CreateMessage extends Component {
       messageDate: new Date(),
       messageTitle: this.title.value,
       messageBody: this.messageBody.value,
-      userId: this.props.currentUser.id,
-      groupId: this.props.currentUser.groupId
+      userId: this.props.user.currentUser.id,
+      groupId: this.props.user.currentUser.groupId
     }
     if (message.messageTitle === "") {
       $("#msgTitleAlert").show();

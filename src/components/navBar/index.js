@@ -50,7 +50,7 @@ class NavBar extends Component {
                 <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Groups*</Link>
+                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/joinGroup">Groups</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>
