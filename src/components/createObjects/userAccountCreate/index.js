@@ -15,7 +15,7 @@ export default class CreateNewUser extends Component {
   // grabs input values and submits for validation
   gatherInputValues = () => {
     $(".alert").hide()
-    let date = new Date ();
+    let date = new Date();
     if (this.password.value === this.confirmPassword.value) {
       let temp = {
         firstName: this.firstName.value,
@@ -25,7 +25,7 @@ export default class CreateNewUser extends Component {
         password: this.password.value,
         securityQuestionId: this.state.securityQuestionId,
         securityAnswer: this.securityAnswer.value,
-        groupId: 0,
+        groupId: 1,
         inGroup: false,
         accountCreationDate: date,
         lastLogin: date
@@ -36,7 +36,7 @@ export default class CreateNewUser extends Component {
 
   // validates all entries and then either toggles alerts or saves new user to json and redirects
   checkAndSave = (temp) => {
-    let errorFound= false;
+    let errorFound = false;
     if (temp.firstName === "") {
       $("#firstNameMissingAlert").show();
       errorFound = true;
@@ -74,21 +74,23 @@ export default class CreateNewUser extends Component {
       errorFound = true;
     }
     if (!errorFound) {
-      console.log(errorFound)
-    // else if (testing.emailAndUsernameValidation(temp.email) && !testing.emailAndUsernameValidation(temp.username)) {
       apiData.getSingleType('users', `email=${temp.email}`).then(email => {
         if (email.length === 0) {
           apiData.getSingleType('users', `username=${temp.username}`).then(username => {
             if (username.length === 0) {
               apiData.newDataPost(temp, "users").then(currentUser => {
-                console.log("saved user: ", currentUser);
                 sessionStorage.setItem("currentUserId", currentUser.id);
-                this.props.loggedIn();
-                this.setState({ redirect: true });
+                let loginDate = new Date();
+                let date = { date: loginDate, userId: currentUser.id}
+                apiData.newDataPost(date, "loginActivities")
+                  .then(() => {
+                    this.props.loggedIn();
+                    this.setState({ redirect: true });
+                  })
               })
             } else { $("#usernameDupAlert").show() };
           })
-        } else { $("#emailDupAlert").show()};
+        } else { $("#emailDupAlert").show() };
       })
     }
   }

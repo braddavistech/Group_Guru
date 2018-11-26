@@ -8,10 +8,10 @@
       "password": "123456",
       "securityQuestionId": 1,
       "securityAnswer": "hello",
-      "groupId": 1,
+      "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-11-25T10:55:00.905Z",
+      "lastLogin": "2018-11-26T10:41:31.792Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -28,10 +28,10 @@
       "password": "testing",
       "securityQuestionId": 2,
       "securityAnswer": "spike",
-      "groupId": 0,
-      "inGroup": false,
+      "groupId": 2,
+      "inGroup": true,
       "accountCreationDate": "2018-11-21T04:02:37.606Z",
-      "lastLogin": "2018-11-23T14:04:33.526Z",
+      "lastLogin": "2018-11-26T10:30:21.526Z",
       "id": 2,
       "streetAdd": "1234 main",
       "city": "franklin",
@@ -43,36 +43,42 @@
     {
       "firstName": "Brad",
       "lastName": "Davis",
-      "email": "test@test.com",
-      "username": "test2ndGroup",
-      "password": "123456",
-      "securityQuestionId": 1,
-      "securityAnswer": "hello",
+      "email": "bad3y@mtsu.edu",
+      "username": "Brad MTSU",
+      "password": "testing",
+      "securityQuestionId": 2,
+      "securityAnswer": "Spike",
       "groupId": 1,
-      "inGroup": true,
-      "accountCreationDate": "2018-11-23T07:02:37.606Z",
-      "lastLogin": "2018-11-24T21:55:23.409Z",
+      "inGroup": false,
+      "accountCreationDate": "2018-11-26T10:25:13.510Z",
+      "lastLogin": "2018-11-26T10:40:09.975Z",
       "id": 3,
-      "streetAdd": "1445 Bern Drive",
-      "city": "Spring Hill",
-      "stateId": "TN",
-      "zip": "37174",
-      "phone": "615-423-4972",
-      "preferredContact": "Email"
+      "streetAdd": "No Information Provided",
+      "city": "No Information Provided",
+      "stateId": "No Information Provided",
+      "zip": "No Information Provided",
+      "phone": "No Information Provided",
+      "preferredContact": "No Information Provided"
     }
   ],
   "groups": [
     {
-      "groupName": "Davis Family",
-      "groupDescription": "This is just a test group creation.",
-      "groupType": "Family",
+      "groupName": "Default/No Group",
+      "groupDescription": "You are not currenty in a group. Please join one now to access the full capabilities of Group Guru.",
+      "groupType": "Other",
       "id": 1
     },
     {
-      "groupName": "This is a tester.",
+      "groupName": "Davis Family",
+      "groupDescription": "This is just a test group creation.",
+      "groupType": "Family",
+      "id": 2
+    },
+    {
+      "groupName": "Tech Learning Group.",
       "groupDescription": "Testing this out.",
       "groupType": "Work",
-      "id": 2
+      "id": 3
     }
   ],
   "securityQuestions": [
@@ -100,7 +106,7 @@
       "messageTitle": "Got New Message Functionality",
       "messageBody": "This is the first message created using the create new message functionality.",
       "userId": 1,
-      "groupId": 1,
+      "groupId": 2,
       "id": 1
     },
     {
@@ -108,23 +114,23 @@
       "messageTitle": "Great Thanksgiving",
       "messageBody": "Always great to spend time with family.",
       "userId": 1,
-      "groupId": 2,
+      "groupId": 3,
       "id": 2
     },
     {
       "messageDate": "2018-11-24T11:45:15.806Z",
       "messageTitle": "Testing other user",
       "messageBody": "This is a message from another group member to ensure it shows on landing page.",
-      "userId": 3,
-      "groupId": 1,
+      "userId": 2,
+      "groupId": 2,
       "id": 3
     },
     {
       "messageDate": "2018-11-24T12:26:24.304Z",
       "messageTitle": "Crazy Day",
       "messageBody": "We went to Murfreesboro to eat lunch and had to deal with all the Black Friday shopping traffic.",
-      "userId": 1,
-      "groupId": 1,
+      "userId": 2,
+      "groupId": 2,
       "id": 4
     },
     {
@@ -132,7 +138,7 @@
       "messageTitle": "This is the 3rd message",
       "messageBody": "This is the 3rd message for group 1. Just checking that the functionality is working correctly.",
       "userId": 1,
-      "groupId": 1,
+      "groupId": 2,
       "id": 5
     },
     {
@@ -140,18 +146,60 @@
       "messageTitle": "Test to top of list",
       "messageBody": "This should now be the top message.\n",
       "userId": 1,
-      "groupId": 1,
+      "groupId": 2,
       "id": 6
     },
     {
       "messageDate": "2018-11-25T10:53:38.608Z",
-      "messageTitle": "Top of list test 2",
-      "messageBody": "This is 2nd test to top of list after modifying object author name.",
+      "messageTitle": "Default message for no group",
+      "messageBody": "This is a sample message for a user with no group.",
       "userId": 1,
       "groupId": 1,
       "id": 7
+    },
+    {
+      "messageDate": "2018-11-26T00:34:48.345Z",
+      "messageTitle": "Finally have join group working.",
+      "messageBody": "I just finished being able to join a group from a drop down and having it forward user back to main page and display messages for new group.",
+      "userId": 2,
+      "groupId": 2,
+      "id": 8
+    },
+    {
+      "messageDate": "2018-11-26T10:41:15.581Z",
+      "messageTitle": "Finished Login Date Tracking",
+      "messageBody": "Group Guru now has a login tracker that updates when someone logs in or a new account is created.",
+      "userId": 1,
+      "groupId": 2,
+      "id": 9
     }
   ],
   "events": [],
-  "loginActivities": []
+  "loginActivities": [
+    {
+      "date": "2018-11-26T10:25:13.541Z",
+      "userId": 3,
+      "id": 1
+    },
+    {
+      "date": "2018-11-26T10:29:43.747Z",
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "date": "2018-11-26T10:30:04.003Z",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "date": "2018-11-26T10:31:20.821Z",
+      "userId": 3,
+      "id": 4
+    },
+    {
+      "date": "2018-11-26T10:40:35.371Z",
+      "userId": 1,
+      "id": 5
+    }
+  ]
 }

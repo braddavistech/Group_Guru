@@ -7,7 +7,7 @@ export default class CreateNewGroup extends Component {
   state = {
     userId: 0,
     groupType: "Other",
-    uniqueGroupName: false,
+    // uniqueGroupName: false,
     backToMain: false
   }
 
@@ -30,8 +30,8 @@ export default class CreateNewGroup extends Component {
     } else {
       apiData.getSingleType('groups', `groupName=${temp.groupName}`).then(sameGroup => {
         if (sameGroup.length === 0) {
+          // this.setState({ uniqueGroupName: true })
           this.saveGroup(temp);
-          this.setState({ uniqueGroupName: true })
         } else {
           $("#nameTakenAlert").show();
         }
@@ -46,6 +46,7 @@ export default class CreateNewGroup extends Component {
       sessionStorage.setItem("groupId", currentGroup.id);
       sessionStorage.setItem("inGroup", true)
       apiData.updateItem("users", this.state.userId, data).then(() => {
+        this.props.refresh();
         this.props.mainPage();
       })
     })
@@ -91,11 +92,10 @@ export default class CreateNewGroup extends Component {
         </section>
         <section className="newUserDualButton">
           <button onClick={this.gatherGroupInputValues} id="newUserBtn">Create This Group</button>
-          <button onClick={console.log("function to back out to join existing")} id="newUserBtn">Join Existing Group</button>
+          <button onClick={this.props.mainPage} id="newUserBtn">Back To Main</button>
         </section>
       </article>
     )
-    // }
   }
 }
 
