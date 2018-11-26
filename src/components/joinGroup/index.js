@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router";
 import "./JoinGroup.css";
 import apiData from "../../modules/APIcalls";
 import $ from "jquery";
@@ -42,8 +43,11 @@ export default class JoinGroup extends Component {
         inGroup: true
       }
       apiData.updateItem("users", this.state.userId, groupData)
-        .then(() => this.props.refresh())
-        .then(() => this.props.mainPage())
+        .then(() => {
+          this.props.refresh()
+          this.setState({backToMain: true});
+          this.props.mainPage();
+        })
     } else { $("#groupSelectAlert").show() }
   }
 
@@ -56,27 +60,35 @@ export default class JoinGroup extends Component {
     });
   }
 
+  mainPage = () => {
+    return <Redirect to="/groupGuru" />
+  }
 
 
   render() {
-    return (
-      <article id="joinGroupForm">
-        <p id="joinGroupTitle">Join A Group</p>
-        <section className="groupInputSection">
-          <label htmlFor="groupSelect" className="joinGroup">Select Existing Group
+    let mainLandingPage = this.mainPage();
+    if (this.state.backToMain) {
+      return mainLandingPage
+    } else {
+      return (
+        <article id="joinGroupForm">
+          <p id="joinGroupTitle">Join A Group</p>
+          <section className="groupInputSection">
+            <label htmlFor="groupSelect" className="joinGroup">Select Existing Group
             <p id="groupSelectAlert" className="alert hide">You must select a group to join.</p>
-          </label>
-          <select id="groupSelect" onChange={this.handleOptionChange}>
-            {this.printGroupOption()}
-          </select>
-          {this.printGroupDescription()}
-        </section>
-        <section className="joinGroupDualButton">
-          <button onClick={this.saveGroup} className="groupButton hide">Join This Group</button>
-          <button onClick={this.props.mainPage} className="groupButton hide">Back To Main</button>
-          <button onClick={this.props.mainPage} className="groupButtonSingle">Return To Main Page</button>
-        </section>
-      </article>
-    )
+            </label>
+            <select id="groupSelect" onChange={this.handleOptionChange}>
+              {this.printGroupOption()}
+            </select>
+            {this.printGroupDescription()}
+          </section>
+          <section className="joinGroupDualButton">
+            <button onClick={this.saveGroup} className="groupButton hide">Join This Group</button>
+            <button onClick={this.props.mainPage} className="groupButton hide">Back To Main</button>
+            <button onClick={this.props.mainPage} className="groupButtonSingle">Return To Main Page</button>
+          </section>
+        </article>
+      )
+    }
   }
 }

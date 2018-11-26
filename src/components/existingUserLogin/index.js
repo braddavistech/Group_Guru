@@ -37,9 +37,8 @@ export default class LoginMain extends Component {
           apiData.newDataPost(date, "loginActivities")
             .then(() => {
               apiData.updateItem("users", email[0].id, newLoginDate).then(() => {
-                this.props.refresh();
-                this.props.loggedIn();
-                this.setState({ loggedIn: true });
+                this.props.user.refresh();
+                this.props.user.loggedIn();
               })
             })
         } else { $("#wrongPasswordAlert").show(); }
@@ -59,9 +58,8 @@ export default class LoginMain extends Component {
           apiData.newDataPost(date, "loginActivities")
             .then(() => {
               apiData.updateItem("users", username[0].id, newLoginDate).then(() => {
-                this.props.refresh();
-                this.props.loggedIn();
-                this.setState({ loggedIn: true });
+                this.props.user.refresh();
+                this.props.user.loggedIn();
               })
             })
         } else {
@@ -79,9 +77,9 @@ export default class LoginMain extends Component {
   }
 
   render() {
-    if (this.state.loggedIn) {
+    if (this.props.user.main.loggedIn) {
       return <Redirect to="/GroupGuru" />
-    } else if (this.state.newUser) {
+    } else if (this.props.user.newUser) {
       return <Redirect to="/newUser" />
     } else {
       return (
