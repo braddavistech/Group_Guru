@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import apiData from "../../modules/APIcalls";
 import "./NavBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,11 +23,21 @@ class NavBar extends Component {
     sessionStorage.removeItem("lastLogin");
     sessionStorage.removeItem("groupId");
     sessionStorage.removeItem("inGroup");
+    this.props.openGroup();
     this.setState({ currentUser: {}, profileLoaded: false})
-    return <Redirect to="/"/>;
+    // return <Redirect to="/"/>;
     })
   }
 
+  goHome = () => {
+    $(".-toggle").hide();
+    this.props.stayAtMain();
+  }
+
+  addGroup = () => {
+    $(".-toggle").hide()
+    this.props.joinGroup();
+  }
 
   grabProfileInfo = () => {
     let userId = sessionStorage.getItem("currentUserId")
@@ -44,13 +54,13 @@ class NavBar extends Component {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">Home</Link>
+                <Link className="nav-link" onClick={() => { this.goHome()}} to="/GroupGuru">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/joinGroup">Groups</Link>
+                <Link className="nav-link" onClick={() => { this.addGroup() }} to="/joinGroup">Groups</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>

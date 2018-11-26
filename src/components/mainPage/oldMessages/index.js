@@ -7,9 +7,11 @@ export default class OldMessages extends Component {
 
   printMessages() {
     let moment = require('moment');
-    this.props.messages.sort(function(a,b){
-      return new Date(b.messageDate) - new Date(a.messageDate);
-    });
+    if (this.props.messages.length > 1) {
+      this.props.messages.sort(function (a, b) {
+        return new Date(b.messageDate) - new Date(a.messageDate);
+      });
+    }
     return (this.props.messages.map(message => (
       <section className="indivMessage" key={message.id}>
         <p className="oldMsgTitle">{message.user.username} - {moment(`${message.messageDate}`).fromNow()}</p>

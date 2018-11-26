@@ -1,4 +1,4 @@
-const dataURL = "http://localhost:8088/"
+const dataURL = "http://0.0.0.0:8088/"
 
 export default Object.create(null, {
 
@@ -34,7 +34,7 @@ export default Object.create(null, {
       return fetch(`${dataURL}${category}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data), 
+        body: JSON.stringify(data),
       })
         .then(response => response.json());
     }
