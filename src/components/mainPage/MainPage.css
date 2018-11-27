@@ -66,8 +66,8 @@
   margin: 0px;
   font-weight: bold;
   text-align: center;
-  border-bottom: .5px solid;
-  background-color: lightgrey;
+  color: white;
+  background-color: var(--section--title-headers);
 }
 .alertNavButton {
   width: 27%;

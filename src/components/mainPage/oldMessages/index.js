@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiData from "../../../modules/APIcalls";
 import "./OldMessages.css";
 import $ from "jquery";
+import { confirmAlert } from "react-confirm-alert";
 
 
 export default class OldMessages extends Component {
@@ -71,12 +72,38 @@ export default class OldMessages extends Component {
     $(".editBtn").show();
     $(".deleteBtn").show();
     apiData.updateItem("messages", event.target.value, editMessage)
-    .then(() => this.props.refresh())
+      .then(() => this.props.refresh())
   }
 
-  deleteMessage = (event) => {
-    apiData.deleteItem("messages", event.target.value)
+  deleteMessage = (messageId) => {
+    console.log("delete event: ", messageId)
+    apiData.deleteItem("messages", messageId)
       .then(() => this.props.refresh())
+  }
+
+  deleteConfirmation = (event) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        console.log("deleteConfirmation: ", event.target.value)
+        const messageTarget = event.target.value;
+        return (
+          <div className="deleteAlert">
+            <img src="../../../groupGuruLogo.jpg" id="logoForLoginAlert" alt="Group Guru Logo" />
+            <div id="deleteTextDiv">
+              <h1 id="areYouSure">Are you sure?</h1>
+              <p id="deleteFile">This will permanently delete this message.</p>
+            </div>
+            <div id="deleteBtnSection">
+            <button className="deleteConfirmation" onClick={onClose}>No, Keep Message</button>
+            <button className="deleteConfirmation" onClick={() => {
+              this.deleteMessage(messageTarget)
+              onClose()
+            }}>Yes, Delete It</button>
+            </div>
+          </div>
+        )
+      }
+    })
   }
 
   printMessages() {
@@ -88,13 +115,13 @@ export default class OldMessages extends Component {
     }
     return (this.props.messages.map(message => {
       if (message.user.username === this.props.user.username) {
-        return <section className="indivMessage" key={message.id}>
-          <div className="oldMsgTitle">
-            <p id="userInfo">{message.user.username} - {moment(`${message.messageDate}`).fromNow()} </p>
+        return <section className="indivMessageOwner" key={message.id}>
+          <div className="oldMsgTitleOwner">
+            <p id="userInfo">{moment(`${message.messageDate}`).fromNow()} </p>
             <article id="editDelete">
               <button value={message.id} className="saveBtn hide" id={`${message.id}saveBtn`} onClick={this.saveMessage}>Save</button>
               <button value={message.id} className="editBtn" onClick={this.editMessage} >Edit</button>
-              <button value={message.id} className="deleteBtn" id={`${message.id}deleteBtn`} onClick={this.deleteMessage}>Delete</button>
+              <button value={message.id} className="deleteBtn" id={`${message.id}deleteBtn`} onClick={this.deleteConfirmation}>Delete</button>
             </article>
           </div>
           <input className={`messageTitleInput hide ${message.id}titleInput`} onChange={this.titleInputValue} defaultValue={message.messageTitle}></input>
@@ -103,13 +130,14 @@ export default class OldMessages extends Component {
           <p className={`oldMsgBody ${message.id}body`}>{message.messageBody}</p>
         </section>
       } else {
-        return <section className="indivMessage" key={message.id}>
+        return <section className="indivMessageOther" key={message.id}>
           <p className="oldMsgTitle">{message.user.username} - {moment(`${message.messageDate}`).fromNow()}</p>
           <p className="oldMsgTitle">{message.messageTitle}</p>
           <p className="oldMsgBody">{message.messageBody}</p>
         </section>
       }
-    }))
+    }
+    ))
   }
 
 
@@ -117,6 +145,7 @@ export default class OldMessages extends Component {
     return (
       <div id="oldMessages">
         {this.printMessages()}
+        <p id="endOfMessages" dangerouslySetInnerHTML={{ __html: '&bigstar;  End Of Messages  &bigstar;' }}></p>
       </div>
     )
   }
