@@ -1,41 +1,37 @@
 import React, { Component } from 'react';
-// import apiData from "../../modules/APIcalls";
 import "./MainPage.css";
 import CreateNewGroup from "../createObjects/group";
 import CreateMessage from "../createObjects/createMessage";
 import OldMessages from "./oldMessages";
 import JoinGroup from "../joinGroup";
+import CreateImage from "../createObjects/createImage";
+import OldPhotos from "./oldPhotos";
 
 
 
 export default class MainPage extends Component {
-  state = {
-
-  }
-
-  componentDidMount = () => {
-    // this.props.refresh();
-  }
 
   render() {
     if (this.props.user.main.sendToGroup) {
-      return <CreateNewGroup mainPage={this.props.user.stayAtMain} refresh={this.props.user.refresh}/>;
+      return <CreateNewGroup mainPage={this.props.user.stayAtMain} refresh={this.props.user.refresh} />;
     } else if (this.props.user.main.joinGroup) {
-      return <JoinGroup mainPage={this.props.user.stayAtMain} joinGroup={this.props.user.main.joinGroup} refresh={this.props.user.refresh}/>;
+      return <JoinGroup mainPage={this.props.user.stayAtMain} joinGroup={this.props.user.main.joinGroup} refresh={this.props.user.refresh} />;
     } else if (this.props.user.main.profileLoaded) {
       if (!this.props.user.main.inGroup && !this.props.user.main.closeGroup) {
         return (
           <React.Fragment>
             <div className="topLeft">
               <p id="messageWindow">MESSAGES</p>
-              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh}/>
-              <CreateMessage user={this.props.user} refresh={this.props.user.refresh}/>
+              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
+              <CreateMessage user={this.props.user} refresh={this.props.user.refresh} />
             </div>
             <div className="topRight">
               <p id="messageWindow">CALENDAR</p>
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES</p>
+              <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+              <CreateImage user={this.props.user} refresh={this.props.user.refresh} />
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -60,7 +56,7 @@ export default class MainPage extends Component {
           <React.Fragment>
             <div className="topLeft">
               <p id="messageWindow">MESSAGES</p>
-              <OldMessages messages={this.props.user.main.groupMessages} />
+              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
               <CreateMessage user={this.props.user} refresh={this.props.user.refresh} />
             </div>
             <div className="topRight">
@@ -68,6 +64,10 @@ export default class MainPage extends Component {
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES</p>
+              <section id="photoSection">
+                <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+              </section>
+              <CreateImage user={this.props.user} refresh={this.props.user.refresh} />
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">

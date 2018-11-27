@@ -3,9 +3,6 @@ import apiData from "../../../modules/APIcalls";
 import $ from "jquery";
 import "./CreateMessage.css";
 
-
-
-
 export default class CreateMessage extends Component {
 
   gatherInputValues = () => {
