@@ -29,8 +29,9 @@
   margin-bottom: 0px;
 }
 #newTitle {
-  width: 50%;
+  width: 225px;
   height: 24px;
+  text-align: center;
 }
 #msgBody {
   width: 72%;

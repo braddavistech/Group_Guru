@@ -1,10 +1,18 @@
 #oldMessages {
   height: 67%;
   overflow: scroll;
-  padding-bottom: 10%;
+  padding-bottom: 28px;
 }
-.indivMessage {
+.indivMessageOther {
   border-bottom: 0.25px solid;
+  background-color: var(--messages--otherUser);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+.indivMessageOwner {
+  border-bottom: 0.25px solid;
+  background-color:var(--messages--currentUser);
   display: flex;
   flex-direction: column;
   padding: 8px;
@@ -14,47 +22,120 @@
   display: flex;
   flex-direction: row;
   font-size: 15px;
+  padding-bottom: 5px;
   line-height: 1;
   margin: 0px;
+}
+.oldMsgTitleOwner {
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  padding-bottom: 5px;
+  line-height: 1;
+  margin: 0px;
+  justify-content: flex-end;
+}
+.messageTitileInput {
+  line-height: 1;
+}
+.messageBodyInput {
+  line-height: 1;
 }
 .oldMsgBody {
   margin: 0px;
   line-height: 1;
-  margin-top: 3px;
   font-size: 15px;
 }
 #userInfo {
   margin-bottom: 0px;
+  padding-top: 2px;
 }
 #editDelete {
   position: relative;
   display: flex;
-  left: 20px;
+  left: 4px;
   height: 18px;
 }
 .saveBtn {
-  width: 55px;
+  width: 64px;
   margin-right: 10px;
-  padding: 2px;
-  padding-top: 0px;
-  border: 1px solid;
+  border: 2px solid var(--input--form-background);
   border-radius: 8px;
   font-weight: bold;
+  color:grey
+}
+.saveBtn:hover{
+  color:black;
+  border: 2px solid var(--section--title-headers);
 }
 .editBtn {
-  width: 55px;
-  margin-right: 10px;
-  padding: 2px;
-  padding-top: 0px;
-  border: 1px solid;
+  width: 64px;
+  margin-right: 5px;
+  border: 2px solid var(--input--form-background);
   border-radius: 8px;
   font-weight: bold;
+  color:grey;
+}
+.editBtn:hover {
+  color:black;
+  border: 2px solid var(--section--title-headers);
 }
 .deleteBtn {
-  width: 55px;
-  padding: 2px;
-  padding-top: 0px;
-  border: 1px solid;
+  width: 64px;
+  border: 2px solid var(--input--form-background);
   border-radius: 8px;
   font-weight: bold;
+  color: grey;
+}
+.deleteBtn:hover {
+  color: black;
+  border: 2px solid var(--section--title-headers);
+}
+#endOfMessages {
+  margin-bottom: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+.deleteAlert{
+  position: relative;
+  background-color: white;
+  width: 600px;
+  border: 5px solid;
+  text-align: center;
+  margin: auto;
+  border-radius: 10px;
+}
+#logoForLoginAlert {
+  width: 100px;
+  display: inline-block;
+}
+#deleteTextDiv {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+#areYouSure {
+  margin: 0px;
+  margin-top: 15px;
+}
+#deleteFile {
+  margin: 0px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.deleteConfirmation {
+  width: 165px;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: 2px solid;
+}
+#deleteBtnSection {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }

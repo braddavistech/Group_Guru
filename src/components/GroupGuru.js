@@ -47,9 +47,8 @@ class GroupGuru extends Component {
             return messages;
           })
           this.setState({ groupMessages: messages, currentUser: newUser, groupId: newUser.groupId, profileLoaded: true, inGroup: newUser.inGroup })
-          return newUser
         })
-          .then(newUser => {
+          .then(() => {
             apiData.getSingleType("photos", `_expand=user&groupId=${newUser.groupId}`).then(photos => {
               photos.map(photo => {
                 photo.user.password = "HIDDEN";
