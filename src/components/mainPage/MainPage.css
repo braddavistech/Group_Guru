@@ -2,33 +2,33 @@
   position: fixed;
   background-color: white;
   height: 42%;
-  width: 46%;
-  margin-left: 3.3%;
+  width: 48%;
+  margin-left: 1.3%;
   margin-top: 55px;
 }
 .topRight {
   position: fixed;
   background-color: white;
   height: 42%;
-  width: 46%;
-  right: 3.3%;
+  width: 48%;
+  right: 1.3%;
   margin-top: 55px;
 
 }
 .middleRow {
   position: absolute;
   background-color: white;
-  height: 27%;
-  width: 93.4%;
-  right: 3.3%;
-  bottom: 21%;
+  height: 212px;
+  width: 97.4%;
+  right: 1.3%;
+  bottom: 133px;
   overflow: scroll;
 }
 .alertBottom {
   position: fixed;
   background-color: white;
-  height: 19%;
-  z-index: 10000;
+  height: 120px;
+  z-index: 1;
   display: flex;
   padding: 1%;
   width: 100%;
@@ -81,4 +81,9 @@
   margin-top: 7px;
   justify-content: space-evenly;
   display: flex;
+}
+#photoSection {
+  overflow: auto;
+  white-space: nowrap;
+  height: 187px;
 }

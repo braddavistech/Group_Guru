@@ -25,7 +25,6 @@ class NavBar extends Component {
     sessionStorage.removeItem("inGroup");
     this.props.openGroup();
     this.setState({ currentUser: {}, profileLoaded: false})
-    // return <Redirect to="/"/>;
     })
   }
 

@@ -5,11 +5,14 @@
 }
 .indivMessage {
   border-bottom: 0.25px solid;
-  padding: 1.5%;
-
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
 }
 .oldMsgTitle {
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
   font-size: 15px;
   line-height: 1;
   margin: 0px;
@@ -19,5 +22,39 @@
   line-height: 1;
   margin-top: 3px;
   font-size: 15px;
-
+}
+#userInfo {
+  margin-bottom: 0px;
+}
+#editDelete {
+  position: relative;
+  display: flex;
+  left: 20px;
+  height: 18px;
+}
+.saveBtn {
+  width: 55px;
+  margin-right: 10px;
+  padding: 2px;
+  padding-top: 0px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.editBtn {
+  width: 55px;
+  margin-right: 10px;
+  padding: 2px;
+  padding-top: 0px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.deleteBtn {
+  width: 55px;
+  padding: 2px;
+  padding-top: 0px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-weight: bold;
 }

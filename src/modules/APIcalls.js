@@ -50,6 +50,17 @@ export default Object.create(null, {
         body: JSON.stringify(data)
       })
     }
+  },
+
+  deleteItem: {
+    value: function (category, id) {
+      return fetch(`${dataURL}${category}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    }
   }
 
 })
