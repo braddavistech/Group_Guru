@@ -2,11 +2,26 @@
   display: inline-block;
   background-color: black;
   text-align: center;
-  margin-right: 29.5%;
+  margin-right: 30%;
+  height: 100%;
 }
 .indivPhotos {
   display: inline-block;
   color: black;
+  height: 100%;
+}
+.photoSectionWithZoom {
+  height: 92%;
+}
+.zoomBtn {
+  position: relative;
+  display: flex;
+  bottom: 30px;
+  width: 30px;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 14px;
+  cursor: pointer;
 }
 .oldPhotosTitle {
   background-color: white;
@@ -22,5 +37,71 @@
 }
 .oldPhotosImage {
   margin: 0px;
-  height: 172px;
+  height: 100%;
+  position: relative;
+}
+.photoDetails {
+  background-color: white;
+  width: 70%;
+  border: 5px solid;
+  text-align: center;
+  margin: auto;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1031;
+}
+#photoTitleTextDiv {
+  width: 100%;
+}
+#photoDetailsHeader {
+  margin-bottom: 0px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.photoTextDescription {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.photoTextDetails {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.25;
+}
+#photoDetailsImage {
+  width: 97%;
+  margin-bottom: 5px;
+}
+#react-confirm-alert-firm-svg {
+  display: none;
+}
+#photoBtnSection {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.photoConfirmation {
+  width: 165px;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: 2px solid;
+  cursor: pointer;
+}
+.photoConfirmation:hover {
+  background-color: grey;
+  color: white;
+}
+#mailToPhoto {
+  color:black;
+  border-radius: 5px;
+}
+#mailToPhoto:hover {
+  background-color: grey;
+  color: white;
+  text-decoration: none;
 }

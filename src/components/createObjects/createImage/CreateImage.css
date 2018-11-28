@@ -1,12 +1,12 @@
 #newImage {
   position: absolute;
-  top: 25px;
+  top: 24px;
   right: 0px;
   padding: .5%;
   padding-top: 0px;
   font-weight: bold;
   text-align: center;
-  height: 187px;
+  height: 90%;
   width: 30%;
   border-left: 2px solid;
   background-color: white;
@@ -26,8 +26,8 @@
   flex-direction: column;
 }
 .newImageLabel {
-  margin-right: 2%;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
+  line-height: 1;
 }
 #newTitle {
   width: 100%;
@@ -41,8 +41,7 @@
 }
 #newImageButtonContainer {
   margin: auto;
-  height: 35px;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 #newImageCreateBtn {
   width: 125px;

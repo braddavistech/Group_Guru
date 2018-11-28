@@ -53,23 +53,23 @@ class NavBar extends Component {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { this.goHome()}} to="/GroupGuru">Home</Link>
+                <Link className="navLink" onClick={() => { this.goHome()}} to="/GroupGuru">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
+                <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { this.addGroup() }} to="/joinGroup">Groups</Link>
+                <Link className="navLink" onClick={() => { this.addGroup() }} to="/joinGroup">Groups</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>
+                <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>
               </li>
             </ul>
             <section id="logOutDropdown">
-              <li className="nav-link" onClick={() => { $(".-toggle").toggle() }} id="loggedInButton">{this.state.currentUser.username}</li>
-              <p className="nav-link -toggle hide" >Edit Profile</p>
-              <p className="nav-link -toggle hide" >Settings Preferences</p>
-              <p className="nav-link -toggle hide" onClick={this.logOut}><Link className="nav-link" to="/">Log Out</Link></p>
+              <li className="navLink" onClick={() => { $(".-toggle").toggle() }} id="loggedInButton">{this.state.currentUser.username}</li>
+              <p className="navLinkP -toggle hide" >Edit Profile</p>
+              <p className="navLinkP -toggle hide" >Settings Preferences</p>
+              <Link className="navLink -toggle hide" id="logOutBtn" onClick={this.logOut} to="/">Log Out</Link>
             </section>
 
           </nav>
@@ -83,10 +83,10 @@ class NavBar extends Component {
         <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
           <ul className="nav nav-pills">
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <Link className="navLink" to="/about">About</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/">Login</Link>
+              <Link className="navLink" to="/">Login</Link>
             </li>
           </ul>
         </nav>
