@@ -76,7 +76,6 @@ export default class OldMessages extends Component {
   }
 
   deleteMessage = (messageId) => {
-    console.log("delete event: ", messageId)
     apiData.deleteItem("messages", messageId)
       .then(() => this.props.refresh())
   }
@@ -84,7 +83,11 @@ export default class OldMessages extends Component {
   deleteConfirmation = (event) => {
     confirmAlert({
       customUI: ({ onClose }) => {
-        console.log("deleteConfirmation: ", event.target.value)
+        $(".navbar").addClass("isBlurred");
+        $(".topLeft").addClass("isBlurred");
+        $(".topRight").addClass("isBlurred");
+        $(".middleRow").addClass("isBlurred");
+        $(".alertBottom").addClass("isBlurred");
         const messageTarget = event.target.value;
         return (
           <div className="deleteAlert">
@@ -94,9 +97,20 @@ export default class OldMessages extends Component {
               <p id="deleteFile">This will permanently delete this message.</p>
             </div>
             <div id="deleteBtnSection">
-            <button className="deleteConfirmation" onClick={onClose}>No, Keep Message</button>
+            <button className="deleteConfirmation" onClick={() => {
+              $(".navbar").removeClass("isBlurred");
+              $(".topLeft").removeClass("isBlurred");
+              $(".topRight").removeClass("isBlurred");
+              $(".middleRow").removeClass("isBlurred");
+              $(".alertBottom").removeClass("isBlurred");
+              onClose()}}>No, Keep Message</button>
             <button className="deleteConfirmation" onClick={() => {
               this.deleteMessage(messageTarget)
+              $(".navbar").removeClass("isBlurred");
+               $(".topLeft").removeClass("isBlurred");
+               $(".topRight").removeClass("isBlurred");
+               $(".middleRow").removeClass("isBlurred");
+               $(".alertBottom").removeClass("isBlurred");
               onClose()
             }}>Yes, Delete It</button>
             </div>

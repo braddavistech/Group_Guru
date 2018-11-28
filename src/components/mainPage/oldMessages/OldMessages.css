@@ -98,13 +98,15 @@
   font-weight: bold;
 }
 .deleteAlert{
-  position: relative;
   background-color: white;
-  width: 600px;
+  width: 70%;
   border: 5px solid;
   text-align: center;
   margin: auto;
   border-radius: 10px;
+  position: relative;
+  top: 55px;
+  z-index: 2;
 }
 #logoForLoginAlert {
   width: 100px;
@@ -132,6 +134,8 @@
   justify-content: center;
   border-radius: 5px;
   border: 2px solid;
+  cursor: pointer;
+  text-decoration: none;
 }
 #deleteBtnSection {
   display: flex;

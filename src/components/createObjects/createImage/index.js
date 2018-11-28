@@ -14,6 +14,7 @@ export default class CreateImage extends Component {
       addedDate: new Date(),
       title: this.title.value,
       webAddress: this.imageBody.value,
+      description: this.imageDescription.value,
       userId: this.props.user.main.currentUser.id,
       groupId: this.props.user.main.currentUser.groupId
     }
@@ -49,6 +50,11 @@ export default class CreateImage extends Component {
             <label className="newImageLabel" htmlFor="newImageBody">Image URL</label>
             <input type="text" name="newImageBody" ref={(userInput) => this.imageBody =
               userInput} id="imageBody" placeholder="Enter The Address Of The Image"></input>
+          </section>
+          <section className="imageBodyInputContainer">
+            <label className="newImageLabel" htmlFor="newImageDescription">Description</label>
+            <input type="text" name="newImageDescription" ref={(userInput) => this.imageDescription =
+              userInput} id="imageBody" placeholder="Enter A Description Of The Image"></input>
           </section>
           <section id="newImageButtonContainer">
               <button onClick={this.gatherInputValues} id="newImageCreateBtn">Create Message</button>

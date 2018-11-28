@@ -7,43 +7,48 @@
 .nav {
   width: 75%;
 }
-a {
-  color: #e65b11 !important;
-  font-weight: bold;
-  border-radius: 9px;
-}
-a:hover {
-  background-color: rgb(184, 181, 181);
-}
-#loggedInButton {
-  color: #e65b11 !important;
+.navLink {
+  color: var(--section--title-headers);
   font-weight: bold;
   cursor: pointer;
-  border-radius: 9px;
+  margin-left: 15px;
+  margin-right: 15px;
+  text-decoration: none;
+  list-style-type: none;
 }
-#loggedInButton:hover {
-  background-color: rgb(184, 181, 181);
+.navLink:hover {
+  color: var(--label--form-text);
+  text-decoration: none;
 }
 .hide {
   display: none;
 }
-#logOutDropdown > p {
-  color: #e65b11 !important;
+.navLinkP {
+  color: #e65b11 ;
   border-radius: 9px;
   font-weight: bold;
   cursor: pointer;
-  margin: 0px !important;
+  margin: 0px ;
   flex-direction: column;
+}
+.navLinkP:hover {
+  color: var(--label--form-text);
 }
 #logOutDropdown {
   position: fixed;
   top: 0px;
-  width: 25%;
+  width: 20%;
   right: 0%;
   background-color: white;
   text-align: center;
   border-radius: 9px;
 }
-#logOutDropdown > p:hover {
-  background-color: rgb(184, 181, 181);
+#logOutBtn {
+  padding-left: 3vw;
+  padding-right: 3vw;
+  position: relative;
+}
+#logOutBtn:hover {
+  text-decoration: none;
+  background-color: none;
 }
