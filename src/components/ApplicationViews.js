@@ -19,7 +19,11 @@ export default class ApplicationViews extends Component {
             return <About />
           }} />
           <Route exact path="/" render={(props) => {
+            if (this.props.main.loggedIn) {
+              return <MainPage user={this.props} />
+            } else {
             return <Login refreshData={this.props.refresh}/>
+            }
           }} />
           <Route exact path="/login" render={(props) => {
             return <ExistingUserLogin user={this.props}/>
@@ -36,9 +40,9 @@ export default class ApplicationViews extends Component {
           <Route exact path="/moreInfo" render={(props) => {
             return <MoreInfoForm refresh={this.props.refresh}/>
           }} />
-          <Route exact path="/GroupGuru" render={(props) => {
+          {/* <Route exact path="/GroupGuru" render={(props) => {
             return <MainPage user={this.props} />
-          }} />
+          }} /> */}
         </React.Fragment>
       )
     // }

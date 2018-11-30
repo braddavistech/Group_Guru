@@ -60,8 +60,12 @@ export default class JoinGroup extends Component {
     });
   }
 
+  backToMain = () => {
+    this.setState({backToMain: true})
+  }
+
   mainPage = () => {
-    return <Redirect to="/groupGuru" />
+    return <Redirect to="/" />
   }
 
 
@@ -84,8 +88,12 @@ export default class JoinGroup extends Component {
           </section>
           <section className="joinGroupDualButton">
             <button onClick={this.saveGroup} className="groupButton hide">Join This Group</button>
-            <button onClick={this.props.mainPage} className="groupButton hide">Back To Main</button>
-            <button onClick={this.props.mainPage} className="groupButtonSingle">Return To Main Page</button>
+            <button onClick={() => {
+              this.props.mainPage()
+              this.backToMain()}} className="groupButton hide">Back To Main</button>
+            <button onClick={() => {
+              this.props.mainPage()
+              this.backToMain()}} className="groupButtonSingle">Return To Main Page</button>
           </section>
         </article>
       )

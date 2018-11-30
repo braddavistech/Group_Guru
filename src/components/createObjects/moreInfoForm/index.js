@@ -59,7 +59,7 @@ export default class MoreInfo extends Component {
 
   render() {
     if (this.state.skipMoreInfo) {
-      return <Redirect to="/GroupGuru" />
+      return <Redirect to="/" />
     } else {
       return (
         <div id="newUserForm">

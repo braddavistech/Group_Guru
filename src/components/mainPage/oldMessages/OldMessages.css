@@ -1,7 +1,6 @@
 #oldMessages {
-  height: 67%;
+  height: 92%;
   overflow: scroll;
-  padding-bottom: 28px;
 }
 .indivMessageOther {
   border-bottom: 0.25px solid;
@@ -23,6 +22,15 @@
   flex-direction: row;
   font-size: 15px;
   padding-bottom: 5px;
+  line-height: 1;
+  margin: 0px;
+}
+.oldMsgInfo {
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  padding-bottom: 1px;
   line-height: 1;
   margin: 0px;
 }

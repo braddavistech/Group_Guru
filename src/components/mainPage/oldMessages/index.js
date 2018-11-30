@@ -69,8 +69,8 @@ export default class OldMessages extends Component {
     $(`.${targetMessage}text`).show();
     $(`.${targetMessage}body`).show();
     $(`#${targetMessage}saveBtn`).hide();
-    $(".editBtn").show();
-    $(".deleteBtn").show();
+    $(".hideShowBtn").show();
+    $(".deleteBtn").hide();
     apiData.updateItem("messages", event.target.value, editMessage)
       .then(() => this.props.refresh())
   }
@@ -78,6 +78,15 @@ export default class OldMessages extends Component {
   deleteMessage = (messageId) => {
     apiData.deleteItem("messages", messageId)
       .then(() => this.props.refresh())
+  }
+
+  cancelEdit = (target) => {
+    console.log(target)
+    $(`.${target}titleInput`).hide();
+    $(`.${target}bodyInput`).hide();
+    $(`.${target}text`).show();
+    $(`.${target}body`).show();
+    $(`#${target}saveBtn`).hide();
   }
 
   deleteConfirmation = (event) => {
@@ -89,6 +98,7 @@ export default class OldMessages extends Component {
         $(".middleRow").addClass("isBlurred");
         $(".alertBottom").addClass("isBlurred");
         const messageTarget = event.target.value;
+        console.log(event.target.value)
         return (
           <div className="deleteAlert">
             <img src="../../../groupGuruLogo.jpg" id="logoForLoginAlert" alt="Group Guru Logo" />
@@ -97,27 +107,38 @@ export default class OldMessages extends Component {
               <p id="deleteFile">This will permanently delete this message.</p>
             </div>
             <div id="deleteBtnSection">
-            <button className="deleteConfirmation" onClick={() => {
-              $(".navbar").removeClass("isBlurred");
-              $(".topLeft").removeClass("isBlurred");
-              $(".topRight").removeClass("isBlurred");
-              $(".middleRow").removeClass("isBlurred");
-              $(".alertBottom").removeClass("isBlurred");
-              onClose()}}>No, Keep Message</button>
-            <button className="deleteConfirmation" onClick={() => {
-              this.deleteMessage(messageTarget)
-              $(".navbar").removeClass("isBlurred");
-               $(".topLeft").removeClass("isBlurred");
-               $(".topRight").removeClass("isBlurred");
-               $(".middleRow").removeClass("isBlurred");
-               $(".alertBottom").removeClass("isBlurred");
-              onClose()
-            }}>Yes, Delete It</button>
+              <button className="deleteConfirmation" onClick={() => {
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                $(".deleteBtn").hide();
+                $(".editBtn").hide();
+                $(".hideShowBtn").show();
+                this.cancelEdit(messageTarget);
+                onClose()
+              }}>No, Keep Message</button>
+              <button className="deleteConfirmation" onClick={() => {
+                this.deleteMessage(messageTarget)
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                onClose()
+              }}>Yes, Delete It</button>
             </div>
           </div>
         )
       }
     })
+  }
+
+  showMessageOptions = () => {
+    $(".hideShowBtn").hide();
+    $(".editBtn").show();
+    $(".deleteBtn").show();
   }
 
   printMessages() {
@@ -134,8 +155,9 @@ export default class OldMessages extends Component {
             <p id="userInfo">{moment(`${message.messageDate}`).fromNow()} </p>
             <article id="editDelete">
               <button value={message.id} className="saveBtn hide" id={`${message.id}saveBtn`} onClick={this.saveMessage}>Save</button>
-              <button value={message.id} className="editBtn" onClick={this.editMessage} >Edit</button>
-              <button value={message.id} className="deleteBtn" id={`${message.id}deleteBtn`} onClick={this.deleteConfirmation}>Delete</button>
+              <button value={message.id} className="hideShowBtn" onClick={this.showMessageOptions} >Options</button>
+              <button value={message.id} className="editBtn hide" onClick={this.editMessage} >Edit</button>
+              <button value={message.id} className="deleteBtn hide" id={`${message.id}deleteBtn`} onClick={this.deleteConfirmation}>Delete</button>
             </article>
           </div>
           <input className={`messageTitleInput hide ${message.id}titleInput`} onChange={this.titleInputValue} defaultValue={message.messageTitle}></input>
@@ -145,7 +167,8 @@ export default class OldMessages extends Component {
         </section>
       } else {
         return <section className="indivMessageOther" key={message.id}>
-          <p className="oldMsgTitle">{message.user.username} - {moment(`${message.messageDate}`).fromNow()}</p>
+          <p className="oldMsgInfo">{message.user.username} - Last online {moment(`${message.user.lastLogin}`).fromNow()}</p>
+          <p className="oldMsgInfo">(added {moment(`${message.messageDate}`).fromNow()})</p>
           <p className="oldMsgTitle">{message.messageTitle}</p>
           <p className="oldMsgBody">{message.messageBody}</p>
         </section>
@@ -158,6 +181,7 @@ export default class OldMessages extends Component {
   render() {
     return (
       <div id="oldMessages">
+        <p id="endOfMessages" dangerouslySetInnerHTML={{ __html: '&bigstar;  Top of Messages  &bigstar;' }}></p>
         {this.printMessages()}
         <p id="endOfMessages" dangerouslySetInnerHTML={{ __html: '&bigstar;  End Of Messages  &bigstar;' }}></p>
       </div>

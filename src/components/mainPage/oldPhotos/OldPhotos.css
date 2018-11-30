@@ -2,7 +2,6 @@
   display: inline-block;
   background-color: black;
   text-align: center;
-  margin-right: 30%;
   height: 100%;
 }
 .indivPhotos {
@@ -43,6 +42,7 @@
 .photoDetails {
   background-color: white;
   width: 70%;
+  max-height:80%;
   border: 5px solid;
   text-align: center;
   margin: auto;
@@ -71,8 +71,9 @@
   line-height: 1.25;
 }
 #photoDetailsImage {
-  width: 97%;
+  max-width: 97%;
   margin-bottom: 5px;
+  max-height: 500px;
 }
 #react-confirm-alert-firm-svg {
   display: none;
@@ -104,4 +105,7 @@
   background-color: grey;
   color: white;
   text-decoration: none;
+}
+#tagLine {
+  padding: 5px;
 }
