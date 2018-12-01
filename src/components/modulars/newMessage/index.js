@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import "./NewMessageModular.css";
-// import $ from "jquery";
 
 export default class NewMessageModular extends Component {
   state = {
@@ -33,26 +31,6 @@ export default class NewMessageModular extends Component {
       </React.Fragment>
     )
   }
-
-  // alertWithPreview = () => {
-  //   return (
-  //     <React.Fragment>
-  //       <img id="newPhotoPreview" src={this.state.webAddress} alt="Preview of File" />
-  //       <section className="imageInputContainer">
-  //         <label className="newImageLabel" htmlFor="newImageTitle">Title</label>
-  //         <input className="newImageInput" type="text" required={true} defaultValue={this.state.title} onChange={this.handleChange} id="title" name="imageTitle" placeholder="Enter Message Title"></input>
-  //       </section>
-  //       <section className="imageInputContainer">
-  //         <label className="newImageLabel" htmlFor="newImageBody">Image URL</label>
-  //         <input className="newImageInput" type="text" name="newImageBody" defaultValue={this.state.webAddress} onChange={this.handleChange} id="webAddress" placeholder="Enter The Address Of The Image"></input>
-  //       </section>
-  //       <section className="imageInputContainer">
-  //         <label className="newImageLabel" htmlFor="newImageDescription">Description</label>
-  //         <input className="newImageInput" type="text" name="newImageDescription" defaultValue={this.state.description} onChange={this.handleChange} id="description" placeholder="Enter A Description Of The Image"></input>
-  //       </section>
-  //     </React.Fragment>
-  //   )
-  // }
 
   render() {
     console.log("NewMessageModular: ", this.props)

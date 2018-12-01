@@ -7,14 +7,26 @@ import $ from "jquery"
 
 export default class OldPhotos extends Component {
 
+  addBlur = () => {
+    $(".navbar").addClass("isBlurred");
+    $(".topLeft").addClass("isBlurred");
+    $(".topRight").addClass("isBlurred");
+    $(".middleRow").addClass("isBlurred");
+    $(".alertBottom").addClass("isBlurred");
+  }
+
+  clearBlur = () => {
+    $(".navbar").removeClass("isBlurred");
+    $(".topLeft").removeClass("isBlurred");
+    $(".topRight").removeClass("isBlurred");
+    $(".middleRow").removeClass("isBlurred");
+    $(".alertBottom").removeClass("isBlurred");
+  }
+
   photoDetails = (event) => {
     confirmAlert({
       customUI: ({ onClose }) => {
-        $(".navbar").addClass("isBlurred");
-        $(".topLeft").addClass("isBlurred");
-        $(".topRight").addClass("isBlurred");
-        $(".middleRow").addClass("isBlurred");
-        $(".alertBottom").addClass("isBlurred");
+        this.addBlur();
         const photoTarget = parseInt(event.target.id);
         let oldPhoto = this.props.photos.find(e => e.id === photoTarget);
         return (
@@ -23,29 +35,20 @@ export default class OldPhotos extends Component {
               <p id="photoDetailsHeader">{oldPhoto.title}</p>
               <img id="photoDetailsImage" src={oldPhoto.webAddress} alt={oldPhoto.title}></img>
               <p className="photoTextDescription">{oldPhoto.description}</p>
-
             </div>
             <div id="photoBtnSection">
               <button className="photoConfirmation" onClick={() => {
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
+                this.clearBlur();
                 onClose()
               }}>Back</button>
               <button className="photoConfirmation" onClick={() => {
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
+                this.clearBlur();
                 onClose()
               }}><a id="mailToPhoto" href={'mailto:' + oldPhoto.user.email} target="_top">Send Email to {oldPhoto.user.username}</a></button>
             </div>
-              <section id="tagLine">
-                <p className="photoTextDetails">Added by {oldPhoto.user.username} on {moment(`${oldPhoto.addedDate}`).fromNow()}</p>
-              </section>
+            <section id="tagLine">
+              <p className="photoTextDetails">Added by {oldPhoto.user.username} on {moment(`${oldPhoto.addedDate}`).fromNow()}</p>
+            </section>
           </div>
         )
       }
