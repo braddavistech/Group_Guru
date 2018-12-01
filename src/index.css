@@ -17,6 +17,7 @@ body {
   --messages--currentUser: rgb(141, 146, 141);
   --messages--otherUser: rgb(255, 204, 169);
   --section--title-headers: #e65b11;
+  --calendar--background-color: rgb(255, 149, 62);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

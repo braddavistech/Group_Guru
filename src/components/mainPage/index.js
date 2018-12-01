@@ -8,8 +8,12 @@ import JoinGroup from "../joinGroup";
 import OldPhotos from "./oldPhotos";
 import NewPhotoModular from "../modulars/newPhoto";
 import NewMessageModular from "../modulars/newMessage";
+// import Calendar from "react-calendar";
+import Calendar from "react-calendar/dist/entry.nostyle";
+import Day from "react-calendar/dist/entry.nostyle";
 import apiData from "../../modules/APIcalls";
 import { confirmAlert } from "react-confirm-alert";
+import moment from "moment";
 import $ from "jquery";
 
 
@@ -45,7 +49,6 @@ export default class MainPage extends Component {
   }
 
   messageDetails = () => {
-    console.log("inside messageDetails")
     confirmAlert({
       customUI: ({ onClose }) => {
         $(".navbar").addClass("isBlurred");
@@ -53,7 +56,6 @@ export default class MainPage extends Component {
         $(".topRight").addClass("isBlurred");
         $(".middleRow").addClass("isBlurred");
         $(".alertBottom").addClass("isBlurred");
-        console.log("test", this.state.description)
         return (
           <div id="newMessage">
             <NewMessageModular props={this.props} handleChange={this.handleChange} state={this.state} />
@@ -100,34 +102,36 @@ export default class MainPage extends Component {
     else { this.photoDetails() }
   }
 
+  addBlur = () => {
+    $(".navbar").addClass("isBlurred");
+    $(".topLeft").addClass("isBlurred");
+    $(".topRight").addClass("isBlurred");
+    $(".middleRow").addClass("isBlurred");
+    $(".alertBottom").addClass("isBlurred");
+  }
+
+  removeBlur = () => {
+    $(".navbar").removeClass("isBlurred");
+    $(".topLeft").removeClass("isBlurred");
+    $(".topRight").removeClass("isBlurred");
+    $(".middleRow").removeClass("isBlurred");
+    $(".alertBottom").removeClass("isBlurred");
+  }
+
   photoDetails = () => {
-    console.log("inside photoDetails")
     confirmAlert({
       customUI: ({ onClose }) => {
-        $(".navbar").addClass("isBlurred");
-        $(".topLeft").addClass("isBlurred");
-        $(".topRight").addClass("isBlurred");
-        $(".middleRow").addClass("isBlurred");
-        $(".alertBottom").addClass("isBlurred");
-        console.log("test", this.state.description)
+        this.addBlur();
         return (
           <div id="newImage">
             <NewPhotoModular props={this.props} handleChange={this.handleChange} state={this.state} />
             <section id="newButtonContainer">
               <button className="newCreateBtn" onClick={() => {
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
+                this.removeBlur();
                 onClose();
               }}>Back</button>
               <button className="newCreateBtn" onClick={() => {
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
+                this.removeBlur();
                 this.gatherPhotoValues()
                 onClose();
               }}>Add Photo</button>
@@ -136,6 +140,14 @@ export default class MainPage extends Component {
         )
       }
     })
+  }
+
+  handleCalendarChange = (date) => {
+    this.setState({ date }, () => console.log(this.state.date))
+  }
+
+  showDayEvents = (date) => {
+    console.log("this is the date", moment(date).fromNow())
   }
 
   render() {
@@ -152,17 +164,17 @@ export default class MainPage extends Component {
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.messageDetails} className="addIcon" />
               </p>
               <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
-              {/* <CreateMessage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="topRight">
               <p id="messageWindow">CALENDAR</p>
+              <Day date={this.state.date} />
+              <Calendar className="calendar" calendarType="US" minDetail="year" minDate={new Date()} onChange={this.handleCalendarChange} value={this.state.date} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
               </p>
               <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
-              {/* <NewImage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -190,10 +202,10 @@ export default class MainPage extends Component {
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.messageDetails} className="addIcon" />
               </p>
               <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
-              {/* <CreateMessage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="topRight">
               <p id="messageWindow">CALENDAR</p>
+              <Calendar onClickDay={this.showDayEvents} className="calendar" calendarType="US" minDetail="year" minDate={new Date()} onChange={this.handleCalendarChange} value={this.state.date} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES

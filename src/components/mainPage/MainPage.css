@@ -8,12 +8,39 @@
 }
 .topRight {
   position: fixed;
-  background-color: white;
+  background-color: var(--calendar--background-color);
   height: 42%;
   width: 48%;
   right: 1.3%;
   margin-top: 3%;
-
+}
+.calendar {
+  width: 100% !important;
+}
+.react-calendar__navigation__prev-button {
+  width: 5%;
+}
+.react-calendar__navigation__prev2-button {
+  width: 5%;
+}
+.react-calendar__navigation__label {
+  font-weight: bold;
+}
+.react-calendar__navigation__next-button {
+  width: 5%;
+}
+.react-calendar__navigation__next2-button {
+  width: 5%;
+}
+.react-calendar__month-view__days__day {
+  padding-top: 1px;
+  padding-bottom: 9.75px;
+}
+.react-calendar__year-view__months__month {
+  padding-top: 2vw;
+  padding-bottom: 2px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .middleRow {
   position: absolute;
