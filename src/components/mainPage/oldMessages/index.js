@@ -7,72 +7,66 @@ import { confirmAlert } from "react-confirm-alert";
 
 export default class OldMessages extends Component {
   state = {
-    titleInputValue: "",
-    bodyInputValue: "",
+    messageBody: "",
+    messageTitle: "",
     oldMessage: {}
   }
 
-  editMessage = (event) => {
-    let targetMessage = parseInt(event.target.value);
-    let oldMess = this.props.messages.find(e => e.id === targetMessage);
-    this.setState({ oldMessage: oldMess }, () => {
-      this.setState({ titleInputValue: this.state.oldMessage.messageTitle, bodyInputValue: this.state.oldMessage.messageBody })
+  clearBlur = () => {
+    $(".navbar").removeClass("isBlurred");
+    $(".topLeft").removeClass("isBlurred");
+    $(".topRight").removeClass("isBlurred");
+    $(".middleRow").removeClass("isBlurred");
+    $(".alertBottom").removeClass("isBlurred");
+  }
+
+  addBlur = () => {
+    $(".navbar").addClass("isBlurred");
+    $(".topLeft").addClass("isBlurred");
+    $(".topRight").addClass("isBlurred");
+    $(".middleRow").addClass("isBlurred");
+    $(".alertBottom").addClass("isBlurred");
+  }
+
+  clearState = () => {
+    this.setState({ messageBody: "", messageTitle: "", oldMessage: {} })
+  }
+
+  handleInputValue = (event) => {
+    let thisMessageId = parseInt(sessionStorage.getItem("messageId"));
+    this.props.messages.forEach(message => {
+      if (message.id === thisMessageId) {
+        this.setState({
+          [event.target.id]: event.target.value,
+          oldMessage: message
+        });
+      }
     })
-    $(`.${targetMessage}titleInput`).show();
-    $(`.${targetMessage}bodyInput`).show();
-    this.setState({ originalTitle: $(`.${targetMessage}titleInput`).value });
-    this.setState({ originalBody: $(`.${targetMessage}bodyInput`).value })
-    $(`.${targetMessage}text`).hide();
-    $(`.${targetMessage}body`).hide();
-    $(`#${targetMessage}saveBtn`).show();
-    $(".editBtn").hide();
-    $(".deleteBtn").hide();
-    $(`#${targetMessage}deleteBtn`).show();
   }
 
-  titleInputValue = (event) => {
-    this.setState({
-      titleInputValue: event.target.value
-    });
-  }
-
-  bodyInputValue = (event) => {
-    this.setState({
-      bodyInputValue: event.target.value
-    });
-  }
-
-  saveMessage = (event) => {
-    let targetMessage = event.target.value;
-    let editMessage = {
-      messageBody: this.state.bodyInputValue
+  saveMessage = () => {
+    if (this.state.oldMessage === null) {
+      let editMessage = {
+        messageBody: this.state.messageBody,
+      }
+      let alreadyEdited = this.state.messageTitle.includes("(edited)");
+      if (alreadyEdited) {
+        editMessage.messageTitle = this.state.messageTitle;
+      } else {
+        editMessage.messageTitle = this.state.messageTitle + "(edited)";
+      }
+      if (editMessage.messageTitle === "(edited)") {
+        editMessage.messageTitle = this.state.oldMessage.messageTitle;
+      }
+      if (editMessage.messageBody === "") {
+        editMessage.messageBody = this.state.oldMessage.messageBody;
+      }
+      apiData.updateItem("messages", this.state.oldMessage.id, editMessage)
+      this.clearState();
+      this.props.refresh();
+      sessionStorage.removeItem("messageId");
     }
-    let alreadyEdited = this.state.titleInputValue.includes("(edited)");
-    if (alreadyEdited) {
-      editMessage.messageTitle = this.state.titleInputValue;
-    } else {
-      editMessage.messageTitle = this.state.titleInputValue + "(edited)";
-    }
-    if (editMessage.messageTitle === "(edited)") {
-      editMessage.messageTitle = this.state.oldMessage.messageTitle;
-    }
-    if (editMessage.messageBody === "") {
-      editMessage.messageBody = this.state.oldMessage.messageBody;
-    }
-    this.setState({
-      titleInputValue: "",
-      bodyInputValue: "",
-      oldMessage: {}
-    })
-    $(`.${targetMessage}titleInput`).hide();
-    $(`.${targetMessage}bodyInput`).hide();
-    $(`.${targetMessage}text`).show();
-    $(`.${targetMessage}body`).show();
-    $(`#${targetMessage}saveBtn`).hide();
-    $(".hideShowBtn").show();
-    $(".deleteBtn").hide();
-    apiData.updateItem("messages", event.target.value, editMessage)
-      .then(() => this.props.refresh())
+    else { sessionStorage.removeItem("messageId")}
   }
 
   deleteMessage = (messageId) => {
@@ -80,25 +74,11 @@ export default class OldMessages extends Component {
       .then(() => this.props.refresh())
   }
 
-  cancelEdit = (target) => {
-    console.log(target)
-    $(`.${target}titleInput`).hide();
-    $(`.${target}bodyInput`).hide();
-    $(`.${target}text`).show();
-    $(`.${target}body`).show();
-    $(`#${target}saveBtn`).hide();
-  }
-
   deleteConfirmation = (event) => {
     confirmAlert({
       customUI: ({ onClose }) => {
-        $(".navbar").addClass("isBlurred");
-        $(".topLeft").addClass("isBlurred");
-        $(".topRight").addClass("isBlurred");
-        $(".middleRow").addClass("isBlurred");
-        $(".alertBottom").addClass("isBlurred");
-        const messageTarget = event.target.value;
-        console.log(event.target.value)
+        let messageId = parseInt(sessionStorage.getItem("messageId"))
+        console.log(messageId, "messageId")
         return (
           <div className="deleteAlert">
             <img src="../../../groupGuruLogo.jpg" id="logoForLoginAlert" alt="Group Guru Logo" />
@@ -108,24 +88,16 @@ export default class OldMessages extends Component {
             </div>
             <div id="deleteBtnSection">
               <button className="deleteConfirmation" onClick={() => {
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
-                $(".deleteBtn").hide();
-                $(".editBtn").hide();
-                $(".hideShowBtn").show();
-                this.cancelEdit(messageTarget);
+                this.clearBlur();
+                this.clearState();
+                sessionStorage.removeItem("messageId")
                 onClose()
               }}>No, Keep Message</button>
               <button className="deleteConfirmation" onClick={() => {
-                this.deleteMessage(messageTarget)
-                $(".navbar").removeClass("isBlurred");
-                $(".topLeft").removeClass("isBlurred");
-                $(".topRight").removeClass("isBlurred");
-                $(".middleRow").removeClass("isBlurred");
-                $(".alertBottom").removeClass("isBlurred");
+                this.deleteMessage(messageId);
+                this.clearState();
+                this.clearBlur();
+                sessionStorage.removeItem("messageId")
                 onClose()
               }}>Yes, Delete It</button>
             </div>
@@ -135,10 +107,51 @@ export default class OldMessages extends Component {
     })
   }
 
-  showMessageOptions = () => {
-    $(".hideShowBtn").hide();
-    $(".editBtn").show();
-    $(".deleteBtn").show();
+  showMessageOptions = (event) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        this.addBlur();
+        // console.log("event.target.value", event.target.id)
+        const messageTarget = parseInt(event.target.id);
+        // console.log(messageTarget)
+        let thisMessage = {};
+        this.props.messages.forEach(message => {
+          if (message.id === messageTarget) {
+            thisMessage = message;
+            sessionStorage.setItem("messageId", message.id)
+          }
+        })
+        console.log("thisMessage", thisMessage)
+        return (
+          <div className="messageAlert">
+            <h1 id="messageEditTitle">Edit or Delete Message</h1>
+            <div id="messageEditInputSection">
+              <label htmlFor="messageTitleEdit" className="messageEditLabel">Message Title</label>
+              <input className="messageTitleInput" name="messageTitleEdit" id="messageTitle" onChange={this.handleInputValue} defaultValue={thisMessage.messageTitle}></input>
+              <label htmlFor="messageBodyEdit" className="messageEditLabel">Message Body</label>
+              <textarea className="messageBodyInput" name="messageBodyEdit" id="messageBody" onChange={this.handleInputValue} defaultValue={thisMessage.messageBody}></textarea>
+            </div>
+            <div id="deleteBtnSection">
+              <button className="deleteConfirmation" onClick={() => {
+                this.clearBlur();
+                this.clearState();
+                sessionStorage.removeItem("messageId")
+                onClose()
+              }}>Go Back</button>
+              <button className="deleteConfirmation" onClick={() => {
+                this.clearBlur();
+                this.saveMessage();
+                onClose()
+              }}>Save Changes</button>
+              <button className="deleteConfirmation" onClick={() => {
+                this.deleteConfirmation();
+                onClose()
+              }}>Delete Message</button>
+            </div>
+          </div>
+        )
+      }
+    })
   }
 
   printMessages() {
@@ -152,13 +165,8 @@ export default class OldMessages extends Component {
       if (message.user.username === this.props.user.username) {
         return <section className="indivMessageOwner" key={message.id}>
           <div className="oldMsgTitleOwner">
+            <img src="../editIcon.png" id={message.id} className="hideShowBtn" onClick={this.showMessageOptions} alt="edit"></img>
             <p id="userInfo">{moment(`${message.messageDate}`).fromNow()} </p>
-            <article id="editDelete">
-              <button value={message.id} className="saveBtn hide" id={`${message.id}saveBtn`} onClick={this.saveMessage}>Save</button>
-              <button value={message.id} className="hideShowBtn" onClick={this.showMessageOptions} >Options</button>
-              <button value={message.id} className="editBtn hide" onClick={this.editMessage} >Edit</button>
-              <button value={message.id} className="deleteBtn hide" id={`${message.id}deleteBtn`} onClick={this.deleteConfirmation}>Delete</button>
-            </article>
           </div>
           <input className={`messageTitleInput hide ${message.id}titleInput`} onChange={this.titleInputValue} defaultValue={message.messageTitle}></input>
           <p className={`oldMsgTitle ${message.id}text`}>{message.messageTitle}</p>
@@ -179,6 +187,11 @@ export default class OldMessages extends Component {
 
 
   render() {
+    $(document).keyup(function (e) {
+      if (e.keyCode === 27) {
+        this.clearBlur()
+      }
+    });
     return (
       <div id="oldMessages">
         <p id="endOfMessages" dangerouslySetInnerHTML={{ __html: '&bigstar;  Top of Messages  &bigstar;' }}></p>
