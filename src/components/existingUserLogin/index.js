@@ -77,11 +77,11 @@ export default class LoginMain extends Component {
   }
 
   render() {
-    if (this.props.user.main.loggedIn) {
-      return <Redirect to="/GroupGuru" />
-    } else if (this.props.user.newUser) {
-      return <Redirect to="/newUser" />
-    } else {
+      if (this.props.user.main.loggedIn) {
+        return <Redirect to="/" />
+      } else if (this.props.user.newUser) {
+        return <Redirect to="/newUser" />
+      } else {
       return (
         <div id="existingUserForm">
           <section id="logoContainer">

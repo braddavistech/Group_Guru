@@ -1,4 +1,6 @@
+// import Encryption from "crypto-js";
 const dataURL = "http://0.0.0.0:8088/"
+// const codeKey = "BradTest";
 
 export default Object.create(null, {
 
@@ -31,6 +33,12 @@ export default Object.create(null, {
 
   newDataPost: {
     value: function (data, category) {
+      // console.log("dataBefore: ", data);
+      // let cipherData = Encryption.AES.encrypt(JSON.stringify(data), codeKey).toString();
+      // console.log("encodedData: ", cipherData)
+      // let cipherToString = Encryption.AES.decrypt(cipherData.toString(), codeKey);
+      // let decryptedObject = JSON.parse(cipherToString.toString(Encryption.enc.Utf8));
+      // console.log("decryptedData: ", decryptedObject);
       return fetch(`${dataURL}${category}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

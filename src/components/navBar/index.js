@@ -44,6 +44,7 @@ class NavBar extends Component {
       let newUser = user[0];
       this.setState({ currentUser: newUser, profileLoaded: true })
     })
+    this.props.refresh()
   }
 
   render() {
@@ -53,7 +54,7 @@ class NavBar extends Component {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="navLink" onClick={() => { this.goHome()}} to="/GroupGuru">Home</Link>
+                <Link className="navLink" onClick={() => { this.goHome()}} to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>

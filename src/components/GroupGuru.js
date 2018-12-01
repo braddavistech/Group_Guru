@@ -104,7 +104,7 @@ class GroupGuru extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar logOut={this.logOut} openGroup={this.openGroupMessage} joinGroup={this.joinGroup} stayAtMain={this.stayAtMain} noJoinGroup={this.noJoinGroup} loggedInStatus={this.state.loggedIn} />
+        <NavBar logOut={this.logOut} openGroup={this.openGroupMessage} refresh={this.refreshData} joinGroup={this.joinGroup} stayAtMain={this.stayAtMain} noJoinGroup={this.noJoinGroup} loggedInStatus={this.state.loggedIn} />
         <ApplicationViews loggedIn={this.toggleLogin} refresh={this.refreshData} joinGroup={this.joinGroup} createJoinGroup={this.createJoinGroup} closeGroupMessage={this.closeGroupMessage} stayAtMain={this.stayAtMain} main={this.state} />
       </React.Fragment>
     )

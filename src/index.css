@@ -9,12 +9,12 @@ body {
 }
 :root{
   --label--form-text: darkblue;
-  --input--form-background: #ff572299;
+  --input--form-background: #f89475;
   --input--form-textColor: black;
   --input--form-fontSize: calc(12px + .5vw);
   --input--form-height: calc(18px + 1vw);
   --newUser--label-text: calc(10px + 1vw);
-  --messages--currentUser: rgb(223, 226, 223);
+  --messages--currentUser: rgb(141, 146, 141);
   --messages--otherUser: rgb(255, 204, 169);
   --section--title-headers: #e65b11;
 }

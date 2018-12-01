@@ -1,15 +1,142 @@
 import React, { Component } from 'react';
 import "./MainPage.css";
 import CreateNewGroup from "../createObjects/group";
-import CreateMessage from "../createObjects/createMessage";
+// import CreateMessage from "../createObjects/createMessage";
 import OldMessages from "./oldMessages";
 import JoinGroup from "../joinGroup";
-import CreateImage from "../createObjects/createImage";
+// import NewImage from "./newPhoto";
 import OldPhotos from "./oldPhotos";
+import NewPhotoModular from "../modulars/newPhoto";
+import NewMessageModular from "../modulars/newMessage";
+import apiData from "../../modules/APIcalls";
+import { confirmAlert } from "react-confirm-alert";
+import $ from "jquery";
 
 
 
 export default class MainPage extends Component {
+  state = {
+    webAddress: "",
+    description: "",
+    title: "",
+    messageTitle: "",
+    messageBody: ""
+  }
+
+  handleChange = (stateToChange) => {
+    this.setState(stateToChange)
+  }
+
+  gatherMessageValues = () => {
+    let message = {
+      messageDate: new Date(),
+      messageTitle: this.state.messageTitle,
+      messageBody: this.state.messageBody,
+      userId: this.props.user.main.currentUser.id,
+      groupId: this.props.user.main.currentUser.groupId
+    }
+    if (this.state.messageTitle !== "" && this.state.messageBody !== "") {
+      apiData.newDataPost(message, "messages").then(() => {
+        this.setState({ messageTitle: "", messageBody: "", goodToSave: false });
+        this.props.user.refresh();
+      })
+    }
+    else { this.messageDetails() }
+  }
+
+  messageDetails = () => {
+    console.log("inside messageDetails")
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        $(".navbar").addClass("isBlurred");
+        $(".topLeft").addClass("isBlurred");
+        $(".topRight").addClass("isBlurred");
+        $(".middleRow").addClass("isBlurred");
+        $(".alertBottom").addClass("isBlurred");
+        console.log("test", this.state.description)
+        return (
+          <div id="newMessage">
+            <NewMessageModular props={this.props} handleChange={this.handleChange} state={this.state} />
+            <section id="newButtonContainer">
+              <button className="newCreateBtn" onClick={() => {
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                onClose();
+              }}>Back</button>
+              <button className="newCreateBtn" onClick={() => {
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                this.gatherMessageValues()
+                onClose();
+              }}>Add Message</button>
+            </section>
+          </div>
+        )
+      }
+    })
+  }
+
+  gatherPhotoValues = () => {
+    let image = {
+      addedDate: new Date(),
+      title: this.state.title,
+      webAddress: this.state.webAddress,
+      description: this.state.description,
+      userId: this.props.user.main.currentUser.id,
+      groupId: this.props.user.main.currentUser.groupId
+    }
+    if (this.state.title !== "" && this.state.webAddress !== "" && this.state.description !== "") {
+      apiData.newDataPost(image, "photos").then(() => {
+        this.setState({ webAddress: "", description: "", title: "", goodToSave: false });
+        this.props.user.refresh();
+      })
+    }
+    else { this.photoDetails() }
+  }
+
+  photoDetails = () => {
+    console.log("inside photoDetails")
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        $(".navbar").addClass("isBlurred");
+        $(".topLeft").addClass("isBlurred");
+        $(".topRight").addClass("isBlurred");
+        $(".middleRow").addClass("isBlurred");
+        $(".alertBottom").addClass("isBlurred");
+        console.log("test", this.state.description)
+        return (
+          <div id="newImage">
+            <NewPhotoModular props={this.props} handleChange={this.handleChange} state={this.state} />
+            <section id="newButtonContainer">
+              <button className="newCreateBtn" onClick={() => {
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                onClose();
+              }}>Back</button>
+              <button className="newCreateBtn" onClick={() => {
+                $(".navbar").removeClass("isBlurred");
+                $(".topLeft").removeClass("isBlurred");
+                $(".topRight").removeClass("isBlurred");
+                $(".middleRow").removeClass("isBlurred");
+                $(".alertBottom").removeClass("isBlurred");
+                this.gatherPhotoValues()
+                onClose();
+              }}>Add Photo</button>
+            </section>
+          </div>
+        )
+      }
+    })
+  }
 
   render() {
     if (this.props.user.main.sendToGroup) {
@@ -21,17 +148,21 @@ export default class MainPage extends Component {
         return (
           <React.Fragment>
             <div className="topLeft">
-              <p id="messageWindow">MESSAGES</p>
-              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
-              <CreateMessage user={this.props.user} refresh={this.props.user.refresh} />
+              <p id="messageWindow">MESSAGES
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.messageDetails} className="addIcon" />
+              </p>
+              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
+              {/* <CreateMessage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="topRight">
               <p id="messageWindow">CALENDAR</p>
             </div>
             <div className="middleRow">
-              <p id="messageWindow">PICTURES</p>
+              <p id="messageWindow">PICTURES
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
+              </p>
               <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
-              <CreateImage user={this.props.user} refresh={this.props.user.refresh} />
+              {/* <NewImage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -55,19 +186,22 @@ export default class MainPage extends Component {
         return (
           <React.Fragment>
             <div className="topLeft">
-              <p id="messageWindow">MESSAGES</p>
-              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
-              <CreateMessage user={this.props.user} refresh={this.props.user.refresh} />
+              <p id="messageWindow">MESSAGES
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.messageDetails} className="addIcon" />
+              </p>
+              <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
+              {/* <CreateMessage user={this.props.user} refresh={this.props.user.refresh} /> */}
             </div>
             <div className="topRight">
               <p id="messageWindow">CALENDAR</p>
             </div>
             <div className="middleRow">
-              <p id="messageWindow">PICTURES</p>
+              <p id="messageWindow">PICTURES
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
+              </p>
               <section id="photoSection">
                 <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
               </section>
-              <CreateImage user={this.props.user} refresh={this.props.user.refresh} />
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
