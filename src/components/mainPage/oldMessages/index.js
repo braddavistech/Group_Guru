@@ -45,7 +45,7 @@ export default class OldMessages extends Component {
   }
 
   saveMessage = () => {
-    if (this.state.oldMessage === null) {
+    if (this.state.oldMessage !== null) {
       let editMessage = {
         messageBody: this.state.messageBody,
       }
@@ -66,7 +66,7 @@ export default class OldMessages extends Component {
       this.props.refresh();
       sessionStorage.removeItem("messageId");
     }
-    else { sessionStorage.removeItem("messageId")}
+    else { sessionStorage.removeItem("messageId") }
   }
 
   deleteMessage = (messageId) => {
@@ -78,7 +78,6 @@ export default class OldMessages extends Component {
     confirmAlert({
       customUI: ({ onClose }) => {
         let messageId = parseInt(sessionStorage.getItem("messageId"))
-        console.log(messageId, "messageId")
         return (
           <div className="deleteAlert">
             <img src="../../../groupGuruLogo.jpg" id="logoForLoginAlert" alt="Group Guru Logo" />
@@ -111,9 +110,7 @@ export default class OldMessages extends Component {
     confirmAlert({
       customUI: ({ onClose }) => {
         this.addBlur();
-        // console.log("event.target.value", event.target.id)
         const messageTarget = parseInt(event.target.id);
-        // console.log(messageTarget)
         let thisMessage = {};
         this.props.messages.forEach(message => {
           if (message.id === messageTarget) {
@@ -121,7 +118,6 @@ export default class OldMessages extends Component {
             sessionStorage.setItem("messageId", message.id)
           }
         })
-        console.log("thisMessage", thisMessage)
         return (
           <div className="messageAlert">
             <h1 id="messageEditTitle">Edit or Delete Message</h1>
@@ -189,7 +185,11 @@ export default class OldMessages extends Component {
   render() {
     $(document).keyup(function (e) {
       if (e.keyCode === 27) {
-        this.clearBlur()
+        $(".navbar").removeClass("isBlurred");
+        $(".topLeft").removeClass("isBlurred");
+        $(".topRight").removeClass("isBlurred");
+        $(".middleRow").removeClass("isBlurred");
+        $(".alertBottom").removeClass("isBlurred");
       }
     });
     return (

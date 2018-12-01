@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import NavBar from "./navBar";
 import ApplicationViews from "./ApplicationViews";
-import apiData from "../modules/APIcalls"
+import apiData from "../modules/APIcalls";
+import moment from "moment";
 import "./GroupGuru.css";
 import "bootstrap/dist/css/bootstrap.min.css"
 
@@ -15,6 +16,7 @@ class GroupGuru extends Component {
     sendToGroup: false,
     groupMessages: [],
     groupPhotos: [],
+    groupEvents: [],
     profileLoaded: false
   }
 
@@ -59,6 +61,19 @@ class GroupGuru extends Component {
               this.setState({ groupPhotos: photos })
             })
           })
+          .then(() => {
+            apiData.getSingleType("events", `_expand=user&groupId=${newUser.groupId}`).then(events => {
+              events.map(event => {
+                event.start = moment(event.start).toDate();
+                event.end = moment(event.end).toDate();
+                event.user.password = "HIDDEN";
+                event.user.securityAnswer = "HIDDEN";
+                event.user.securityQuestionId = "HIDDEN";
+                return event;
+              })
+              this.setState({ groupEvents: events })
+            })
+          })
       })
   }
 
@@ -73,7 +88,7 @@ class GroupGuru extends Component {
   }
 
   openGroupMessage = () => {
-    this.setState({ loggedIn: false, groupId: 0, inGroup: false, joinGroup: false, closeGroup: false, sendToGroup: false, groupMessages: [], currentUser: {} })
+    this.setState({ loggedIn: false, groupId: 0, inGroup: false, joinGroup: false, closeGroup: false, sendToGroup: false, groupMessages: [], currentUser: {}, groupPhotos: [], groupEvents: [] })
   }
 
   joinGroup = () => {

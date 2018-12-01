@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import "./MainPage.css";
 import CreateNewGroup from "../createObjects/group";
-// import CreateMessage from "../createObjects/createMessage";
 import OldMessages from "./oldMessages";
 import JoinGroup from "../joinGroup";
-// import NewImage from "./newPhoto";
 import OldPhotos from "./oldPhotos";
 import NewPhotoModular from "../modulars/newPhoto";
 import NewMessageModular from "../modulars/newMessage";
-// import Calendar from "react-calendar";
-import Calendar from "react-calendar/dist/entry.nostyle";
-import Day from "react-calendar/dist/entry.nostyle";
+import NewEventModular from "../modulars/newEvent";
+import Calendar from "./calendar";
 import apiData from "../../modules/APIcalls";
 import { confirmAlert } from "react-confirm-alert";
-import moment from "moment";
 import $ from "jquery";
 
 
@@ -21,14 +17,41 @@ import $ from "jquery";
 export default class MainPage extends Component {
   state = {
     webAddress: "",
-    description: "",
-    title: "",
+    photoDescription: "",
+    photoTitle: "",
     messageTitle: "",
-    messageBody: ""
+    messageBody: "",
+    eventStart: "",
+    eventEnd: "",
+    eventTitle: "",
+    eventDescription: "",
+    eventLocation: "",
+    eventStreetAdd: "",
+    eventCity: "",
+    eventState: "",
+    eventZip: "",
+    eventNotes: "",
+    eventDuration: false
   }
 
   handleChange = (stateToChange) => {
     this.setState(stateToChange)
+  }
+
+  addBlur = () => {
+    $(".navbar").addClass("isBlurred");
+    $(".topLeft").addClass("isBlurred");
+    $(".topRight").addClass("isBlurred");
+    $(".middleRow").addClass("isBlurred");
+    $(".alertBottom").addClass("isBlurred");
+  }
+
+  removeBlur = () => {
+    $(".navbar").removeClass("isBlurred");
+    $(".topLeft").removeClass("isBlurred");
+    $(".topRight").removeClass("isBlurred");
+    $(".middleRow").removeClass("isBlurred");
+    $(".alertBottom").removeClass("isBlurred");
   }
 
   gatherMessageValues = () => {
@@ -76,7 +99,7 @@ export default class MainPage extends Component {
                 $(".alertBottom").removeClass("isBlurred");
                 this.gatherMessageValues()
                 onClose();
-              }}>Add Message</button>
+              }}>Save Message</button>
             </section>
           </div>
         )
@@ -87,9 +110,9 @@ export default class MainPage extends Component {
   gatherPhotoValues = () => {
     let image = {
       addedDate: new Date(),
-      title: this.state.title,
+      title: this.state.photoTitle,
       webAddress: this.state.webAddress,
-      description: this.state.description,
+      description: this.state.photoDescription,
       userId: this.props.user.main.currentUser.id,
       groupId: this.props.user.main.currentUser.groupId
     }
@@ -102,21 +125,6 @@ export default class MainPage extends Component {
     else { this.photoDetails() }
   }
 
-  addBlur = () => {
-    $(".navbar").addClass("isBlurred");
-    $(".topLeft").addClass("isBlurred");
-    $(".topRight").addClass("isBlurred");
-    $(".middleRow").addClass("isBlurred");
-    $(".alertBottom").addClass("isBlurred");
-  }
-
-  removeBlur = () => {
-    $(".navbar").removeClass("isBlurred");
-    $(".topLeft").removeClass("isBlurred");
-    $(".topRight").removeClass("isBlurred");
-    $(".middleRow").removeClass("isBlurred");
-    $(".alertBottom").removeClass("isBlurred");
-  }
 
   photoDetails = () => {
     confirmAlert({
@@ -134,7 +142,7 @@ export default class MainPage extends Component {
                 this.removeBlur();
                 this.gatherPhotoValues()
                 onClose();
-              }}>Add Photo</button>
+              }}>Save Photo</button>
             </section>
           </div>
         )
@@ -142,12 +150,61 @@ export default class MainPage extends Component {
     })
   }
 
-  handleCalendarChange = (date) => {
-    this.setState({ date }, () => console.log(this.state.date))
+  gatherEventValues = () => {
+    let event = {
+      addedDate: new Date(),
+      start: this.state.eventStart,
+      end: this.state.eventEnd,
+      title: this.state.eventTitle,
+      description: this.state.eventDescription,
+      location: this.state.eventLocation,
+      streetAdd: this.state.eventStreetAdd,
+      city: this.state.eventCity,
+      state: this.state.eventState,
+      zip: this.state.eventZip,
+      notes: this.state.eventNotes,
+      allDay: this.state.eventDuration,
+      userId: this.props.user.main.currentUser.id,
+      groupId: this.props.user.main.currentUser.groupId
+    }
+    if (event.title !== "" && event.start !== "" && event.end !== "" ) {
+      if (event.description === "") event.description = "No description provided.";
+      if (event.location === "") event.location = "No location provided.";
+      if (event.streetAdd === "") event.streetAdd = "No street address provided.";
+      if (event.city === "") event.city = "No city provided.";
+      if (event.state === "") event.state = "No state provided.";
+      if (event.zip === "") event.zip = "No zip provided.";
+      if (event.notes === "") event.notes = "No notes provided.";
+      apiData.newDataPost(event, "events").then(() => {
+        this.setState({ eventStart: "", eventEnd: "", eventTitle: "", eventDescription: "", eventLocation: "", eventStreetAdd: "", eventCity: "", eventState: "", eventZip: "", eventNotes: "", eventDuration: false});
+        this.props.user.refresh();
+      })
+    }
+    else { this.eventDetails() }
   }
 
-  showDayEvents = (date) => {
-    console.log("this is the date", moment(date).fromNow())
+  eventDetails = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        this.addBlur();
+        return (
+          <div id="newEvent">
+            <NewEventModular props={this.props} handleChange={this.handleChange} info={this.state} />
+            <section id="newButtonContainer">
+              <button className="newCreateBtn" onClick={() => {
+                this.removeBlur();
+                onClose();
+              }}>Back</button>
+              <button className="newCreateBtn" onClick={() => {
+                this.removeBlur();
+                this.gatherEventValues();
+                onClose();
+              }}>Save Event</button>
+            </section>
+          </div>
+        )
+      }
+    })
   }
 
   render() {
@@ -166,9 +223,10 @@ export default class MainPage extends Component {
               <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="topRight">
-              <p id="messageWindow">CALENDAR</p>
-              <Day date={this.state.date} />
-              <Calendar className="calendar" calendarType="US" minDetail="year" minDate={new Date()} onChange={this.handleCalendarChange} value={this.state.date} />
+              <p id="messageWindow">CALENDAR
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
+              </p>
+              <Calendar events={this.props.user.main.groupEvents} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
@@ -204,8 +262,10 @@ export default class MainPage extends Component {
               <OldMessages messages={this.props.user.main.groupMessages} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="topRight">
-              <p id="messageWindow">CALENDAR</p>
-              <Calendar onClickDay={this.showDayEvents} className="calendar" calendarType="US" minDetail="year" minDate={new Date()} onChange={this.handleCalendarChange} value={this.state.date} />
+              <p id="messageWindow">CALENDAR
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
+              </p>
+              <Calendar events={this.props.user.main.groupEvents} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
