@@ -114,13 +114,13 @@ export default class Calendar extends Component {
       this.showDetails()
       return (
         <React.Fragment>
-          <BigCalendar id="smallCalendar" selectable onSelectSlot={(slot) => this.eventDetails(slot)} onSelectEvent={(event) => { this.setState({ message: event }) }} localizer={this.state.localizer} defaultView="month" events={this.props.events} startAccessor="start" endAccessor="end" />
+          <BigCalendar id="smallCalendar" selectable onSelectSlot={(slot) => this.eventDetails(slot)} onSelectEvent={(event) => { this.setState({ message: event }) }} localizer={this.state.localizer} defaultView="agenda" events={this.props.events} startAccessor="start" endAccessor="end" />
         </React.Fragment>
       )
     } else {
       return (
         <React.Fragment>
-          <BigCalendar id="smallCalendar" selectable onSelectSlot={(slot) => this.eventDetails(slot)} onSelectEvent={(event) => { this.setState({ message: event }) }} localizer={this.state.localizer} defaultView="month" events={this.props.events} startAccessor="start" endAccessor="end" />
+          <BigCalendar id="smallCalendar" selectable onSelectSlot={(slot) => this.eventDetails(slot)} onSelectEvent={(event) => { this.setState({ message: event }) }} localizer={this.state.localizer} defaultView="agenda" events={this.props.events} startAccessor="start" endAccessor="end" />
         </React.Fragment>
       )
     }

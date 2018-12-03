@@ -245,9 +245,9 @@ export default class MainPage extends Component {
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
-              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} user={this.props.user.main.currentUser} className="addIcon" />
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
               </p>
-              <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+              <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -284,10 +284,10 @@ export default class MainPage extends Component {
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
-              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} user={this.props.user.main.currentUser} className="addIcon" />
+              <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
               </p>
               <section id="photoSection">
-                <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+                <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
               </section>
             </div>
             <div className="alertBottom">

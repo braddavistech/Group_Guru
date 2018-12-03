@@ -74,7 +74,7 @@ export default class OldMessages extends Component {
       .then(() => this.props.refresh())
   }
 
-  deleteConfirmation = (event) => {
+  deleteConfirmation = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
         let messageId = parseInt(sessionStorage.getItem("messageId"))

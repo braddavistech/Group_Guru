@@ -66,9 +66,9 @@ class GroupGuru extends Component {
               events.map(event => {
                 event.start = moment(event.start).toDate();
                  event.end = moment(event.end).toDate();
-                console.log("eventStart", event.start);
-                let date = moment(event.start, "d, MM-Do-YYYY hh:mm:ss.sss").format("dddd, MMMM Do, YYYY h:mm A")
-                console.log("formattedDate", date)
+                // console.log("eventStart", event.start);
+                // let date = moment(event.start, "d, MM-Do-YYYY hh:mm:ss.sss").format("dddd, MMMM Do, YYYY h:mm A")
+                // console.log("formattedDate", date)
                 event.user.password = "HIDDEN";
                 event.user.securityAnswer = "HIDDEN";
                 event.user.securityQuestionId = "HIDDEN";
