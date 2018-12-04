@@ -8,6 +8,7 @@ import MoreInfoForm from "./createObjects/moreInfoForm";
 import ExistingUserLogin from "./existingUserLogin";
 import CreateNewGroup from "./createObjects/group";
 import JoinGroup from "./joinGroup";
+import AddressBook from "./addressBook";
 
 
 export default class ApplicationViews extends Component {
@@ -40,9 +41,9 @@ export default class ApplicationViews extends Component {
           <Route exact path="/moreInfo" render={(props) => {
             return <MoreInfoForm refresh={this.props.refresh}/>
           }} />
-          {/* <Route exact path="/GroupGuru" render={(props) => {
-            return <MainPage user={this.props} />
-          }} /> */}
+          <Route exact path="/addressBook" render={(props) => {
+            return <AddressBook user={this.props} />
+          }} />
         </React.Fragment>
       )
     // }

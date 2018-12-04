@@ -63,7 +63,7 @@ class NavBar extends Component {
                 <Link className="navLink" onClick={() => { this.addGroup() }} to="/joinGroup">Groups</Link>
               </li>
               <li className="nav-item">
-                <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/GroupGuru">*Logout*</Link>
+                <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/addressBook">Address Book</Link>
               </li>
             </ul>
             <section id="logOutDropdown">

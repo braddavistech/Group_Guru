@@ -17,6 +17,7 @@ class GroupGuru extends Component {
     groupMessages: [],
     groupPhotos: [],
     groupEvents: [],
+    groupMembers: [],
     profileLoaded: false
   }
 
@@ -75,6 +76,17 @@ class GroupGuru extends Component {
                 return event;
               })
               this.setState({ groupEvents: events })
+            })
+          })
+          .then(() => {
+            apiData.getSingleType("users", `groupId=${newUser.groupId}`).then(members => {
+              members.map(member => {
+                member.password = "HIDDEN";
+                member.securityAnswer = "HIDDEN";
+                member.securityQuestionId = "HIDDEN";
+                return member;
+              })
+              this.setState({ groupMembers: members })
             })
           })
       })
