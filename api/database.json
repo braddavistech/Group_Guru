@@ -11,7 +11,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-12-03T13:53:23.191Z",
+      "lastLogin": "2018-12-03T23:06:30.118Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -31,7 +31,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-21T04:02:37.606Z",
-      "lastLogin": "2018-12-03T13:37:48.224Z",
+      "lastLogin": "2018-12-04T07:36:32.654Z",
       "id": 2,
       "streetAdd": "1234 main",
       "city": "franklin",
@@ -51,7 +51,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-26T10:25:13.510Z",
-      "lastLogin": "2018-12-01T16:37:10.121Z",
+      "lastLogin": "2018-12-04T00:10:46.591Z",
       "id": 3,
       "streetAdd": "No Information Provided",
       "city": "No Information Provided",
@@ -265,6 +265,14 @@
       "userId": 2,
       "groupId": 2,
       "id": 13
+    },
+    {
+      "messageDate": "2018-12-04T00:06:10.223Z",
+      "messageTitle": "Only 3 Weeks Until Christmas",
+      "messageBody": "Man is time flying by this year. I still have Christmas shopping to do. Better get to it!!!",
+      "userId": 3,
+      "groupId": 2,
+      "id": 14
     }
   ],
   "events": [
@@ -304,11 +312,11 @@
     },
     {
       "addedDate": "2018-12-01T13:36:19.987Z",
-      "start": "2018-12-21T14:00:00.000Z",
-      "end": "2018-12-26T13:00:00.000Z",
-      "title": "Christmas in Georgia",
-      "description": "Christmas with the Folsoms'",
-      "location": "Royce And Jodonnes",
+      "start": "2018-12-21T23:00:00Z",
+      "end": "2018-12-26T13:00:00Z",
+      "title": "Folsom Family Christmas",
+      "description": "Christmas with the Folsoms'.",
+      "location": "Royce And Jodonnes house.",
       "streetAdd": "Folsom Loop",
       "city": "Glennville",
       "state": "GA",
@@ -352,6 +360,23 @@
       "userId": 2,
       "groupId": 2,
       "id": 5
+    },
+    {
+      "addedDate": "2018-12-04T00:09:01.679Z",
+      "start": "2018-12-14T18:00:00Z",
+      "end": "2018-12-14T19:00:00Z",
+      "title": "MVP for Capstone Due",
+      "description": "Must have MVP for capstone done by this date.",
+      "location": "NSS",
+      "streetAdd": "500 Interstate Blvd",
+      "city": "Nashville",
+      "state": "TN",
+      "zip": "37210",
+      "notes": "Better have it done!!!",
+      "allDay": false,
+      "userId": 3,
+      "groupId": 2,
+      "id": 6
     }
   ],
   "loginActivities": [
@@ -2669,6 +2694,76 @@
       "date": "2018-12-03T13:51:31.107Z",
       "userId": 1,
       "id": 463
+    },
+    {
+      "date": "2018-12-03T19:56:08.786Z",
+      "userId": 1,
+      "id": 464
+    },
+    {
+      "date": "2018-12-03T23:12:38.234Z",
+      "userId": 4,
+      "id": 465
+    },
+    {
+      "date": "2018-12-03T23:52:56.339Z",
+      "userId": 2,
+      "id": 466
+    },
+    {
+      "date": "2018-12-03T23:55:11.578Z",
+      "userId": 2,
+      "id": 467
+    },
+    {
+      "date": "2018-12-03T23:57:18.765Z",
+      "userId": 2,
+      "id": 468
+    },
+    {
+      "date": "2018-12-04T00:01:34.554Z",
+      "userId": 2,
+      "id": 469
+    },
+    {
+      "date": "2018-12-04T00:01:44.856Z",
+      "userId": 2,
+      "id": 470
+    },
+    {
+      "date": "2018-12-04T00:01:56.850Z",
+      "userId": 2,
+      "id": 471
+    },
+    {
+      "date": "2018-12-04T00:02:09.300Z",
+      "userId": 2,
+      "id": 472
+    },
+    {
+      "date": "2018-12-04T00:02:22.289Z",
+      "userId": 2,
+      "id": 473
+    },
+    {
+      "date": "2018-12-04T00:03:08.234Z",
+      "userId": 3,
+      "id": 474
+    },
+    {
+      "date": "2018-12-04T00:10:52.243Z",
+      "userId": 2,
+      "id": 475
+    },
+    {
+      "date": "2018-12-04T00:14:09.070Z",
+      "userId": 2,
+      "id": 476
+    },
+    {
+      "date": "2018-12-04T07:36:32.654Z",
+      "userId": 2,
+      "id": 477
     }
   ]
 }

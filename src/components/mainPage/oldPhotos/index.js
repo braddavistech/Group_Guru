@@ -70,7 +70,6 @@ export default class OldPhotos extends Component {
               }}>No, Keep Photo</button>
               <button className="deleteConfirmation" onClick={() => {
                 this.deletePhoto(photoId);
-                // this.clearState();
                 this.clearBlur();
                 sessionStorage.removeItem("messageId")
                 onClose()
@@ -151,7 +150,7 @@ export default class OldPhotos extends Component {
         sessionStorage.setItem("photoId", oldPhoto.id)
         return (
           <div className="photoDetails">
-            <img id="newPhotoPreview" src={oldPhoto.webAddress} alt="Preview of File" />
+            <img id="photoDetailsImage" src={oldPhoto.webAddress} alt="Preview of File" />
             <section className="imageInputContainer">
               <label className="newImageLabel" htmlFor="newImageTitle">Title</label>
               <input className="newImageInput" type="text" required={true} defaultValue={oldPhoto.title} onChange={this.handleChange} id="photoTitle" name="imageTitle" ></input>

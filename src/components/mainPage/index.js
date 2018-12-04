@@ -241,7 +241,7 @@ export default class MainPage extends Component {
               <p id="messageWindow">CALENDAR
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
               </p>
-              <Calendar events={this.props.user.main.groupEvents} />
+              <Calendar events={this.props.user.main.groupEvents} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
@@ -280,7 +280,7 @@ export default class MainPage extends Component {
               <p id="messageWindow">CALENDAR
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
               </p>
-              <Calendar events={this.props.user.main.groupEvents} />
+              <Calendar events={this.props.user.main.groupEvents} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES

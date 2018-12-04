@@ -21,6 +21,8 @@ export default class LoginMain extends Component {
     })
   }
 
+
+
   render() {
     if (this.state.newUser) {
       return <Redirect to="/newUser" />
