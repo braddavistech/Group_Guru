@@ -9,6 +9,8 @@ import NewMessageModular from "../modulars/newMessage";
 import NewEventModular from "../modulars/newEvent";
 import Calendar from "./calendar";
 import apiData from "../../modules/APIcalls";
+import jstz from "jstz";
+import moment from "moment-timezone";
 import { confirmAlert } from "react-confirm-alert";
 import $ from "jquery";
 
@@ -167,7 +169,8 @@ export default class MainPage extends Component {
       userId: this.props.user.main.currentUser.id,
       groupId: this.props.user.main.currentUser.groupId
     }
-    if (event.title !== "" && event.start !== "" && event.end !== "" ) {
+
+    if (event.title !== "" && event.start !== "" && event.end !== "") {
       if (event.description === "") event.description = "No description provided.";
       if (event.location === "") event.location = "No location provided.";
       if (event.streetAdd === "") event.streetAdd = "No street address provided.";
@@ -175,6 +178,18 @@ export default class MainPage extends Component {
       if (event.state === "") event.state = "No state provided.";
       if (event.zip === "") event.zip = "No zip provided.";
       if (event.notes === "") event.notes = "No notes provided.";
+      let TimeZone = jstz.determine();
+      let TimeZoneName = TimeZone.name();
+      let monthDate = event.start.split("T");
+      monthDate = monthDate[0] + " " + monthDate[1];
+      let tempValue = moment(monthDate).tz(TimeZoneName)
+      tempValue = tempValue.utc().format()
+      event.start = tempValue;
+      monthDate = event.end.split("T");
+      monthDate = monthDate[0] + " " + monthDate[1];
+      tempValue = moment(monthDate).tz(TimeZoneName)
+      tempValue = tempValue.utc().format()
+      event.end = tempValue;
       apiData.newDataPost(event, "events").then(() => {
         this.setState({ eventStart: "", eventEnd: "", eventTitle: "", eventDescription: "", eventLocation: "", eventStreetAdd: "", eventCity: "", eventState: "", eventZip: "", eventNotes: "", eventDuration: false});
         this.props.user.refresh();
@@ -226,13 +241,13 @@ export default class MainPage extends Component {
               <p id="messageWindow">CALENDAR
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
               </p>
-              <Calendar events={this.props.user.main.groupEvents} />
+              <Calendar events={this.props.user.main.groupEvents} refresh={this.props.user.refresh} user={this.props.user.main.currentUser}/>
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
               </p>
-              <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+              <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="alertBottom">
               <article id="noGroupAlert">
@@ -265,14 +280,14 @@ export default class MainPage extends Component {
               <p id="messageWindow">CALENDAR
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.eventDetails} className="addIcon" />
               </p>
-              <Calendar events={this.props.user.main.groupEvents} />
+              <Calendar events={this.props.user.main.groupEvents} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
             </div>
             <div className="middleRow">
               <p id="messageWindow">PICTURES
               <img src="../../../addIconImage.png" alt="Add Item" onClick={this.photoDetails} className="addIcon" />
               </p>
               <section id="photoSection">
-                <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} />
+                <OldPhotos photos={this.props.user.main.groupPhotos} refresh={this.props.user.refresh} user={this.props.user.main.currentUser} />
               </section>
             </div>
             <div className="alertBottom">

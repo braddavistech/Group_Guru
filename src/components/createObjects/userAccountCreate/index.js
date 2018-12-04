@@ -112,7 +112,7 @@ export default class CreateNewUser extends Component {
       return <Redirect to="/" />;
     } else {
       return (
-        <article id="newUserForm">
+        <article id="newUserFormPage1">
           <section className="newUserInputSection">
             <label htmlFor="firstName" className="newUserLabel">First Name<p id="firstNameMissingAlert" className="alert hide">You must enter a first name.</p></label>
             <input name="firstName" ref={(userInput) => this.firstName =
@@ -157,9 +157,9 @@ export default class CreateNewUser extends Component {
             <input name="passwordQuestion" ref={(userInput) => this.securityAnswer =
               userInput} className="newUserInput" placeholder="Enter your answer to your security question."></input>
           </section>
-          <section className="newUserDualButton">
-            <button onClick={this.backToLogin} id="newUserBtn">Back</button>
-            <button onClick={this.gatherInputValues} id="newUserBtn">Create User</button>
+          <section className="newUserDualButtonPage1">
+            <button onClick={this.backToLogin} id="newUserBtnPage1">Back</button>
+            <button onClick={this.gatherInputValues} id="newUserBtnPage1">Create User</button>
           </section>
         </article>
       )

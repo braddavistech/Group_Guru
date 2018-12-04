@@ -62,3 +62,27 @@
   color: red;
   align-self: center;
 }
+#saveLoginInfoLabel {
+  font-weight: bold;
+  margin: 0px;
+  margin-top: 5px;
+  text-align: center;
+  color: var(--label--form-text);
+}
+#saveLoginInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.indivRadioBtn {
+  display: flex;
+  margin-left: 3%;
+  margin-right: 3%;
+  flex-direction: column;
+}
+.newUserRadioLabel {
+  font-size: 14px;
+}
+.existingUserRadio {
+  align-self: center;
+}

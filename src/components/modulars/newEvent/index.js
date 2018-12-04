@@ -18,7 +18,7 @@ export default class NewEventModular extends Component {
         <section className="dateSelectContainer">
           <section className="dateSelect">
             <label className="newEventLabel" htmlFor="start">Start</label>
-            <input className="newEventDate" type="datetime-local" required={true} defaultValue={new Date().toString("yyyy-MM-dd")} onChange={this.handleChange} id="eventStart" name="start" min={new Date()} max="2023-12-31T00:00"></input>
+            <input className="newEventDate" type="datetime-local" required={true} defaultValue={new Date()} onChange={this.handleChange} id="eventStart" name="start" min={new Date()} max="2023-12-31T00:00"></input>
           </section>
           <section className="dateSelect">
             <label className="newEventLabel" htmlFor="end">End</label>

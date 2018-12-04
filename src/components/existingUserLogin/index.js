@@ -9,7 +9,17 @@ import apiData from "../../modules/APIcalls";
 export default class LoginMain extends Component {
   state = {
     loggedIn: false,
-    newUser: false
+    newUser: false,
+    saveLogin: "option2"
+  }
+
+  toggleLogin = () => {
+    if (this.state.saveLogin === "option2") {
+      this.setState({ saveLogin: "option1" })
+    } else {
+      this.setState({ saveLogin: "option2" });
+      localStorage.removeItem("passwordUsername");
+    }
   }
 
   authenticateUser = () => {
@@ -27,6 +37,10 @@ export default class LoginMain extends Component {
         if (email.length === 0) {
           $("#noEmailFoundAlert").show();
         } else if (email[0].password === temp.password) {
+          if (this.state.saveLogin === "option1") {
+            console.log("save:", temp.usernameOrEmail)
+            localStorage.setItem("passwordUsername", temp.usernameOrEmail)
+          }
           sessionStorage.setItem("currentUserId", email[0].id);
           sessionStorage.setItem("lastLogin", email[0].lastLogin);
           let newLoginDate = {
@@ -48,6 +62,10 @@ export default class LoginMain extends Component {
         if (username.length === 0) {
           $("#noUsernameFoundAlert").show();
         } else if (username[0].password === temp.password) {
+          if (this.state.saveLogin === "option1") {
+            console.log("save:", temp.usernameOrEmail)
+            localStorage.setItem("passwordUsername", temp.usernameOrEmail)
+          }
           sessionStorage.setItem("currentUserId", username[0].id);
           sessionStorage.setItem("lastLogin", username[0].lastLogin);
           let newLoginDate = {
@@ -77,11 +95,57 @@ export default class LoginMain extends Component {
   }
 
   render() {
-      if (this.props.user.main.loggedIn) {
-        return <Redirect to="/" />
-      } else if (this.props.user.newUser) {
-        return <Redirect to="/newUser" />
-      } else {
+    let storedUser = localStorage.getItem("passwordUsername");
+    if (this.props.user.main.loggedIn) {
+      return <Redirect to="/" />
+    } else if (this.props.user.newUser) {
+      return <Redirect to="/newUser" />
+    } else if (storedUser !== undefined) {
+      return (
+        <div id="existingUserForm">
+          <section id="logoContainer">
+            <img src="../../groupGuruLogo.jpg" id="logoForLogin" alt="Group Guru Logo" />
+            <article id="welcomeLoginMessage">
+              <p id="welcome">Welcome</p>
+              <p id="to">Let's Get Started</p>
+            </article>
+          </section>
+          <section className="userLoginSection">
+            <label htmlFor="usernameOrEmail" className="newUserLabel">Enter Username or Email
+            <p id="noEmailFoundAlert" className="alert hide">The email you entered is not registered.</p>
+              <p id="noUsernameFoundAlert" className="alert hide">The username you entered is not registered.</p>
+              <p id="invalidEmailAlert" className="alert hide">Please enter a valid email address.</p>
+              <p id="invalidUsernameAlert" className="alert hide">Please enter a valid username.</p>
+            </label>
+            <input name="usernameOrEmail" ref={(userInput) => this.usernameOrEmail =
+              userInput} defaultValue={storedUser} className="newUserInput" placeholder="Enter Username/Email"></input>
+          </section>
+          <section className="userLoginSection">
+            <label htmlFor="password" className="newUserLabel">Enter Your Password
+            <p id="wrongPasswordAlert" className="alert hide">The password entered is incorrect.</p>
+              <p id="passwordLengthAlert" className="alert hide">The password entered is too short. Please try again.</p>
+            </label>
+            <input name="password" ref={(userInput) => this.password =
+              userInput} className="newUserInput" placeholder="Enter Password"></input>
+          </section>
+          <p id="saveLoginInfoLabel" >Remember Me</p>
+          <article id="saveLoginInfo">
+            <section className="indivRadioBtn">
+              <label className="newUserRadioLabel">Yes</label>
+              <input className="existingUserRadio" type="radio" id="option1" checked={this.state.saveLogin === "option1"} onChange={() => this.toggleLogin()}></input>
+            </section>
+            <section className="indivRadioBtn">
+              <label className="newUserRadioLabel">No</label>
+              <input className="existingUserRadio" type="radio" id="option2" checked={this.state.saveLogin === "option2"} onChange={() => this.toggleLogin()}></input>
+            </section>
+          </article>
+          <article id="loginNavButtonContainer">
+            <button value="Log In" onClick={this.authenticateUser} className="loginNavButton">Log In</button>
+            <button value="New User" onClick={this.newUserForm} className="loginNavButton">Create New Account</button>
+          </article>
+        </div>
+      )
+    } else {
       return (
         <div id="existingUserForm">
           <section id="logoContainer">
@@ -109,6 +173,17 @@ export default class LoginMain extends Component {
             <input name="password" ref={(userInput) => this.password =
               userInput} className="newUserInput" placeholder="Enter Password"></input>
           </section>
+          <p id="saveLoginInfoLabel" >Remember Me</p>
+          <article id="saveLoginInfo">
+            <section className="indivRadioBtn">
+              <label className="newUserRadioLabel">Yes</label>
+              <input className="existingUserRadio" type="radio" id="option1" checked={this.state.saveLogin === "option1"} onChange={() => this.toggleLogin()}></input>
+            </section>
+            <section className="indivRadioBtn">
+              <label className="newUserRadioLabel">No</label>
+              <input className="existingUserRadio" type="radio" id="option2" checked={this.state.saveLogin === "option2"} onChange={() => this.toggleLogin()}></input>
+            </section>
+          </article>
           <article id="loginNavButtonContainer">
             <button value="Log In" onClick={this.authenticateUser} className="loginNavButton">Log In</button>
             <button value="New User" onClick={this.newUserForm} className="loginNavButton">Create New Account</button>

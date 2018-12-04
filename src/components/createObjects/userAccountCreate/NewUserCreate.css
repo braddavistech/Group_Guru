@@ -9,10 +9,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-#newUserForm {
+#newUserFormPage1 {
   position: fixed;
   padding: 2%;
-  top: 125px;
+  top: 45px;
   width: 85%;
   margin-left: 7.5%;
   display: inline-block;
@@ -87,16 +87,16 @@
   width: 100%;
   font-weight: bold;
 }
-#newUserBtn {
+#newUserBtnPage1 {
   width: 50%;
   max-width: 160px;
   border: 2px solid black;
   border-radius: 9px;
   font-weight: bold;
-  margin-bottom: 2vw;
+  margin-bottom: 10px;
 }
-.newUserDualButton {
-  margin-top: 5%;
+.newUserDualButtonPage1 {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 20px;
 }
