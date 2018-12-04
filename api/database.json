@@ -31,7 +31,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-21T04:02:37.606Z",
-      "lastLogin": "2018-12-04T07:36:32.654Z",
+      "lastLogin": "2018-12-04T09:39:30.050Z",
       "id": 2,
       "streetAdd": "1234 main",
       "city": "franklin",
@@ -2764,6 +2764,21 @@
       "date": "2018-12-04T07:36:32.654Z",
       "userId": 2,
       "id": 477
+    },
+    {
+      "date": "2018-12-04T09:37:02.722Z",
+      "userId": 4,
+      "id": 478
+    },
+    {
+      "date": "2018-12-04T09:37:15.090Z",
+      "userId": 2,
+      "id": 479
+    },
+    {
+      "date": "2018-12-04T09:39:11.904Z",
+      "userId": 2,
+      "id": 480
     }
   ]
 }
