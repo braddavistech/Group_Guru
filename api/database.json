@@ -11,7 +11,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-12-05T14:20:32.126Z",
+      "lastLogin": "2018-12-05T17:18:27.623Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -43,61 +43,61 @@
       "deleted": false
     },
     {
-      "firstName": "Brad",
+      "firstName": "Deanna",
       "lastName": "Davis",
-      "email": "bad3y@mtsu.edu",
-      "username": "Brad MTSU",
+      "email": "none@none.com",
+      "username": "Deanna1",
       "password": "testing",
       "securityQuestionId": 2,
       "securityAnswer": "Spike",
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-26T10:25:13.510Z",
-      "lastLogin": "2018-12-04T00:10:46.591Z",
+      "lastLogin": "2018-12-05T17:19:55.407Z",
       "id": 3,
-      "streetAdd": "No Information Provided",
-      "city": "No Information Provided",
-      "stateId": "No Information Provided",
-      "zip": "No Information Provided",
-      "phone": "No Information Provided",
-      "preferredContact": "No Information Provided",
+      "streetAdd": "1445 Bern Dr",
+      "city": "Spring Hill",
+      "stateId": "TN",
+      "zip": "37174",
+      "phone": "615-423-4972",
+      "preferredContact": "None",
       "deleted": false
     },
     {
-      "firstName": "test",
-      "lastName": "test",
+      "firstName": "Pate",
+      "lastName": "Langley",
       "email": "test@test.com",
-      "username": "testing",
+      "username": "PateTheGreat",
       "password": "Account Deleted",
       "securityQuestionId": 0,
       "securityAnswer": "Account Deleted",
       "groupId": 0,
       "inGroup": false,
       "accountCreationDate": "2018-12-05T13:54:08.619Z",
-      "lastLogin": "2018-12-05T14:56:03.014Z",
+      "lastLogin": "2018-12-05T15:26:10.289Z",
       "id": 4,
-      "streetAdd": "No Information Provided",
-      "city": "No Information Provided",
-      "stateId": "No Information Provided",
-      "zip": "No Information Provided",
-      "phone": "No Information Provided",
-      "preferredContact": "No Information Provided",
+      "streetAdd": "1026 Shannon Lane",
+      "city": "Franklin",
+      "stateId": "TN",
+      "zip": "37064",
+      "phone": "615-794-6917",
+      "preferredContact": "Phone",
       "deleted": true
     }
   ],
   "addedContacts": [
     {
-      "firstName": "test",
-      "lastName": "test",
+      "firstName": "Pate",
+      "lastName": "Langley",
       "email": "test@test.com",
-      "username": "testing",
+      "username": "PateTheGreat",
       "groupId": 2,
-      "streetAdd": "No Information Provided",
-      "city": "No Information Provided",
-      "stateId": "No Information Provided",
-      "zip": "No Information Provided",
-      "phone": "No Information Provided",
-      "preferredContact": "No Information Provided",
+      "streetAdd": "1026 Shannon Lane",
+      "city": "Franklin",
+      "stateId": "TN",
+      "zip": "37064",
+      "phone": "615-794-6917",
+      "preferredContact": "Phone",
       "id": 1
     }
   ],
@@ -2922,6 +2922,36 @@
       "date": "2018-12-05T14:56:03.014Z",
       "userId": 4,
       "id": 501
+    },
+    {
+      "date": "2018-12-05T15:25:38.941Z",
+      "userId": 4,
+      "id": 502
+    },
+    {
+      "date": "2018-12-05T15:26:10.289Z",
+      "userId": 4,
+      "id": 503
+    },
+    {
+      "date": "2018-12-05T15:30:30.258Z",
+      "userId": 1,
+      "id": 504
+    },
+    {
+      "date": "2018-12-05T17:18:46.121Z",
+      "userId": 3,
+      "id": 505
+    },
+    {
+      "date": "2018-12-05T17:19:28.618Z",
+      "userId": 3,
+      "id": 506
+    },
+    {
+      "date": "2018-12-05T17:19:55.407Z",
+      "userId": 3,
+      "id": 507
     }
   ]
 }
