@@ -21,7 +21,7 @@ export default class CreateNewUser extends Component {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
         email: this.email.value,
-        emailSecondary: "None Provided",
+        emailSecondary: this.emailSecondary.value,
         username: this.username.value,
         password: this.password.value,
         securityQuestionId: this.state.securityQuestionId,
@@ -53,6 +53,9 @@ export default class CreateNewUser extends Component {
     } else if (testing.emailAndUsernameValidation(temp.email) === false) {
       $("#emailValidAlert").show();
       errorFound = true;
+    }
+    if (temp.emailSecondary === "" || !testing.emailAndUsernameValidation(temp.emailSecondary)) {
+      temp.emailSecondary = "None Provided"
     }
     if (temp.username === "") {
       $("#usernameMissingAlert").show();
@@ -129,6 +132,11 @@ export default class CreateNewUser extends Component {
             <label htmlFor="email" className="newUserLabel">Primary Email<p id="emailMissingAlert" className="alert hide">You must enter your email address.</p><p id="emailValidAlert" className="alert hide">You must enter a valid email address. Please try again.</p><p id="emailDupAlert" className="alert hide">This email address is already registered. Please try again.</p></label>
             <input name="email" ref={(userInput) => this.email =
               userInput} className="newUserInput" placeholder="Enter Email Address"></input>
+          </section>
+          <section className="newUserInputSection">
+            <label htmlFor="emailSecondary" className="newUserLabel">Alternate Email</label>
+            <input name="emailSecondary" ref={(userInput) => this.emailSecondary =
+              userInput} className="newUserInput" placeholder="Enter Alternate Email Address"></input>
           </section>
           <section className="newUserInputSection">
             <label htmlFor="username" className="newUserLabel">Username<p id="usernameMissingAlert" className="alert hide">You must enter a username.</p><p id="usernameLengthAlert" className="alert hide">Your username must be between 6 and 15 characters. Please try again.</p><p id="usernameValidAlert" className="alert hide">The username you entered is not valid in a valid format. Please try again.</p><p id="usernameDupAlert" className="alert hide">This username is already registered. Please try again.</p></label>
