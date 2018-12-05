@@ -29,13 +29,19 @@
   display: flex;
   margin: 3px;
 }
+.addressBookSectionEmail {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3px;
+}
 .addressFullLine {
   font-weight: bold;
-  width: 40%;
+  width: 60%;
   margin-bottom: 0px;
 }
 .memberLastOnline {
   font-weight: bold;
+  margin-bottom: 0px;
   padding-left: 7px;
   padding-right: 7px;
   border-radius: 10px;
@@ -151,4 +157,20 @@
   border: 2px solid;
   cursor: pointer;
   text-decoration: none;
+}
+.editOtherUserInputSection {
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  background-color: lightgray;
+
+}
+.editOtherUserInfo {
+  width: 100%;
+  line-height: 1;
+  margin-bottom: 0px;
+  font-weight: bold;
+  font-size: var(--newUser--label-text);
+  color: var(--label--form-text);
 }
