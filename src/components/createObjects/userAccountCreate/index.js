@@ -30,7 +30,8 @@ export default class CreateNewUser extends Component {
         inGroup: false,
         accountCreationDate: date,
         lastLogin: date,
-        deleted: false
+        deleted: false,
+        type: "user"
       }
       this.checkAndSave(temp);
     } else { $("#passwordMatchAlert").show() }

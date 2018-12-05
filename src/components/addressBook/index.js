@@ -48,18 +48,27 @@ export default class AddressBook extends Component {
       phone: this.state.phone,
     }
     let member = this.props.user.main.groupMembers.find(user => user.id === this.state.id)
-    if (newData.emailSecondary === "" || !testing.emailAndUsernameValidation(newData.emailSecondary)) { newData.emailSecondary = member.emailSecondary }
-    if (newData.emailSecondary !== member.emailSecondary && !newData.emailSecondary.includes("modified")) { newData.emailSecondary += " (modified)" }
+    if (newData.emailSecondary === "") { newData.emailSecondary = member.emailSecondary }
+    let tempCheckEmail = newData.emailSecondary;
+    if (tempCheckEmail.includes("(modified")) {
+      tempCheckEmail = tempCheckEmail.split(" ");
+      console.log("tempCheckEmail", tempCheckEmail[0])
+      if (testing.emailAndUsernameValidation(tempCheckEmail[0])) { newData.emailSecondary = tempCheckEmail[0] }
+      else { newData.emailSecondary = member.emailSecondary };
+    } else if (!testing.emailAndUsernameValidation(newData.emailSecondary)) {
+      newData.emailSecondary = member.emailSecondary
+    }
+    if (newData.emailSecondary !== member.emailSecondary && !newData.emailSecondary.includes("(modified)")) { newData.emailSecondary = `${newData.emailSecondary} (modified)` }
     if (newData.streetAdd === "") { newData.streetAdd = member.streetAdd }
-    if (newData.streetAdd !== member.streetAdd && !newData.streetAdd.includes("modified")) { newData.streetAdd += " (modified)" }
+    if (newData.streetAdd !== member.streetAdd && !newData.streetAdd.includes("(modified)")) { newData.streetAdd = `${newData.streetAdd} (modified)` }
     if (newData.city === "") { newData.city = member.city }
-    if (newData.city !== member.city && !newData.city.includes("modified")) { newData.city += " (modified)" }
+    if (newData.city !== member.city && !newData.city.includes("(modified)")) { newData.city = `${newData.city} (modified)` }
     if (newData.stateId === "") { newData.stateId = member.stateId }
-    if (newData.stateId !== member.stateId && !newData.stateId.includes("modified")) { newData.stateId += " (modified)" }
+    if (newData.stateId !== member.stateId && !newData.stateId.includes("(modified)")) { newData.stateId = `${newData.stateId} (modified)` }
     if (newData.zip === "") { newData.zip = member.zip }
-    if (newData.zip !== member.zip && !newData.zip.includes("modified")) { newData.zip += " (modified)" }
+    if (newData.zip !== member.zip && !newData.zip.includes("(modified)")) { newData.zip = `${newData.zip} (modified)` }
     if (newData.phone === "") { newData.phone = member.phone }
-    if (newData.phone !== member.phone && !newData.phone.includes("modified")) { newData.phone += " (modified)" }
+    if (newData.phone !== member.phone && !newData.phone.includes("(modified)")) { newData.phone = `${newData.phone} (modified)` }
     apiData.updateItem("users", member.id, newData)
       .then(() => {
         this.props.user.refresh()
@@ -67,6 +76,39 @@ export default class AddressBook extends Component {
       })
   }
 
+  saveNewContact = () => {
+    let canSave = true;
+    let newData = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      emailSecondary: this.state.emailSecondary,
+      streetAdd: this.state.streetAdd,
+      city: this.state.city,
+      stateId: this.state.stateId,
+      zip: this.state.zip,
+      phone: this.state.phone,
+      type: "contact"
+    }
+    if (newData.firstName === "") { newData.firstName = "None Provided" }
+    if (newData.lastName === "") { newData.lastName = "None Provided" }
+    if (newData.email === "") { newData.email = "None Provided" }
+    if (newData.emailSecondary === "") { newData.emailSecondary = "None Provided" }
+    if (newData.streetAdd === "") { newData.streetAdd = "None Provided" }
+    if (newData.city === "") { newData.city = "None Provided" }
+    if (newData.stateId === "") { newData.stateId = "None Provided" }
+    if (newData.zip === "") { newData.zip = "None Provided" }
+    if (newData.phone === "") { newData.phone = "None Provided" }
+    if (newData.lastName === "None Provided" && newData.firstName === "None Provided") { canSave = false; }
+    if (newData.email === "None Provided" && newData.phone === "None Provided" && newData.streetAdd === "None Provided") { canSave = false }
+    if (canSave) {
+      apiData.newDataPost(newData, "addedContacts")
+        .then(() => {
+          this.props.user.refresh()
+          this.clearState();
+        })
+    }
+  }
 
   saveEdits = () => {
     let newData = {
@@ -203,9 +245,68 @@ export default class AddressBook extends Component {
     })
   }
 
+  addNewContact = () => {
+    this.addBlur();
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="editUserAlert">
+            <h1 id="messageEditTitle">Add New Contact</h1>
+            <section className="editUserInputSection">
+              <label htmlFor="firstName" className="editUserLabel">First Name</label>
+              <input name="firstName" className="editUserInput" onChange={this.handleChange} placeholder="Enter first name."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="lastName" className="editUserLabel">Last Name</label>
+              <input name="lastName" className="editUserInput" onChange={this.handleChange} placeholder="Enter last name."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="email" className="editUserLabel">Primary Email</label>
+              <input name="email" className="editUserInput" onChange={this.handleChange} placeholder="Enter primary email."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="emailSecondary" className="editUserLabel">Secondary Email</label>
+              <input name="emailSecondary" className="editUserInput" onChange={this.handleChange} placeholder="Enter an alternate email address."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="streetAdd" className="editUserLabel">Address</label>
+              <input name="streetAdd" className="editUserInput" onChange={this.handleChange} placeholder="Enter the street address."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="city" className="editUserLabel">City</label>
+              <input name="city" className="editUserInput" onChange={this.handleChange} placeholder="Enter the city."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="stateId" className="editUserLabel">State</label>
+              <input name="stateId" className="editUserInput" onChange={this.handleChange} placeholder="Enter the state."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="zip" className="editUserLabel">Zip</label>
+              <input name="zip" className="editUserInput" onChange={this.handleChange} placeholder="Enter the zip code."></input>
+            </section>
+            <section className="editUserInputSection">
+              <label htmlFor="phone" className="editUserLabel">Phone</label>
+              <input name="phone" className="editUserInput" onChange={this.handleChange} placeholder="Enter the phone number."></input>
+            </section>
+            <div id="editInfoBtnSection">
+              <button className="editInfoBtn" onClick={() => {
+                this.clearBlur();
+                this.clearState();
+                onClose()
+              }}>Go Back</button>
+              <button className="editInfoBtn" onClick={() => {
+                this.clearBlur();
+                this.saveNewContact();
+                onClose()
+              }}>Save Changes</button>
+            </div>
+          </div>
+        )
+      }
+    })
+  }
 
   editOtherUser = (member) => {
-    console.log("edit other user function check: ", member)
     this.setState(member, () => {
       this.addBlur();
       confirmAlert({
@@ -264,13 +365,14 @@ export default class AddressBook extends Component {
   printMembers = () => {
     let currentUser = parseInt(sessionStorage.getItem("currentUserId"))
     return this.props.user.main.groupMembers.map(member => {
-      let emailSecondary = <React.Fragment></React.Fragment>
+      let emailSecondaryTemp = <React.Fragment></React.Fragment>
       if (member.emailSecondary !== "None Provided") {
         if (member.emailSecondary.includes("modified")) {
-          member.emailSecondary = member.emailSecondary.split(" ");
-          emailSecondary = <a href={`mailto:${member.emailSecondary[0]}`} className="addressEmailLink">Email {member.emailSecondary[0]}</a>
+          emailSecondaryTemp = member.emailSecondary;
+          emailSecondaryTemp = member.emailSecondary.split(" ");
+          emailSecondaryTemp = <a href={`mailto:${emailSecondaryTemp[0]}`} className="addressEmailLink">Email {emailSecondaryTemp[0]}</a>
         } else {
-          emailSecondary = <a href={`mailto:${member.emailSecondary}`} className="addressEmailLink">Email {member.emailSecondary}</a>
+          emailSecondaryTemp = <a href={`mailto:${member.emailSecondary}`} className="addressEmailLink">Email {member.emailSecondary}</a>
         }
       }
       if (currentUser !== member.id) {
@@ -298,7 +400,7 @@ export default class AddressBook extends Component {
             </section>
             <section className="addressBookSectionEmail">
               <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
-              {emailSecondary}
+              {emailSecondaryTemp}
             </section>
             <p className="addressJoinedGroupGuru">Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
             <section className="addressBookSectionBtns">
@@ -331,7 +433,7 @@ export default class AddressBook extends Component {
             </section>
             <section className="addressBookSectionEmail">
               <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
-              {emailSecondary}
+              {emailSecondaryTemp}
             </section>
             <p className="addressJoinedGroupGuru">You Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
             <section className="addressBookSectionBtns">
@@ -357,7 +459,9 @@ export default class AddressBook extends Component {
     } else {
       return (
         <div id="addressBookContainer">
-          <p id="mainAddressBookTitle">Address Book</p>
+          <p id="mainAddressBookTitle">Address Book
+          <button id="addContactBtn" onClick={this.addNewContact}>Add Contact</button>
+          </p>
           <div id="allUserCards">
             {printMembers}
           </div>
