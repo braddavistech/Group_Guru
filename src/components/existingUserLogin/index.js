@@ -10,7 +10,15 @@ export default class LoginMain extends Component {
   state = {
     loggedIn: false,
     newUser: false,
+    forgotPassword: false,
     saveLogin: "option2"
+  }
+
+  componentDidMount = () => {
+    let storedUser = localStorage.getItem("passwordUsername");
+    if (storedUser !== null) {
+      this.setState({saveLogin: "option1"})
+    }
   }
 
   toggleLogin = () => {
@@ -20,6 +28,15 @@ export default class LoginMain extends Component {
       this.setState({ saveLogin: "option2" });
       localStorage.removeItem("passwordUsername");
     }
+  }
+
+  forgotPassword = () => {
+    localStorage.removeItem("passwordUsername")
+    this.setState({forgotPassword: true})
+  }
+
+  loginForm = () => {
+    this.setState({forgotPassword: false})
   }
 
   authenticateUser = () => {
@@ -38,7 +55,6 @@ export default class LoginMain extends Component {
           $("#noEmailFoundAlert").show();
         } else if (email[0].password === temp.password) {
           if (this.state.saveLogin === "option1") {
-            console.log("save:", temp.usernameOrEmail)
             localStorage.setItem("passwordUsername", temp.usernameOrEmail)
           }
           sessionStorage.setItem("currentUserId", email[0].id);
@@ -63,7 +79,6 @@ export default class LoginMain extends Component {
           $("#noUsernameFoundAlert").show();
         } else if (username[0].password === temp.password) {
           if (this.state.saveLogin === "option1") {
-            console.log("save:", temp.usernameOrEmail)
             localStorage.setItem("passwordUsername", temp.usernameOrEmail)
           }
           sessionStorage.setItem("currentUserId", username[0].id);
@@ -98,8 +113,10 @@ export default class LoginMain extends Component {
     let storedUser = localStorage.getItem("passwordUsername");
     if (this.props.user.main.loggedIn) {
       return <Redirect to="/" />
-    } else if (this.props.user.newUser) {
+    } else if (this.state.newUser) {
       return <Redirect to="/newUser" />
+    } else if (this.state.forgotPassword) {
+      return <Redirect to="/forgotPassword" login={this.loginForm} user={this.props.user} />
     } else if (storedUser !== undefined) {
       return (
         <div id="existingUserForm">
@@ -143,6 +160,7 @@ export default class LoginMain extends Component {
             <button value="Log In" onClick={this.authenticateUser} className="loginNavButton">Log In</button>
             <button value="New User" onClick={this.newUserForm} className="loginNavButton">Create New Account</button>
           </article>
+          <p className="forgotPassword" onClick={this.forgotPassword}>Forgot Password?</p>
         </div>
       )
     } else {
@@ -188,6 +206,7 @@ export default class LoginMain extends Component {
             <button value="Log In" onClick={this.authenticateUser} className="loginNavButton">Log In</button>
             <button value="New User" onClick={this.newUserForm} className="loginNavButton">Create New Account</button>
           </article>
+          <p className="forgotPassword" onClick={this.forgotPassword}>Forgot Password?</p>
         </div>
       )
     }

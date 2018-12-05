@@ -28,7 +28,6 @@ export default class NewPhotoModular extends Component {
         </section>
         <section className="imageInputContainer">
           <label className="newImageLabel" htmlFor="newImageBody">Image URL</label>
-          <p className="alert">Required Field</p>
           <input className="newImageInput" type="text" name="newImageBody" defaultValue={this.state.webAddress} onChange={this.handleChange} id="webAddress" placeholder="Enter The Address Of The Image"></input>
         </section>
         <section className="imageInputContainer">

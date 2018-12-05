@@ -147,7 +147,7 @@
   border-radius: 10px;
   position: relative;
   top: 55px;
-  z-index: 2;
+  z-index: 1031;
 }
 #logoForLoginAlert {
   width: 100px;

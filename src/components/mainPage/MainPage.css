@@ -118,7 +118,7 @@
   background-color: white;
   width: 70%;
   min-height: 400px;
-  max-height: 600px;
+  max-height: 680px;
   padding: 15px;
   border: 5px solid;
   text-align: center;
@@ -297,4 +297,31 @@
   margin-left: 8px;
   padding-bottom: 4px;
   cursor: pointer;
+}
+#newPhotoPreview {
+  vertical-align: middle;
+  border-style: none;
+  max-width: 80%;
+  max-height: 420px;
+}
+
+#deleteUserInputDiv {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+#deleteUserInstructions {
+  color: red;
+  font-size: 26px;
+  font-weight: bold;
+}
+#deleteUserInput {
+  text-align: center;
+  font-weight: bold;
+  background-color:rgb(233, 78, 78);
+  color: white;
+}
+#deleteUserInput::placeholder {
+  color: white;
+  font-size: 15px;
 }

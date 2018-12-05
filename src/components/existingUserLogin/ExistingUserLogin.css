@@ -1,7 +1,7 @@
 #existingUserForm {
   position: fixed;
   padding: 2%;
-  top: 125px;
+  top: 100px;
   width: 85%;
   margin-left: 7.5%;
   display: inline-block;
@@ -12,7 +12,7 @@
   margin-bottom: 3%;
 }
 #logoForLogin {
-  width: 25%;
+  width: 15%;
   display: inline-flex;
   margin-left: 2.5%;
   margin-right: 2.5%;
@@ -26,14 +26,14 @@
 }
 #welcome {
   margin: 0;
-  font-size: calc(10px + 9vw);
+  font-size: 80px;
   font-weight: bold;
   line-height: 1;
   text-align: center;
 }
 #to {
   margin: 0;
-  font-size: calc(10px + 4vw);
+  font-size: 40px;
   line-height: 1;
 }
 #loginNavButtonContainer{
@@ -85,4 +85,12 @@
 }
 .existingUserRadio {
   align-self: center;
+}
+.forgotPassword {
+  font-weight: bold;
+  margin: 0px;
+  margin-top: 10px;
+  text-align: center;
+  color: var(--label--form-text);
+  cursor: pointer;
 }

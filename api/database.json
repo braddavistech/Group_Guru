@@ -5,20 +5,21 @@
       "lastName": "Davis",
       "email": "brad@braddavistech.com",
       "username": "braddavistech",
-      "password": "123456",
+      "password": "testing",
       "securityQuestionId": 1,
       "securityAnswer": "hello",
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-12-03T23:06:30.118Z",
+      "lastLogin": "2018-12-05T14:20:32.126Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
       "stateId": "TN",
       "zip": "37174",
       "phone": "615-423-4972",
-      "preferredContact": "Email"
+      "preferredContact": "Email",
+      "deleted": false
     },
     {
       "firstName": "Brad",
@@ -31,14 +32,15 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-21T04:02:37.606Z",
-      "lastLogin": "2018-12-04T13:34:06.002Z",
+      "lastLogin": "2018-12-05T10:19:21.149Z",
       "id": 2,
       "streetAdd": "1234 main",
       "city": "franklin",
       "stateId": "tn",
       "zip": "37174",
       "phone": "6154765238",
-      "preferredContact": "Email"
+      "preferredContact": "Email",
+      "deleted": false
     },
     {
       "firstName": "Brad",
@@ -58,7 +60,45 @@
       "stateId": "No Information Provided",
       "zip": "No Information Provided",
       "phone": "No Information Provided",
-      "preferredContact": "No Information Provided"
+      "preferredContact": "No Information Provided",
+      "deleted": false
+    },
+    {
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@test.com",
+      "username": "testing",
+      "password": "Account Deleted",
+      "securityQuestionId": 0,
+      "securityAnswer": "Account Deleted",
+      "groupId": 0,
+      "inGroup": false,
+      "accountCreationDate": "2018-12-05T13:54:08.619Z",
+      "lastLogin": "2018-12-05T14:56:03.014Z",
+      "id": 4,
+      "streetAdd": "No Information Provided",
+      "city": "No Information Provided",
+      "stateId": "No Information Provided",
+      "zip": "No Information Provided",
+      "phone": "No Information Provided",
+      "preferredContact": "No Information Provided",
+      "deleted": true
+    }
+  ],
+  "addedContacts": [
+    {
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@test.com",
+      "username": "testing",
+      "groupId": 2,
+      "streetAdd": "No Information Provided",
+      "city": "No Information Provided",
+      "stateId": "No Information Provided",
+      "zip": "No Information Provided",
+      "phone": "No Information Provided",
+      "preferredContact": "No Information Provided",
+      "id": 1
     }
   ],
   "groups": [
@@ -106,7 +146,8 @@
       "webAddress": "https://media.licdn.com/dms/image/C4E03AQEzrd99IwJVfg/profile-displayphoto-shrink_200_200/0?e=1548892800&v=beta&t=S8XAM52m9XvFHOCX-4HH1tvZhnswmtkRF4Z16S5pxY8",
       "userId": 1,
       "groupId": 2,
-      "id": 1
+      "id": 1,
+      "description": "Image that was created for my personal website."
     },
     {
       "addedDate": "2018-11-26T20:17:01.235Z",
@@ -114,7 +155,8 @@
       "webAddress": "https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/27459633_10215237693965563_3314077277720055324_n.jpg?_nc_cat=103&_nc_ht=scontent-atl3-1.xx&oh=11405cbb8dc8735db80062f9d58bbe2a&oe=5CB15A34",
       "userId": 1,
       "groupId": 2,
-      "id": 2
+      "id": 2,
+      "description": "A picture of the group that attended KB's ordination service on Death Row."
     },
     {
       "addedDate": "2018-11-26T20:27:22.456Z",
@@ -122,7 +164,8 @@
       "webAddress": "https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/35439082_10211866898687465_407447540028407808_n.jpg?_nc_cat=107&_nc_ht=scontent-atl3-1.xx&oh=57628ee1b4fda4c9edfa86d6255881f1&oe=5C73EAC4",
       "userId": 1,
       "groupId": 2,
-      "id": 3
+      "id": 3,
+      "description": "Church service on Sunday morning. We had the opportunity to work at this church later in the week."
     },
     {
       "addedDate": "2018-11-26T20:29:16.754Z",
@@ -130,7 +173,8 @@
       "webAddress": "https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/35777185_10211693087697988_6233206188947800064_o.jpg?_nc_cat=104&_nc_ht=scontent-atl3-1.xx&oh=cf47e9397134e457ad0cff2dc7733430&oe=5C6C6412",
       "userId": 1,
       "groupId": 2,
-      "id": 4
+      "id": 4,
+      "description": "This was a photo taken at a park overlooking the city with a huge rainstorm coming in."
     },
     {
       "addedDate": "2018-11-26T20:31:43.393Z",
@@ -138,7 +182,8 @@
       "webAddress": "https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/36223006_10211722628596492_5254918522747748352_o.jpg?_nc_cat=101&_nc_ht=scontent-atl3-1.xx&oh=e8665c9e7baae68509de60c436d620b4&oe=5C798F55",
       "userId": 1,
       "groupId": 2,
-      "id": 5
+      "id": 5,
+      "description": "We went to a park on our way back to the mission house and were able to stand at the feet of Jesus."
     },
     {
       "addedDate": "2018-11-28T08:40:41.557Z",
@@ -273,6 +318,14 @@
       "userId": 3,
       "groupId": 2,
       "id": 14
+    },
+    {
+      "messageDate": "2018-12-05T14:31:11.854Z",
+      "messageTitle": "Testing the delete ",
+      "messageBody": "Hopefully this will change how data is deleted.",
+      "userId": 4,
+      "groupId": 2,
+      "id": 15
     }
   ],
   "events": [
@@ -2701,11 +2754,6 @@
       "id": 464
     },
     {
-      "date": "2018-12-03T23:12:38.234Z",
-      "userId": 4,
-      "id": 465
-    },
-    {
       "date": "2018-12-03T23:52:56.339Z",
       "userId": 2,
       "id": 466
@@ -2766,11 +2814,6 @@
       "id": 477
     },
     {
-      "date": "2018-12-04T09:37:02.722Z",
-      "userId": 4,
-      "id": 478
-    },
-    {
       "date": "2018-12-04T09:37:15.090Z",
       "userId": 2,
       "id": 479
@@ -2794,6 +2837,91 @@
       "date": "2018-12-04T11:31:08.641Z",
       "userId": 2,
       "id": 483
+    },
+    {
+      "date": "2018-12-04T17:39:33.873Z",
+      "userId": 2,
+      "id": 484
+    },
+    {
+      "date": "2018-12-04T17:51:52.793Z",
+      "userId": 1,
+      "id": 485
+    },
+    {
+      "date": "2018-12-05T09:28:58.278Z",
+      "userId": 1,
+      "id": 486
+    },
+    {
+      "date": "2018-12-05T10:15:25.213Z",
+      "userId": 1,
+      "id": 487
+    },
+    {
+      "date": "2018-12-05T10:17:00.935Z",
+      "userId": 1,
+      "id": 488
+    },
+    {
+      "date": "2018-12-05T10:17:42.207Z",
+      "userId": 1,
+      "id": 489
+    },
+    {
+      "date": "2018-12-05T10:17:50.704Z",
+      "userId": 1,
+      "id": 490
+    },
+    {
+      "date": "2018-12-05T10:18:40.554Z",
+      "userId": 2,
+      "id": 491
+    },
+    {
+      "date": "2018-12-05T10:19:11.927Z",
+      "userId": 2,
+      "id": 492
+    },
+    {
+      "date": "2018-12-05T10:20:18.143Z",
+      "userId": 1,
+      "id": 493
+    },
+    {
+      "date": "2018-12-05T12:45:50.876Z",
+      "userId": 1,
+      "id": 495
+    },
+    {
+      "date": "2018-12-05T13:11:13.793Z",
+      "userId": 1,
+      "id": 496
+    },
+    {
+      "date": "2018-12-05T13:54:08.645Z",
+      "userId": 4,
+      "id": 497
+    },
+    {
+      "date": "2018-12-05T14:17:51.229Z",
+      "userId": 1,
+      "id": 498
+    },
+    {
+      "date": "2018-12-05T14:20:42.571Z",
+      "userId": 4,
+      "id": 499
+    },
+    {
+      "date": "2018-12-05T14:30:47.627Z",
+      "userId": 4,
+      "id": 500
+    },
+    {
+      "date": "2018-12-05T14:56:03.014Z",
+      "userId": 4,
+      "id": 501
     }
   ]
 }
