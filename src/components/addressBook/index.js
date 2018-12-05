@@ -76,6 +76,10 @@ export default class AddressBook extends Component {
       })
   }
 
+  editContactInfo = (contact) => {
+    console.log("contactInfo function", contact)
+  }
+
   saveNewContact = () => {
     let canSave = true;
     let newData = {
@@ -88,7 +92,8 @@ export default class AddressBook extends Component {
       stateId: this.state.stateId,
       zip: this.state.zip,
       phone: this.state.phone,
-      type: "contact"
+      type: "contact",
+      groupId: this.props.user.main.currentUser.groupId
     }
     if (newData.firstName === "") { newData.firstName = "None Provided" }
     if (newData.lastName === "") { newData.lastName = "None Provided" }
@@ -364,9 +369,19 @@ export default class AddressBook extends Component {
 
   printMembers = () => {
     let currentUser = parseInt(sessionStorage.getItem("currentUserId"))
-    return this.props.user.main.groupMembers.map(member => {
+    let allUsers = [];
+    this.props.user.main.groupMembers.forEach(member =>
+      allUsers.push(member))
+    this.props.user.main.groupContacts.forEach(member =>
+      allUsers.push(member))
+    if (allUsers.length > 1) {
+      allUsers.sort(function (a, b) {
+        return a.firstName.localeCompare(b.firstName);
+      });
+    }
+    return allUsers.map(member => {
       let emailSecondaryTemp = <React.Fragment></React.Fragment>
-      if (member.emailSecondary !== "None Provided") {
+      if (member.emailSecondary !== "None Provided" || member.emailSecondary !== undefined) {
         if (member.emailSecondary.includes("modified")) {
           emailSecondaryTemp = member.emailSecondary;
           emailSecondaryTemp = member.emailSecondary.split(" ");
@@ -374,50 +389,80 @@ export default class AddressBook extends Component {
         } else {
           emailSecondaryTemp = <a href={`mailto:${member.emailSecondary}`} className="addressEmailLink">Email {member.emailSecondary}</a>
         }
-      }
-      if (currentUser !== member.id) {
-        return (
-          <div className="userAddressCard" key={member.id}>
-            <section className="addressBookSection">
-              <p className="addressFullLine">{member.firstName} {member.lastName} - {member.username}</p>
-              <p className="memberLastOnline">Last online @ {moment(member.lastLogin).fromNow()}</p>
-            </section>
-            <section className="addressBookSection">
-              <p className="addressSectionLabel">Preferred Contact Method</p>
-              <p className="addressFullLine">{member.preferredContact}</p>
-            </section>
-            <section className="addressBookSection">
-              <p className="addressSectionLabel">Phone</p>
-              <p className="addressFullLine">{member.phone}</p>
-            </section>
-            <section className="addressBookSection">
-              <p className="addressSectionLabel">Address</p>
-              <p className="addressFullLine">{member.streetAdd}</p>
-            </section>
-            <section className="addressBookSection">
-              <p className="addressSectionLabel"></p>
-              <p className="addressFullLine">{member.city}, {member.stateId} {member.zip}</p>
-            </section>
-            <section className="addressBookSectionEmail">
-              <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
-              {emailSecondaryTemp}
-            </section>
-            <p className="addressJoinedGroupGuru">Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
-            <section className="addressBookSectionBtns">
-              <button className="addressIndivMemberBtn" value={member} onClick={() => this.editOtherUser(member)}>Edit Info</button>
-            </section>
-          </div>
-        )
+      if (member.type === "user") {
+        if (currentUser !== member.id) {
+          return (
+            <div className="userAddressCard" key={member.id}>
+              <section className="addressBookSection">
+                <p className="addressFullLine">{member.firstName} {member.lastName} - {member.username}</p>
+                <p className="memberLastOnline">Last online @ {moment(member.lastLogin).fromNow()}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Preferred Contact Method</p>
+                <p className="addressFullLine">{member.preferredContact}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Phone</p>
+                <p className="addressFullLine">{member.phone}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Address</p>
+                <p className="addressFullLine">{member.streetAdd}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel"></p>
+                <p className="addressFullLine">{member.city}, {member.stateId} {member.zip}</p>
+              </section>
+              <section className="addressBookSectionEmail">
+                <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
+                {emailSecondaryTemp}
+              </section>
+              <p className="addressJoinedGroupGuru">Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
+              <section className="addressBookSectionBtns">
+                <button className="addressIndivMemberBtn" value={member} onClick={() => this.editOtherUser(member)}>Edit Info</button>
+              </section>
+            </div>
+          )
+        } else {
+          return (
+            <div className="userAddressCard" key={member.id}>
+              <section className="addressBookSection">
+                <p className="addressFullLine">{member.firstName} {member.lastName} - {member.username}</p>
+                <p className="memberLastOnline">Your Information Card</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Preferred Contact Method</p>
+                <p className="addressFullLine">{member.preferredContact}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Phone</p>
+                <p className="addressFullLine">{member.phone}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel">Address</p>
+                <p className="addressFullLine">{member.streetAdd}</p>
+              </section>
+              <section className="addressBookSection">
+                <p className="addressSectionLabel"></p>
+                <p className="addressFullLine">{member.city}, {member.stateId} {member.zip}</p>
+              </section>
+              <section className="addressBookSectionEmail">
+                <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
+                {emailSecondaryTemp}
+              </section>
+              <p className="addressJoinedGroupGuru">You Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
+              <section className="addressBookSectionBtns">
+                <button className="addressIndivMemberBtn" value={member} onClick={() => this.editMyInfo(member)}>Edit My Info</button>
+              </section>
+            </div>
+          )
+        }
       } else {
         return (
-          <div className="userAddressCard" key={member.id}>
+          <div className="userAddressCard" key={member.id + "contact"}>
             <section className="addressBookSection">
-              <p className="addressFullLine">{member.firstName} {member.lastName} - {member.username}</p>
-              <p className="memberLastOnline">Your Information Card</p>
-            </section>
-            <section className="addressBookSection">
-              <p className="addressSectionLabel">Preferred Contact Method</p>
-              <p className="addressFullLine">{member.preferredContact}</p>
+              <p className="addressFullLine">{member.firstName} {member.lastName}</p>
+              <p className="memberLastOnline">Contact Card</p>
             </section>
             <section className="addressBookSection">
               <p className="addressSectionLabel">Phone</p>
@@ -435,15 +480,15 @@ export default class AddressBook extends Component {
               <a href={`mailto:${member.email}`} className="addressEmailLink">Email {member.email}</a>
               {emailSecondaryTemp}
             </section>
-            <p className="addressJoinedGroupGuru">You Joined Group Guru {moment(member.accountCreationDate).fromNow()}</p>
             <section className="addressBookSectionBtns">
-              <button className="addressIndivMemberBtn" value={member} onClick={() => this.editMyInfo(member)}>Edit My Info</button>
+              <button className="addressIndivMemberBtn" value={member} onClick={() => this.editContactInfo(member)}>Edit My Info</button>
             </section>
           </div>
         )
       }
-    })
-  }
+    }
+  })
+}
 
 
   render() {

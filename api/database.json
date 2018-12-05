@@ -12,7 +12,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-12-05T20:58:09.557Z",
+      "lastLogin": "2018-12-05T21:45:18.850Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -98,6 +98,7 @@
       "firstName": "Pate",
       "lastName": "Langley",
       "email": "test@test.com",
+      "emailSecondary": "None Provided",
       "username": "PateTheGreat",
       "groupId": 2,
       "streetAdd": "1026 Shannon Lane",
@@ -115,6 +116,7 @@
       "email": "government@tn.gov",
       "emailSecondary": "None Provided",
       "streetAdd": "None Provided",
+      "groupId": 2,
       "city": "Fairview",
       "stateId": "TN",
       "zip": "None Provided",
@@ -129,11 +131,26 @@
       "emailSecondary": "None Provided",
       "streetAdd": "3213 Santa Sofia Way",
       "city": "Spring Hill",
+      "groupId": 2,
       "stateId": "TN",
       "zip": "37174",
       "phone": "615-336-4865",
       "type": "contact",
       "id": 3
+    },
+    {
+      "firstName": "alan",
+      "lastName": "davis",
+      "email": "test@test.com",
+      "emailSecondary": "None Provided",
+      "streetAdd": "None Provided",
+      "city": "None Provided",
+      "stateId": "None Provided",
+      "zip": "None Provided",
+      "phone": "None Provided",
+      "type": "contact",
+      "groupId": 2,
+      "id": 4
     }
   ],
   "groups": [
@@ -3007,6 +3024,16 @@
       "date": "2018-12-05T20:58:09.557Z",
       "userId": 1,
       "id": 511
+    },
+    {
+      "date": "2018-12-05T21:44:42.926Z",
+      "userId": 1,
+      "id": 512
+    },
+    {
+      "date": "2018-12-05T21:45:18.850Z",
+      "userId": 1,
+      "id": 513
     }
   ]
 }
