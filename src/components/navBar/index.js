@@ -5,11 +5,28 @@ import apiData from "../../modules/APIcalls";
 import "./NavBar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import $ from "jquery";
+import { confirmAlert } from "react-confirm-alert";
 
 class NavBar extends Component {
   state = {
     loggedIn: false,
     profileLoaded: false
+  }
+
+  clearBlur = () => {
+    $(".navbar").removeClass("isBlurred");
+    $(".topLeft").removeClass("isBlurred");
+    $(".topRight").removeClass("isBlurred");
+    $(".middleRow").removeClass("isBlurred");
+    $(".alertBottom").removeClass("isBlurred");
+  }
+
+  addBlur = () => {
+    $(".navbar").addClass("isBlurred");
+    $(".topLeft").addClass("isBlurred");
+    $(".topRight").addClass("isBlurred");
+    $(".middleRow").addClass("isBlurred");
+    $(".alertBottom").addClass("isBlurred");
   }
 
   logOut = () => {
@@ -47,6 +64,47 @@ class NavBar extends Component {
     this.props.refresh()
   }
 
+  removeUser = () => {
+    let user = parseInt(sessionStorage.getItem("currentUserId"))
+    apiData.deleteItem("users", user).then (() => {
+      localStorage.removeItem("passwordUsername");
+      sessionStorage.removeItem("currentUserId");
+      sessionStorage.removeItem("lastLogin");
+      sessionStorage.removeItem("groupId");
+      sessionStorage.removeItem("inGroup");
+      this.props.openGroup();
+      this.setState({ currentUser: {}, profileLoaded: false})
+    })
+  }
+
+  deleteAccount = () => {
+    this.addBlur();
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="deleteAlert">
+            <img src="../../../groupGuruLogo.jpg" id="logoForLoginAlert" alt="Group Guru Logo" />
+            <div id="deleteTextDiv">
+              <h1 id="areYouSure">Are you sure?</h1>
+              <p id="deleteFile">This will permanently delete your account.</p>
+            </div>
+            <div id="deleteBtnSection">
+              <button className="deleteConfirmation" onClick={() => {
+                this.clearBlur();
+                onClose()
+              }}>No, Keep Account</button>
+              <button className="deleteConfirmation" onClick={() => {
+                this.removeUser();
+                this.clearBlur();
+                onClose()
+              }}>Yes, Delete Me</button>
+            </div>
+          </div>
+        )
+      }
+    })
+  }
+
   render() {
     if (this.props.loggedInStatus) {
       if (this.state.profileLoaded) {
@@ -71,6 +129,9 @@ class NavBar extends Component {
               <p className="navLinkP -toggle hide" >Edit Profile</p>
               <p className="navLinkP -toggle hide" >Settings Preferences</p>
               <Link className="navLink -toggle hide" id="logOutBtn" onClick={this.logOut} to="/">Log Out</Link>
+              <p className="navLinkP -toggle hide" onClick={() => {
+                $(".-toggle").hide();
+                this.deleteAccount()}} to="/">Delete Account</p>
             </section>
 
           </nav>

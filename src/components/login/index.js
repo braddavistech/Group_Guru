@@ -27,8 +27,8 @@ export default class LoginMain extends Component {
     if (this.state.newUser) {
       return <Redirect to="/newUser" />
     } else if (this.state.existingUser) {
-      return <Redirect to="/login" />
-    } else {
+      return <Redirect to="/login" forgotPassword={this.forgotPasswordForm}/>
+    }  else {
       return (
         <div id="newUserForm">
           <section id="logoContainer">

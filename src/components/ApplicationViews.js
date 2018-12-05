@@ -9,6 +9,8 @@ import ExistingUserLogin from "./existingUserLogin";
 import CreateNewGroup from "./createObjects/group";
 import JoinGroup from "./joinGroup";
 import AddressBook from "./addressBook";
+import ForgotPassword from "./forgotPassword";
+import CreatePassword from "./createPassword";
 
 
 export default class ApplicationViews extends Component {
@@ -28,6 +30,12 @@ export default class ApplicationViews extends Component {
           }} />
           <Route exact path="/login" render={(props) => {
             return <ExistingUserLogin user={this.props}/>
+          }} />
+          <Route exact path="/forgotPassword" render={(props) => {
+            return <ForgotPassword user={this.props}/>
+          }} />
+          <Route exact path="/createPassword" render={(props) => {
+            return <CreatePassword user={this.props}/>
           }} />
           <Route exact path="/createGroup" render={(props) => {
             return <CreateNewGroup loggedIn={this.props.loggedIn} refresh={this.props.refresh}/>
