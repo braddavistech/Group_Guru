@@ -21,6 +21,7 @@ export default class CreateNewUser extends Component {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
         email: this.email.value,
+        emailSecondary: "None Provided",
         username: this.username.value,
         password: this.password.value,
         securityQuestionId: this.state.securityQuestionId,
