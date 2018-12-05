@@ -85,6 +85,7 @@ export default class AddressBook extends Component {
     if (newData.firstName === "") { newData.firstName = this.props.user.main.currentUser.firstName }
     if (newData.lastName === "") { newData.lastName = this.props.user.main.currentUser.lastName }
     if (newData.email === "" || !testing.emailAndUsernameValidation(newData.email)) { newData.email = this.props.user.main.currentUser.email }
+    if (newData.emailSecondary === "" || !testing.emailAndUsernameValidation(newData.email)) { newData.emailSecondary = this.props.user.main.currentUser.emailSecondary }
     if (newData.username === "" || testing.emailAndUsernameValidation(newData.username) || newData.username.length < 6 || newData.username.length > 15) { newData.username = this.props.user.main.currentUser.username }
     if (newData.streetAdd === "") { newData.streetAdd = this.props.user.main.currentUser.streetAdd }
     if (newData.city === "") { newData.city = this.props.user.main.currentUser.city }
@@ -144,6 +145,10 @@ export default class AddressBook extends Component {
               <section className="editUserInputSection">
                 <label htmlFor="email" className="editUserLabel">Primary Email</label>
                 <input name="email" className="editUserInput" onChange={this.handleChange} defaultValue={this.state.email}></input>
+              </section>
+              <section className="editUserInputSection">
+                <label htmlFor="emailSecondary" className="editUserLabel">Secondary Email</label>
+                <input name="emailSecondary" className="editUserInput" onChange={this.handleChange} defaultValue={this.state.emailSecondary} placeholder="Enter an alternate email address."></input>
               </section>
               <section className="editUserInputSection">
                 <label htmlFor="username" className="editUserLabel">Username</label>
@@ -262,9 +267,7 @@ export default class AddressBook extends Component {
       let emailSecondary = <React.Fragment></React.Fragment>
       if (member.emailSecondary !== "None Provided") {
         if (member.emailSecondary.includes("modified")) {
-
           member.emailSecondary = member.emailSecondary.split(" ");
-          console.log(member.emailSecondary)
           emailSecondary = <a href={`mailto:${member.emailSecondary[0]}`} className="addressEmailLink">Email {member.emailSecondary[0]}</a>
         } else {
           emailSecondary = <a href={`mailto:${member.emailSecondary}`} className="addressEmailLink">Email {member.emailSecondary}</a>
