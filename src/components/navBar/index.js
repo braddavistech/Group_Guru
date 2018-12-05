@@ -10,7 +10,8 @@ import { confirmAlert } from "react-confirm-alert";
 class NavBar extends Component {
   state = {
     loggedIn: false,
-    profileLoaded: false
+    profileLoaded: false,
+    deleteText: ""
   }
 
   clearBlur = () => {
@@ -35,13 +36,13 @@ class NavBar extends Component {
     }
     let userId = sessionStorage.getItem("currentUserId");
     apiData.updateItem("users", userId, newLoginDate).then(() => {
-    this.props.logOut();
-    sessionStorage.removeItem("currentUserId");
-    sessionStorage.removeItem("lastLogin");
-    sessionStorage.removeItem("groupId");
-    sessionStorage.removeItem("inGroup");
-    this.props.openGroup();
-    this.setState({ currentUser: {}, profileLoaded: false})
+      this.props.logOut();
+      sessionStorage.removeItem("currentUserId");
+      sessionStorage.removeItem("lastLogin");
+      sessionStorage.removeItem("groupId");
+      sessionStorage.removeItem("inGroup");
+      this.props.openGroup();
+      this.setState({ currentUser: {}, profileLoaded: false })
     })
   }
 
@@ -65,16 +66,39 @@ class NavBar extends Component {
   }
 
   removeUser = () => {
-    let user = parseInt(sessionStorage.getItem("currentUserId"))
-    apiData.deleteItem("users", user).then (() => {
-      localStorage.removeItem("passwordUsername");
-      sessionStorage.removeItem("currentUserId");
-      sessionStorage.removeItem("lastLogin");
-      sessionStorage.removeItem("groupId");
-      sessionStorage.removeItem("inGroup");
-      this.props.openGroup();
-      this.setState({ currentUser: {}, profileLoaded: false})
-    })
+    if (this.state.deleteText === "DELETE") {
+      let user = parseInt(sessionStorage.getItem("currentUserId"))
+      apiData.getSingleType("users", `id=${user}`).then(data => {
+        data = data[0];
+        let contact = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          username: data.username,
+          groupId: data.groupId,
+          streetAdd: data.streetAdd,
+          city: data.city,
+          stateId: data.stateId,
+          zip: data.zip,
+          phone: data.phone,
+          preferredContact: data.preferredContact,
+        }
+        apiData.newDataPost(contact, "addedContacts")
+      })
+      apiData.updateItem("users", user, {deleted: true, groupId: 0, inGroup: false}).then(() => {
+        localStorage.removeItem("passwordUsername");
+        sessionStorage.removeItem("currentUserId");
+        sessionStorage.removeItem("lastLogin");
+        sessionStorage.removeItem("groupId");
+        sessionStorage.removeItem("inGroup");
+        this.props.openGroup();
+        this.setState({ currentUser: {}, deleteText: "", profileLoaded: false })
+      })
+    }
+  }
+
+  deleteInput = () => {
+    this.setState({ deleteText: this.delete.value })
   }
 
   deleteAccount = () => {
@@ -87,6 +111,10 @@ class NavBar extends Component {
             <div id="deleteTextDiv">
               <h1 id="areYouSure">Are you sure?</h1>
               <p id="deleteFile">This will permanently delete your account.</p>
+            </div>
+            <div id="deleteUserInputDiv">
+              {/* <h1 id="deleteUserInstructions">Type DELETE to delete account.</h1> */}
+              <input id="deleteUserInput" ref={input => this.delete = input} onChange={this.deleteInput} placeholder='Type "DELETE" to delete account.'></input>
             </div>
             <div id="deleteBtnSection">
               <button className="deleteConfirmation" onClick={() => {
@@ -112,7 +140,7 @@ class NavBar extends Component {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow">
             <ul className="nav nav-pills">
               <li className="nav-item">
-                <Link className="navLink" onClick={() => { this.goHome()}} to="/">Home</Link>
+                <Link className="navLink" onClick={() => { this.goHome() }} to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="navLink" onClick={() => { $(".-toggle").hide() }} to="/about">About</Link>
@@ -131,7 +159,8 @@ class NavBar extends Component {
               <Link className="navLink -toggle hide" id="logOutBtn" onClick={this.logOut} to="/">Log Out</Link>
               <p className="navLinkP -toggle hide" onClick={() => {
                 $(".-toggle").hide();
-                this.deleteAccount()}} to="/">Delete Account</p>
+                this.deleteAccount()
+              }} to="/">Delete Account</p>
             </section>
 
           </nav>
