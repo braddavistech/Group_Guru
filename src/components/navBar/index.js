@@ -85,7 +85,7 @@ class NavBar extends Component {
         }
         apiData.newDataPost(contact, "addedContacts")
       })
-      apiData.updateItem("users", user, {deleted: true, groupId: 0, inGroup: false}).then(() => {
+      apiData.updateItem("users", user, {deleted: true, groupId: 0, password: "Account Deleted", securityQuestionId: 0, securityAnswer: "Account Deleted", inGroup: false}).then(() => {
         localStorage.removeItem("passwordUsername");
         sessionStorage.removeItem("currentUserId");
         sessionStorage.removeItem("lastLogin");

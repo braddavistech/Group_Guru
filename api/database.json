@@ -68,13 +68,13 @@
       "lastName": "test",
       "email": "test@test.com",
       "username": "testing",
-      "password": "testing",
-      "securityQuestionId": 1,
-      "securityAnswer": "test",
+      "password": "Account Deleted",
+      "securityQuestionId": 0,
+      "securityAnswer": "Account Deleted",
       "groupId": 0,
       "inGroup": false,
       "accountCreationDate": "2018-12-05T13:54:08.619Z",
-      "lastLogin": "2018-12-05T14:30:47.627Z",
+      "lastLogin": "2018-12-05T14:56:03.014Z",
       "id": 4,
       "streetAdd": "No Information Provided",
       "city": "No Information Provided",
@@ -2917,6 +2917,11 @@
       "date": "2018-12-05T14:30:47.627Z",
       "userId": 4,
       "id": 500
+    },
+    {
+      "date": "2018-12-05T14:56:03.014Z",
+      "userId": 4,
+      "id": 501
     }
   ]
 }
