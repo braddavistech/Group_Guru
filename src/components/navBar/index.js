@@ -92,6 +92,7 @@ class NavBar extends Component {
         sessionStorage.removeItem("groupId");
         sessionStorage.removeItem("inGroup");
         this.props.openGroup();
+        this.props.stayAtMain();
         this.setState({ currentUser: {}, deleteText: "", profileLoaded: false })
       })
     }
