@@ -12,6 +12,11 @@
   margin-bottom: 0px;
   margin-top: 5px;
 }
+#addContactBtn {
+  color: var(--section--title-headers);
+  border: 3px solid var(--section--title-headers);
+  font-weight: bold
+}
 #allUserCards {
   height: 500px;
   overflow-y: hidden;

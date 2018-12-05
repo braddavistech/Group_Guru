@@ -82,6 +82,7 @@ class NavBar extends Component {
           zip: data.zip,
           phone: data.phone,
           preferredContact: data.preferredContact,
+          type: "contact"
         }
         apiData.newDataPost(contact, "addedContacts")
       })
