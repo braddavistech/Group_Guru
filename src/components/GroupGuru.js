@@ -89,6 +89,15 @@ class GroupGuru extends Component {
               this.setState({ groupMembers: members })
             })
           })
+          .then(() => {
+            apiData.getSingleType("addedContacts", `groupId=${newUser.groupId}`).then(members => {
+              let users = []
+              this.state.groupMembers.forEach(member => users.push(member))
+              members.forEach(member => users.push(member))
+              console.log("allUsers: ", users)
+              this.setState({ allUsers: users })
+            })
+          })
       })
   }
 
