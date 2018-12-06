@@ -12,7 +12,7 @@
       "groupId": 2,
       "inGroup": true,
       "accountCreationDate": "2018-11-18T01:02:37.606Z",
-      "lastLogin": "2018-12-05T21:45:18.850Z",
+      "lastLogin": "2018-12-05T23:53:59.336Z",
       "id": 1,
       "streetAdd": "1445 Bern Drive",
       "city": "Spring Hill",
@@ -139,18 +139,46 @@
       "id": 3
     },
     {
-      "firstName": "alan",
-      "lastName": "davis",
-      "email": "test@test.com",
+      "firstName": "Tracie",
+      "lastName": "Davis",
+      "email": "None Provided",
+      "emailSecondary": "None Provided",
+      "streetAdd": "3213 Santa Sofia Way",
+      "city": "Spring Hill",
+      "stateId": "TN",
+      "zip": "37174",
+      "phone": "6154818870",
+      "type": "contact",
+      "groupId": 2,
+      "id": 4
+    },
+    {
+      "firstName": "Jessica",
+      "lastName": "Davis",
+      "email": "jess_4811@yahoo.com",
+      "emailSecondary": "None Provided",
+      "streetAdd": "1445 Bern Drive",
+      "city": "Spring Hill",
+      "stateId": "TN",
+      "zip": "37174",
+      "phone": "615-594-1122",
+      "type": "contact",
+      "groupId": 2,
+      "id": 5
+    },
+    {
+      "firstName": "Kyle",
+      "lastName": "Davis",
+      "email": "None Provided",
       "emailSecondary": "None Provided",
       "streetAdd": "None Provided",
       "city": "None Provided",
       "stateId": "None Provided",
       "zip": "None Provided",
-      "phone": "None Provided",
+      "phone": "615-336-4883",
       "type": "contact",
       "groupId": 2,
-      "id": 4
+      "id": 6
     }
   ],
   "groups": [
@@ -3034,6 +3062,21 @@
       "date": "2018-12-05T21:45:18.850Z",
       "userId": 1,
       "id": 513
+    },
+    {
+      "date": "2018-12-05T23:46:46.849Z",
+      "userId": 1,
+      "id": 514
+    },
+    {
+      "date": "2018-12-05T23:47:28.927Z",
+      "userId": 1,
+      "id": 515
+    },
+    {
+      "date": "2018-12-05T23:53:59.336Z",
+      "userId": 1,
+      "id": 516
     }
   ]
 }
